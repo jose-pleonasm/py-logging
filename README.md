@@ -13,6 +13,7 @@ var logger = logging.getLogger();
 var handlers = logging.handlers;
 
 logger.addHandler(handlers.basic);
+logger.setLevel(logging.INFO);
 
 logger.info('Just started');
 ```
