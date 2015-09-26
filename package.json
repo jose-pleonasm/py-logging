@@ -1,0 +1,28 @@
+{
+  "name": "py-logging",
+  "version": "0.1.0",
+  "description": "Javascript logging library based on the Python logging module",
+  "main": "lib/logging.js",
+  "scripts": {
+    "test": "mocha lib/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jose-pleonasm/py-logging.git"
+  },
+  "keywords": [
+    "logging",
+    "logger",
+    "python"
+  ],
+  "author": "jose-pleonasm",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jose-pleonasm/py-logging/issues"
+  },
+  "homepage": "https://github.com/jose-pleonasm/py-logging#readme",
+  "devDependencies": {
+    "mocha": "^2.3.3",
+    "sinon": "^1.17.1"
+  }
+}
