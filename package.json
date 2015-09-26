@@ -2,7 +2,7 @@
   "name": "py-logging",
   "version": "0.1.2",
   "description": "Javascript logging library based on the Python logging module",
-  "main": "index.js",
+  "main": "lib/logging.js",
   "scripts": {
     "test": "mocha lib/test"
   },
