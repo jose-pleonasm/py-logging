@@ -1,7 +1,7 @@
 # py-logging
 Javascript logging library based on the Python logging module.
 
-More about Python logging here: https://docs.python.org/2/library/logging.html
+More about Python logging here: [https://docs.python.org/2/library/logging.html](https://docs.python.org/2/library/logging.html)
 
 ## Examples
 
