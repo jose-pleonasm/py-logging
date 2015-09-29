@@ -1,0 +1,10 @@
+# Main
+(- format string, merging arguments into msg)
+- formatters
+- argumentra 'extra' which can be used to pass data for log record (using user-defined attributes.)
+========================================================================================================================
+- more handlers
+- filters
+
+# Minor
+- propagate property of the logger
