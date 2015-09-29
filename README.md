@@ -10,7 +10,7 @@ More about Python logging here: [https://docs.python.org/2/library/logging.html]
 ```javascript
 var logging = require('py-logging');
 var logger = logging.getLogger();
-var ConsoleHandler = logging.handlers.ConsoleHandler;
+var ConsoleHandler = logging.ConsoleHandler;
 
 logger.addHandler(new ConsoleHandler());
 logger.setLevel(logging.INFO);
@@ -23,9 +23,8 @@ logger.info('Just started');
 ```javascript
 // myApp.js
 var logging = require('py-logging');
-var handlers = logging.handlers;
-var cHandler = new handlers.ConsoleHandler();
-var fHandler = new handlers.FileHandler('./myApp.log');
+var cHandler = new logging.ConsoleHandler();
+var fHandler = new logging.FileHandler('./myApp.log');
 
 cHandler.setLevel(logging.DEBUG);
 fHandler.setLevel(logging.WARNING);
