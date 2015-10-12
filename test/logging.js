@@ -3,6 +3,8 @@ var sinon = require('sinon');
 var logging = require('../lib/logging');
 var Logger = require('../lib/Logger');
 var mocks = require('./mocks');
+var Hdlr = mocks.MockHandler;
+var Fmtr = logging.Formatter;
 
 beforeEach(function () {
 	sandbox = sinon.sandbox.create();
@@ -196,7 +198,6 @@ describe('Logger', function() {
 	describe('Manipulating with handlers', function() {
 		it('#addHandler should register a new handler'
 				+ ' and logger should call handle of this handler', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var handler = new Hdlr();
 			var root = logging.getLogger();
@@ -208,7 +209,6 @@ describe('Logger', function() {
 			assert(Hdlr.prototype.handle.calledOn(handler));
 		});
 		it('#removeHandler should remove handler', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var handler = new Hdlr();
 			var root = logging.getLogger();
@@ -220,7 +220,6 @@ describe('Logger', function() {
 			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
 		});
 		it('logger should call all of handlers', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var h1 = new Hdlr();
 			var h2 = new Hdlr();
@@ -235,7 +234,6 @@ describe('Logger', function() {
 			assert(Hdlr.prototype.handle.calledOn(h2));
 		});
 		it('handler of parent logger should be called', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var handler = new Hdlr();
 			var root = logging.getLogger();
@@ -248,7 +246,6 @@ describe('Logger', function() {
 			assert(Hdlr.prototype.handle.calledOn(handler));
 		});
 		it('only handler of parent logger should be called', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var fooHandler = new Hdlr();
 			var bazHandler = new Hdlr();
@@ -265,7 +262,6 @@ describe('Logger', function() {
 			assert(!Hdlr.prototype.handle.calledOn(bazHandler));
 		});
 		it('should be called all the handlers of all loggers', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var rootHandler = new Hdlr();
 			var fooHandler1 = new Hdlr();
@@ -291,7 +287,6 @@ describe('Logger', function() {
 
 	describe('Record maker', function() {
 		it('should create object with correct properties', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var handler = new Hdlr();
 			var logger = logging.getLogger();
@@ -307,7 +302,6 @@ describe('Logger', function() {
 			assert.strictEqual(arg.message, '<strong>Varování</strong>');
 		});
 		it('should create object with correct logger name', function() {
-			var Hdlr = mocks.MockHandler;
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var handler = new Hdlr();
 			var root = logging.getLogger();
@@ -322,6 +316,29 @@ describe('Logger', function() {
 			assert.strictEqual(arg.level, Logger.WARNING);
 			assert.strictEqual(arg.levelname, Logger.getLevelName(Logger.WARNING));
 			assert.strictEqual(arg.message, 'message');
+		});
+	});
+
+});
+
+/**
+ * Formatter
+ */
+describe('Formatter', function() {
+
+	describe('#format()', function() {
+		it('should return correct time', function() {
+			var record = {
+				created: 1444673640264,
+				name: 'root',
+				level: Logger.WARNING,
+				levelname: Logger.getLevelName(Logger.WARNING),
+				message: 'message'
+			};
+			var format = '%(created)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), '2015-10-12T18:14:00.264Z');
 		});
 	});
 
