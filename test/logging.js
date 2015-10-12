@@ -297,16 +297,14 @@ describe('Logger', function() {
 			var logger = logging.getLogger();
 
 			logger.addHandler(handler);
-			var time = Date.now();
-			logger.warning('message');
+			logger.warning('<strong>Varování</strong>');
 
-			assert(Hdlr.prototype.handle.calledWithExactly({
-				created: time, //FIXME: insecure
-				name: 'root',
-				level: Logger.WARNING,
-				levelname: Logger.getLevelName(Logger.WARNING),
-				message: 'message'
-			}));
+			var arg = Hdlr.prototype.handle.args[0][0];
+			assert.strictEqual(typeof arg.created, 'number');
+			assert.strictEqual(arg.name, 'root');
+			assert.strictEqual(arg.level, Logger.WARNING);
+			assert.strictEqual(arg.levelname, Logger.getLevelName(Logger.WARNING));
+			assert.strictEqual(arg.message, '<strong>Varování</strong>');
 		});
 		it('should create object with correct logger name', function() {
 			var Hdlr = mocks.MockHandler;
@@ -316,16 +314,14 @@ describe('Logger', function() {
 			var bar  = logging.getLogger('foo.bar');
 
 			root.addHandler(handler);
-			var time = Date.now();
 			bar.warning('message');
 
-			assert(Hdlr.prototype.handle.calledWithExactly({
-				created: time, //FIXME: insecure
-				name: 'foo.bar',
-				level: Logger.WARNING,
-				levelname: Logger.getLevelName(Logger.WARNING),
-				message: 'message'
-			}));
+			var arg = Hdlr.prototype.handle.args[0][0];
+			assert.strictEqual(typeof arg.created, 'number');
+			assert.strictEqual(arg.name, 'foo.bar');
+			assert.strictEqual(arg.level, Logger.WARNING);
+			assert.strictEqual(arg.levelname, Logger.getLevelName(Logger.WARNING));
+			assert.strictEqual(arg.message, 'message');
 		});
 	});
 
