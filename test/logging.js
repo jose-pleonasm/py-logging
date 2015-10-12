@@ -325,20 +325,75 @@ describe('Logger', function() {
  * Formatter
  */
 describe('Formatter', function() {
+	var defRecord = {
+		created: 1444673640264,
+		name: 'root',
+		level: Logger.INFO,
+		levelname: Logger.getLevelName(Logger.INFO),
+		message: 'Lorem ipsum.'
+	};
 
 	describe('#format()', function() {
 		it('should return correct time', function() {
-			var record = {
-				created: 1444673640264,
-				name: 'root',
-				level: Logger.WARNING,
-				levelname: Logger.getLevelName(Logger.WARNING),
-				message: 'message'
-			};
 			var format = '%(created)';
 			var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record), '2015-10-12T18:14:00.264Z');
+			assert.equal(formatter.format(defRecord), '2015-10-12T18:14:00.264Z');
+		});
+		it('should return correct name', function() {
+			var format = '%(name)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), 'root');
+		});
+		it('should return correct level', function() {
+			var format = '%(level)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), Logger.INFO);
+		});
+		it('should return correct levelname', function() {
+			var format = '%(levelname)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(
+				formatter.format(defRecord),
+				Logger.getLevelName(Logger.INFO)
+			);
+		});
+		it('should return correct message', function() {
+			var format = '%(message)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), 'Lorem ipsum.');
+		});
+		it('should parse correctly', function() {
+			var format = '%(mess%(message)age)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), '%(messLorem ipsum.age)');
+		});
+		it('unknown attribute should be omitted', function() {
+			var format = '%(unknown)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), '');
+		});
+		it('should fill repeatedly', function() {
+			var format = '%(name)%(name)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), 'rootroot');
+		});
+
+		it('should fill properly', function() {
+			var format = '%(created) [%(levelname)] (%(name)) %() %(nothing)\t->\t"%(message)"';
+			var formatter = new Fmtr(format);
+
+			assert.equal(
+				formatter.format(defRecord),
+				'2015-10-12T18:14:00.264Z [INFO] (root) %() \t->\t"Lorem ipsum."'
+			);
 		});
 	});
 
