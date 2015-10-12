@@ -1,7 +1,7 @@
 var assert = require('assert');
 var sinon = require('sinon');
-var logging = require('../logging');
-var Logger = require('../Logger');
+var logging = require('../lib/logging');
+var Logger = require('../lib/Logger');
 var mocks = require('./mocks');
 
 beforeEach(function () {
