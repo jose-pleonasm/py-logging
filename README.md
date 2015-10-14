@@ -10,9 +10,11 @@ More about Python logging here: [https://docs.python.org/2/library/logging.html]
 ```javascript
 var logging = require('py-logging');
 var logger = logging.getLogger();
-var ConsoleHandler = logging.ConsoleHandler;
+var formatter = new logging.Formatter();
+var handler = new logging.ConsoleHandler;
 
-logger.addHandler(new ConsoleHandler());
+handler.setFormatter(formatter);
+logger.addHandler(handler);
 logger.setLevel(logging.INFO);
 
 logger.info('Just started');
@@ -21,11 +23,14 @@ logger.info('Just started');
 ### More advanced usage
 
 ```javascript
-// myApp.js
+// init.js
 var logging = require('py-logging');
+var formatter = new logging.Formatter('%(created) - %(name) - %(levelname) - %(message)', '%Y-%m-%d %H:%M:%S');
 var cHandler = new logging.ConsoleHandler();
 var fHandler = new logging.FileHandler('./myApp.log');
 
+cHandler.setFormatter(formatter);
+fHandler.setFormatter(formatter);
 cHandler.setLevel(logging.DEBUG);
 fHandler.setLevel(logging.WARNING);
 logging.getLogger().setLevel(logging.DEBUG);
