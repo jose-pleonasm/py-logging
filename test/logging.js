@@ -336,7 +336,8 @@ describe('Formatter', function() {
 	describe('#format()', function() {
 		it('should return correct time', function() {
 			var format = '%(created)';
-			var formatter = new Fmtr(format);
+			var timeFormat = '%ISO';
+			var formatter = new Fmtr(format, timeFormat);
 
 			assert.equal(formatter.format(defRecord), '2015-10-12T18:14:00.264Z');
 		});
@@ -388,11 +389,12 @@ describe('Formatter', function() {
 
 		it('should fill properly', function() {
 			var format = '%(created) [%(levelname)] (%(name)) %() %(nothing)\t->\t"%(message)"';
-			var formatter = new Fmtr(format);
+			var timeFormat = '%Y-%m-%d %H:%M.%S';
+			var formatter = new Fmtr(format, timeFormat);
 
 			assert.equal(
 				formatter.format(defRecord),
-				'2015-10-12T18:14:00.264Z [INFO] (root) %() \t->\t"Lorem ipsum."'
+				'2015-10-12 18:14.00 [INFO] (root) %() \t->\t"Lorem ipsum."'
 			);
 		});
 	});
