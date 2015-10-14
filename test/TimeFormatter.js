@@ -1,6 +1,8 @@
 var assert = require('assert');
 var TimeFormatter = require('../lib/TimeFormatter');
 
+var date = new Date('2015-10-14T12:00:00+00:00');
+console.log(TimeFormatter.format(date, '%c'));
 
 describe('TimeFormatter', function() {
 	describe('#format()', function() {
@@ -24,6 +26,11 @@ describe('TimeFormatter', function() {
 			var date = new Date('2015-10-14T12:00:00+00:00');
 
 			assert.strictEqual(TimeFormatter.format(date, '%%'), '%');
+		});
+		it('should return correct timestamp', function() {
+			var date = new Date(1444847914 * 1000);
+
+			assert.strictEqual(TimeFormatter.format(date, '%s'), '1444847914');
 		});
 		it('should return correct hour', function() {
 			var date = new Date('2015-10-14T13:00:00+00:00');
