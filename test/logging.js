@@ -1,10 +1,10 @@
 var assert = require('assert');
 var sinon = require('sinon');
-var logging = require('../lib/logging');
-var Logger = require('../lib/Logger');
 var mocks = require('./mocks');
-var Hdlr = mocks.MockHandler;
+var logging = require('../lib/logging');
+var Logger = logging.getLoggerClass();
 var Fmtr = logging.Formatter;
+var Hdlr = mocks.MockHandler;
 
 beforeEach(function () {
 	sandbox = sinon.sandbox.create();
