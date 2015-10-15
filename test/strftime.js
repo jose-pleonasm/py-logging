@@ -78,37 +78,37 @@ describe('strftime', function() {
 
 		assert.strictEqual(strftime(date, '%Y'), '2015');
 	});
-	it('should filled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '%'), '%');
 	});
-	it('should filled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '%o'), 'o');
 	});
-	it('should filled correctly', function() {
+	it('should  befilled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '90%'), '90%');
 	});
-	it('should filled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '%%%'), '%%');
 	});
-	it('should filled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '%%Y'), '%Y');
 	});
-	it('should filled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '%Nothing%'), 'Nothing%');
 	});
-	it('should filled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T01:35:09+00:00');
 		var format = '%Nothing% %y-%m-%d %H:%M.%S';
 

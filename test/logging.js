@@ -380,14 +380,14 @@ describe('Formatter', function() {
 
 			assert.equal(formatter.format(defRecord), '');
 		});
-		it('should fill repeatedly', function() {
+		it('should be filled repeatedly', function() {
 			var format = '%(name)%(name)';
 			var formatter = new Fmtr(format);
 
 			assert.equal(formatter.format(defRecord), 'rootroot');
 		});
 
-		it('should fill properly', function() {
+		it('should be filled properly', function() {
 			var format = '%(created) [%(levelname)] (%(name)) %() %(nothing)\t->\t"%(message)"';
 			var timeFormat = '%Y-%m-%d %H:%M.%S';
 			var formatter = new Fmtr(format, timeFormat);
