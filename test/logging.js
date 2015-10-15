@@ -336,6 +336,12 @@ describe('Formatter', function() {
 	describe('#format()', function() {
 		it('should return correct time', function() {
 			var format = '%(created)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(defRecord), '1444673640264');
+		});
+		it('should return correct time', function() {
+			var format = '%(asctime)';
 			var timeFormat = '%ISO';
 			var formatter = new Fmtr(format, timeFormat);
 
@@ -388,7 +394,7 @@ describe('Formatter', function() {
 		});
 
 		it('should be filled properly', function() {
-			var format = '%(created) [%(levelname)] (%(name)) %() %(nothing)\t->\t"%(message)"';
+			var format = '%(asctime) [%(levelname)] (%(name)) %() %(nothing)\t->\t"%(message)"';
 			var timeFormat = '%Y-%m-%d %H:%M.%S';
 			var formatter = new Fmtr(format, timeFormat);
 
