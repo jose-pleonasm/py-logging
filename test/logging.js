@@ -317,6 +317,45 @@ describe('Logger', function() {
 			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
 			assert.strictEqual(arg.message, 'message');
 		});
+		it('should create object containing error object', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var handler = new Hdlr();
+			var logger = logging.getLogger();
+
+			logger.addHandler(handler);
+
+			try {
+				undef;
+			}
+			catch (err) {
+				logger.error('Chyba', err);
+			}
+
+			var arg = Hdlr.prototype.handle.args[0][0];
+			assert.strictEqual(typeof arg.created, 'number');
+			assert.strictEqual(arg.name, 'root');
+			assert.strictEqual(arg.level, logging.ERROR);
+			assert.strictEqual(arg.levelname, logging.getLevelName(logging.ERROR));
+			assert.strictEqual(arg.message, 'Chyba');
+			assert.strictEqual(arg.error instanceof Error, true);
+		});
+		it('should create object containing extra properties', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var handler = new Hdlr();
+			var logger = logging.getLogger();
+
+			logger.addHandler(handler);
+			logger.warning('Varování', null, { foo:'bar', baz:1 });
+
+			var arg = Hdlr.prototype.handle.args[0][0];
+			assert.strictEqual(typeof arg.created, 'number');
+			assert.strictEqual(arg.name, 'root');
+			assert.strictEqual(arg.level, logging.WARNING);
+			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
+			assert.strictEqual(arg.message, 'Varování');
+			assert.strictEqual(arg.foo, 'bar');
+			assert.strictEqual(arg.baz, 1);
+		});
 	});
 
 });
@@ -402,6 +441,13 @@ describe('Formatter', function() {
 				formatter.format(defRecord),
 				'2015-10-12 18:14.00 [INFO] (root) %() \t->\t"Lorem ipsum."'
 			);
+		});
+		it('should return extra property', function() {
+			var record = Object.assign(defRecord, { foo:'bar' });
+			var format = '%(foo)';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), 'bar');
 		});
 	});
 
