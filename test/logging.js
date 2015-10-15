@@ -51,7 +51,7 @@ describe('Logging', function() {
 		['NOTSET', 'DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
 			.forEach(function(constant) {
 			it(constant + ' constant should exist', function() {
-				assert.strictEqual(logging[constant], Logger[constant]);
+				assert.strictEqual(logging[constant], logging[constant]);
 			});
 		});
 	});
@@ -125,14 +125,14 @@ describe('Logger', function() {
 	describe('Level', function() {
 		it('#getEffectiveLevel should return default root level, which is "WARNING"', function() {
 			var root = logging.getLogger();
-			assert.strictEqual(root.getEffectiveLevel(), Logger.WARNING);
+			assert.strictEqual(root.getEffectiveLevel(), logging.WARNING);
 		});
 		it('#getEffectiveLevel should return default child level, which is same as root', function() {
 			var foo = logging.getLogger('foo');
-			assert.strictEqual(foo.getEffectiveLevel(), Logger.WARNING);
+			assert.strictEqual(foo.getEffectiveLevel(), logging.WARNING);
 		});
 		it('#setLevel should change level of root', function() {
-			var level = Logger.DEBUG;
+			var level = logging.DEBUG;
 			var root = logging.getLogger();
 
 			root.setLevel(level);
@@ -142,9 +142,9 @@ describe('Logger', function() {
 		it('#setLevel should set level to "NOTSET"', function() {
 			var root = logging.getLogger();
 
-			root.setLevel(Logger.NOTSET);
+			root.setLevel(logging.NOTSET);
 
-			assert.strictEqual(root.getEffectiveLevel(), Logger.NOTSET);
+			assert.strictEqual(root.getEffectiveLevel(), logging.NOTSET);
 		});
 		it('#setLevel should throw an Error', function() {
 			var root = logging.getLogger();
@@ -152,7 +152,7 @@ describe('Logger', function() {
 			assert.throws(function() { root.setLevel(11); }, Error);
 		});
 		it('#setLevel should change level of child', function() {
-			var level = Logger.DEBUG;
+			var level = logging.DEBUG;
 			var foo = logging.getLogger('foo');
 
 			foo.setLevel(level);
@@ -160,7 +160,7 @@ describe('Logger', function() {
 			assert.strictEqual(foo.getEffectiveLevel(), level);
 		});
 		it('#setLevel on root should change level of child', function() {
-			var level = Logger.DEBUG;
+			var level = logging.DEBUG;
 			var root = logging.getLogger();
 			var foo = logging.getLogger('foo');
 
@@ -169,14 +169,14 @@ describe('Logger', function() {
 			assert.strictEqual(foo.getEffectiveLevel(), level);
 		});
 		it('#setLevel on child should change only level of child', function() {
-			var level = Logger.DEBUG;
+			var level = logging.DEBUG;
 			var root = logging.getLogger();
 			var foo = logging.getLogger('foo');
 
 			foo.setLevel(level);
 
 			assert.strictEqual(foo.getEffectiveLevel(), level);
-			assert.strictEqual(root.getEffectiveLevel(), Logger.WARNING);
+			assert.strictEqual(root.getEffectiveLevel(), logging.WARNING);
 		});
 	});
 
@@ -297,8 +297,8 @@ describe('Logger', function() {
 			var arg = Hdlr.prototype.handle.args[0][0];
 			assert.strictEqual(typeof arg.created, 'number');
 			assert.strictEqual(arg.name, 'root');
-			assert.strictEqual(arg.level, Logger.WARNING);
-			assert.strictEqual(arg.levelname, Logger.getLevelName(Logger.WARNING));
+			assert.strictEqual(arg.level, logging.WARNING);
+			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
 			assert.strictEqual(arg.message, '<strong>Varování</strong>');
 		});
 		it('should create object with correct logger name', function() {
@@ -313,8 +313,8 @@ describe('Logger', function() {
 			var arg = Hdlr.prototype.handle.args[0][0];
 			assert.strictEqual(typeof arg.created, 'number');
 			assert.strictEqual(arg.name, 'foo.bar');
-			assert.strictEqual(arg.level, Logger.WARNING);
-			assert.strictEqual(arg.levelname, Logger.getLevelName(Logger.WARNING));
+			assert.strictEqual(arg.level, logging.WARNING);
+			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
 			assert.strictEqual(arg.message, 'message');
 		});
 	});
@@ -328,8 +328,8 @@ describe('Formatter', function() {
 	var defRecord = {
 		created: 1444673640264,
 		name: 'root',
-		level: Logger.INFO,
-		levelname: Logger.getLevelName(Logger.INFO),
+		level: logging.INFO,
+		levelname: logging.getLevelName(logging.INFO),
 		message: 'Lorem ipsum.'
 	};
 
@@ -357,7 +357,7 @@ describe('Formatter', function() {
 			var format = '%(level)';
 			var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(defRecord), Logger.INFO);
+			assert.equal(formatter.format(defRecord), logging.INFO);
 		});
 		it('should return correct levelname', function() {
 			var format = '%(levelname)';
@@ -365,7 +365,7 @@ describe('Formatter', function() {
 
 			assert.equal(
 				formatter.format(defRecord),
-				Logger.getLevelName(Logger.INFO)
+				logging.getLevelName(logging.INFO)
 			);
 		});
 		it('should return correct message', function() {
