@@ -297,7 +297,7 @@ describe('Logger', function() {
 			var arg = Hdlr.prototype.handle.args[0][0];
 			assert.strictEqual(typeof arg.created, 'number');
 			assert.strictEqual(arg.name, 'root');
-			assert.strictEqual(arg.level, logging.WARNING);
+			assert.strictEqual(arg.levelno, logging.WARNING);
 			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
 			assert.strictEqual(arg.message, '<strong>Varování</strong>');
 		});
@@ -313,7 +313,7 @@ describe('Logger', function() {
 			var arg = Hdlr.prototype.handle.args[0][0];
 			assert.strictEqual(typeof arg.created, 'number');
 			assert.strictEqual(arg.name, 'foo.bar');
-			assert.strictEqual(arg.level, logging.WARNING);
+			assert.strictEqual(arg.levelno, logging.WARNING);
 			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
 			assert.strictEqual(arg.message, 'message');
 		});
@@ -334,7 +334,7 @@ describe('Logger', function() {
 			var arg = Hdlr.prototype.handle.args[0][0];
 			assert.strictEqual(typeof arg.created, 'number');
 			assert.strictEqual(arg.name, 'root');
-			assert.strictEqual(arg.level, logging.ERROR);
+			assert.strictEqual(arg.levelno, logging.ERROR);
 			assert.strictEqual(arg.levelname, logging.getLevelName(logging.ERROR));
 			assert.strictEqual(arg.message, 'Chyba');
 			assert.strictEqual(arg.error instanceof Error, true);
@@ -350,7 +350,7 @@ describe('Logger', function() {
 			var arg = Hdlr.prototype.handle.args[0][0];
 			assert.strictEqual(typeof arg.created, 'number');
 			assert.strictEqual(arg.name, 'root');
-			assert.strictEqual(arg.level, logging.WARNING);
+			assert.strictEqual(arg.levelno, logging.WARNING);
 			assert.strictEqual(arg.levelname, logging.getLevelName(logging.WARNING));
 			assert.strictEqual(arg.message, 'Varování');
 			assert.strictEqual(arg.foo, 'bar');
@@ -367,7 +367,7 @@ describe('Formatter', function() {
 	var defRecord = {
 		created: 1444673640264,
 		name: 'root',
-		level: logging.INFO,
+		levelno: logging.INFO,
 		levelname: logging.getLevelName(logging.INFO),
 		message: 'Lorem ipsum.'
 	};
@@ -393,7 +393,7 @@ describe('Formatter', function() {
 			assert.equal(formatter.format(defRecord), 'root');
 		});
 		it('should return correct level', function() {
-			var format = '%(level)';
+			var format = '%(levelno)';
 			var formatter = new Fmtr(format);
 
 			assert.equal(formatter.format(defRecord), logging.INFO);
