@@ -78,6 +78,11 @@ describe('strftime', function() {
 
 		assert.strictEqual(strftime(date, '%Y'), '2015');
 	});
+	it('should return correct date and time in ISO 8601 format', function() {
+		var date = new Date('2015-10-14T14:34:56.789+02:00');
+
+		assert.strictEqual(strftime(date, '%ISO'), date.toISOString());
+	});
 	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
@@ -88,7 +93,7 @@ describe('strftime', function() {
 
 		assert.strictEqual(strftime(date, '%o'), 'o');
 	});
-	it('should  befilled correctly', function() {
+	it('should be filled correctly', function() {
 		var date = new Date('2015-10-14T12:00:00+00:00');
 
 		assert.strictEqual(strftime(date, '90%'), '90%');
