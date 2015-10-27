@@ -178,6 +178,43 @@ describe('Logger', function() {
 			assert.strictEqual(foo.getEffectiveLevel(), level);
 			assert.strictEqual(root.getEffectiveLevel(), logging.WARNING);
 		});
+		it('bar#getEffectiveLevel should return level of the parent logger \'foo\'', function() {
+			var foo = logging.getLogger('foo');
+			var bar = logging.getLogger('foo.bar');
+
+			foo.setLevel(logging.INFO);
+
+			assert.strictEqual(bar.getEffectiveLevel(), logging.INFO);
+		});
+	});
+
+	describe('#isEnabledFor', function() {
+		it('should be enabled for default level', function() {
+			var foo = logging.getLogger('foo');
+
+			assert.strictEqual(foo.isEnabledFor(logging.WARNING), true);
+		});
+		it('should be enabled for set level', function() {
+			var root = logging.getLogger();
+
+			root.setLevel(logging.INFO);
+
+			assert.strictEqual(root.isEnabledFor(logging.INFO), true);
+		});
+		it('should be disabled for level lower than level of the child logger', function() {
+			var root = logging.getLogger();
+			var foo = logging.getLogger('foo');
+
+			root.setLevel(logging.INFO);
+			foo.setLevel(logging.ERROR);
+
+			assert.strictEqual(foo.isEnabledFor(logging.INFO), false);
+		});
+		it('should be disabled for level lower than default', function() {
+			var foo = logging.getLogger('foo');
+
+			assert.strictEqual(foo.isEnabledFor(logging.INFO), false);
+		});
 	});
 
 	describe('Log functions', function() {
@@ -281,6 +318,58 @@ describe('Logger', function() {
 			assert(Hdlr.prototype.handle.calledOn(rootHandler));
 			assert(Hdlr.prototype.handle.calledOn(fooHandler1));
 			assert(Hdlr.prototype.handle.calledOn(fooHandler2));
+			assert(Hdlr.prototype.handle.calledOn(barHandler));
+		});
+		it('should not be called any handler', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var rootHandler = new Hdlr();
+			var root = logging.getLogger();
+
+			root.addHandler(rootHandler);
+			root.info('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+		});
+		it('should not be called any handler', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var handler = new Hdlr();
+			var bar = logging.getLogger('foo.bar');
+
+			bar.addHandler(handler);
+			bar.info('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+		});
+		it('should be called both handlers', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var rootHandler = new Hdlr();
+			var barHandler = new Hdlr();
+			var root = logging.getLogger();
+			var bar = logging.getLogger('foo.bar');
+
+			root.addHandler(rootHandler);
+			bar.addHandler(barHandler);
+			root.setLevel(logging.INFO);
+			bar.info('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 2);
+			assert(Hdlr.prototype.handle.calledOn(rootHandler));
+			assert(Hdlr.prototype.handle.calledOn(barHandler));
+		});
+		it('should be called both handlers', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var rootHandler = new Hdlr();
+			var barHandler = new Hdlr();
+			var root = logging.getLogger();
+			var bar = logging.getLogger('foo.bar');
+
+			root.addHandler(rootHandler);
+			bar.addHandler(barHandler);
+			bar.setLevel(logging.INFO);
+			bar.info('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 2);
+			assert(Hdlr.prototype.handle.calledOn(rootHandler));
 			assert(Hdlr.prototype.handle.calledOn(barHandler));
 		});
 	});
