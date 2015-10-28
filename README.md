@@ -86,8 +86,8 @@ And output (console) will be:
 2015.10.28 17:19.09 - INFO - bar - Starting module bar...
 2015.10.28 17:19.09 - ERROR - root - Some module failed!
 Error: Bar error
-    at Object.module.exports.run (/Users/jose-pleonasm/Work/www/working-space/py-logging/examples/advanced/bar.js:10:9)
-    at Object.<anonymous> (/Users/jose-pleonasm/Work/www/working-space/py-logging/examples/advanced/index.js:27:6)
+    at Object.module.exports.run (/py-logging/examples/advanced/bar.js:10:9)
+    at Object.<anonymous> (/py-logging/examples/advanced/index.js:27:6)
     at Module._compile (module.js:434:26)
     at Object.Module._extensions..js (module.js:452:10)
     at Module.load (module.js:355:32)
