@@ -374,6 +374,33 @@ describe('Logger', function() {
 		});
 	});
 
+	describe('Propagation', function() {
+		it('should be propagated to root logger', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var bar = logging.getLogger('foo.bar');
+
+			root.addHandler(handler);
+			bar.warning('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 1);
+		});
+		it('should not be propagated to root logger', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var foo = logging.getLogger('foo');
+			var bar = logging.getLogger('foo.bar');
+
+			root.addHandler(handler);
+			foo.propagate = false;
+			bar.warning('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+		});
+	});
+
 	describe('Record maker', function() {
 		it('should create object with correct properties', function() {
 			sandbox.spy(Hdlr.prototype, 'handle');
