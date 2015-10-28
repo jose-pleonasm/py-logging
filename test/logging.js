@@ -388,16 +388,19 @@ describe('Logger', function() {
 		});
 		it('should not be propagated to root logger', function() {
 			sandbox.spy(Hdlr.prototype, 'handle');
-			var handler = new Hdlr();
+			var rootHandler = new Hdlr();
+			var barHandler = new Hdlr();
 			var root = logging.getLogger();
 			var foo = logging.getLogger('foo');
 			var bar = logging.getLogger('foo.bar');
 
-			root.addHandler(handler);
+			root.addHandler(rootHandler);
+			bar.addHandler(barHandler);
 			foo.propagate = false;
 			bar.warning('message');
 
-			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 1);
+			assert(Hdlr.prototype.handle.calledOn(barHandler));
 		});
 	});
 
