@@ -5,6 +5,9 @@ var logging = require('../lib/logging');
 var Logger = logging.getLoggerClass();
 var Fmtr = logging.Formatter;
 var Hdlr = mocks.MockHandler;
+var Fltr = mocks.MockFilter;
+var FltrAll = mocks.MockFilterAll;
+var FltrNothing = mocks.MockFilterNothing;
 
 beforeEach(function () {
 	sandbox = sinon.sandbox.create();
@@ -477,6 +480,221 @@ describe('Logger', function() {
 		});
 	});
 
+});
+
+/**
+ * Filters
+ */
+describe('Filters', function() {
+	describe('Logger', function() {
+		it('#addFilter should register a new filter'
+				+ ' and logger should call filter of this filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter = new FltrAll();
+			var root = logging.getLogger();
+
+			root.addFilter(filter);
+			root.warning('message');
+
+			assert(Fltr.prototype.filter.calledOnce);
+			assert(Fltr.prototype.filter.calledOn(filter));
+		});
+		it('#addFilter should register a new filters'
+				+ ' and logger should call filter only of the first filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter1 = new FltrAll();
+			var filter2 = new FltrAll();
+			var root = logging.getLogger();
+
+			root.addFilter(filter1);
+			root.addFilter(filter2);
+			root.warning('message');
+
+			assert(Fltr.prototype.filter.calledOnce);
+			assert(Fltr.prototype.filter.calledOn(filter1));
+		});
+		it('#addFilter should register a new filters'
+				+ ' and logger should call filter of every filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter1 = new FltrNothing();
+			var filter2 = new FltrNothing();
+			var root = logging.getLogger();
+
+			root.addFilter(filter1);
+			root.addFilter(filter2);
+			root.warning('message');
+
+			assert(Fltr.prototype.filter.calledTwice);
+			assert(Fltr.prototype.filter.calledOn(filter1));
+			assert(Fltr.prototype.filter.calledOn(filter2));
+		});
+		it('#addFilter should register a new filter'
+				+ ' and logger should filter the log event', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var handler = new Hdlr();
+			var filter = new FltrAll();
+			var root = logging.getLogger();
+
+			root.addFilter(filter);
+			root.addHandler(handler);
+			root.warning('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+		});
+		it('#removeFilter should remove filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter = new FltrAll();
+			var root = logging.getLogger();
+
+			root.addFilter(filter);
+			root.removeFilter(filter);
+			root.warning('message');
+
+			assert.strictEqual(Fltr.prototype.filter.callCount, 0);
+		});
+		it('#addFilter should register a new filters'
+				+ ' and then #removeFilter should remove the first one'
+				+ ' and logger should call filter of the second filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter1 = new FltrNothing();
+			var filter2 = new FltrNothing();
+			var root = logging.getLogger();
+
+			root.addFilter(filter1);
+			root.addFilter(filter2);
+			root.removeFilter(filter1);
+			root.warning('message');
+
+			assert(Fltr.prototype.filter.calledOnce);
+			assert(Fltr.prototype.filter.calledOn(filter2));
+		});
+	});
+	describe('Handler', function() {
+		it('#addFilter should register a new filter'
+				+ ' and logger should call filter of this filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter = new FltrAll();
+			var handler = new Hdlr();
+
+			handler.addFilter(filter);
+			handler.handle({});
+
+			assert(Fltr.prototype.filter.calledOnce);
+			assert(Fltr.prototype.filter.calledOn(filter));
+		});
+		it('#removeFilter should remove filter', function() {
+			sandbox.spy(Fltr.prototype, 'filter');
+			var filter = new FltrAll();
+			var handler = new Hdlr();
+
+			handler.addFilter(filter);
+			handler.removeFilter(filter);
+			handler.handle({});
+
+			assert.strictEqual(Fltr.prototype.filter.callCount, 0);
+		});
+	});
+	describe('Filtering with default filter', function() {
+		it('nameless filter should not filter anything', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter();
+			var rootHandler = new Hdlr();
+			var aHandler = new Hdlr();
+			var root = logging.getLogger();
+			var a = logging.getLogger('A');
+
+			a.addFilter(filter);
+			root.addHandler(rootHandler);
+			a.addHandler(aHandler);
+			a.warning('message');
+
+			assert(Hdlr.prototype.handle.calledTwice);
+			assert(Hdlr.prototype.handle.calledOn(rootHandler));
+			assert(Hdlr.prototype.handle.calledOn(aHandler));
+		});
+		it('filter "A.B" should allow events logged by logger "A.B"', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter('A.B');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var ab = logging.getLogger('A.B');
+
+			root.addHandler(handler);
+			ab.addFilter(filter);
+			ab.warning('message');
+
+			assert(Hdlr.prototype.handle.calledOnce);
+			assert(Hdlr.prototype.handle.calledOn(handler));
+		});
+		it('filter "A.B" should allow events logged by logger  "A.B.C"', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter('A.B');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var abc = logging.getLogger('A.B.C');
+
+			root.addHandler(handler);
+			abc.addFilter(filter);
+			abc.warning('message');
+
+			assert(Hdlr.prototype.handle.calledOnce);
+			assert(Hdlr.prototype.handle.calledOn(handler));
+		});
+		it('filter "A.B" should allow events logged by logger  "A.B.C.D"', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter('A.B');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var abcd = logging.getLogger('A.B.C.D');
+
+			root.addHandler(handler);
+			abcd.addFilter(filter);
+			abcd.warning('message');
+
+			assert(Hdlr.prototype.handle.calledOnce);
+			assert(Hdlr.prototype.handle.calledOn(handler));
+		});
+		it('filter "A.B" should allow events logged by logger  "A.B.D"', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter('A.B');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var abd = logging.getLogger('A.B.D');
+
+			root.addHandler(handler);
+			abd.addFilter(filter);
+			abd.warning('message');
+
+			assert(Hdlr.prototype.handle.calledOnce);
+			assert(Hdlr.prototype.handle.calledOn(handler));
+		});
+		it('filter "A.B" should not allow events logged by logger  "A.BB"', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter('A.B');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var abb = logging.getLogger('A.BB');
+
+			root.addHandler(handler);
+			abb.addFilter(filter);
+			abb.warning('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+		});
+		it('filter "A.B" should not allow events logged by logger  "B.A.B"', function() {
+			sandbox.spy(Hdlr.prototype, 'handle');
+			var filter = new logging.Filter('A.B');
+			var handler = new Hdlr();
+			var root = logging.getLogger();
+			var bab = logging.getLogger('B.A.B');
+
+			root.addHandler(handler);
+			bab.addFilter(filter);
+			bab.warning('message');
+
+			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
+		});
+	});
 });
 
 /**
