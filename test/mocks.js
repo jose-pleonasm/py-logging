@@ -6,7 +6,7 @@ function MockHandler() {
 }
 util.inherits(MockHandler, Handler);
 
-MockHandler.prototype.handle = function(record) {};
+MockHandler.prototype.emit = function(record) {};
 
 module.exports = {
 	MockHandler: MockHandler
