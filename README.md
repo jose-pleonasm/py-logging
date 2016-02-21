@@ -96,3 +96,10 @@ Error: Bar error
     at startup (node.js:117:18)
     at node.js:951:3
 ```
+
+## Usable handlers
+
+### ConsoleHandler
+### RotatingFileHandler
+### SyncRotatingFileHandler
+### BrowserBasicHttpHandler
