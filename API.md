@@ -53,6 +53,7 @@
     * [.warning()](#module_py-logging.warning)
     * [.error()](#module_py-logging.error)
     * [.critical()](#module_py-logging.critical)
+    * [.log()](#module_py-logging.log)
     * [.LogRecord](#module_py-logging.LogRecord) : <code>Object</code>
 
 <a name="module_py-logging.MODULE_IDENTIFIER"></a>
@@ -164,6 +165,11 @@ Return the textual representation of logging level.
 ### py-logging.critical()
 **Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
 **See**: [critical](#Logger+critical)  
+<a name="module_py-logging.log"></a>
+
+### py-logging.log()
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+**See**: [log](#Logger+log)  
 <a name="module_py-logging.LogRecord"></a>
 
 ### py-logging.LogRecord : <code>Object</code>
@@ -247,6 +253,7 @@ A base class for loggers and handlers which allows them to share common code.
         * [.warning(msg, [error], [extra])](#Logger+warning)
         * [.error(msg, [error], [extra])](#Logger+error)
         * [.critical(msg, [error], [extra])](#Logger+critical)
+        * [.log(level, msg, [error], [extra])](#Logger+log)
         * [.makeRecord(level, msg, [error], [extra])](#Logger+makeRecord) ⇒ <code>[LogRecord](#module_py-logging.LogRecord)</code>
         * [.addFilter(filter)](#Filterer+addFilter)
         * [.removeFilter(filter)](#Filterer+removeFilter)
@@ -400,6 +407,20 @@ Log msg with severity 'CRITICAL'.
 
 | Param | Type |
 | --- | --- |
+| msg | <code>string</code> | 
+| [error] | <code>Object</code> | 
+| [extra] | <code>Object</code> | 
+
+<a name="Logger+log"></a>
+
+### logger.log(level, msg, [error], [extra])
+Log msg with specified severity.
+
+**Kind**: instance method of <code>[Logger](#Logger)</code>  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
 | msg | <code>string</code> | 
 | [error] | <code>Object</code> | 
 | [extra] | <code>Object</code> | 
