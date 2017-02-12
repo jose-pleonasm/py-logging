@@ -45,9 +45,14 @@
     * [.CRITICAL](#module_py-logging.CRITICAL) : <code>number</code>
     * [.getLoggerClass()](#module_py-logging.getLoggerClass) ⇒ <code>function</code>
     * [.getLogger(name)](#module_py-logging.getLogger) ⇒ <code>[Logger](#Logger)</code>
-    * [.basicConfig(options)](#module_py-logging.basicConfig)
-    * [.getLevelName(level)](#module_py-logging.getLevelName) ⇒ <code>string</code>
+    * [.basicConfig([options])](#module_py-logging.basicConfig)
     * [.config(config, [outerContext])](#module_py-logging.config)
+    * [.getLevelName(level)](#module_py-logging.getLevelName) ⇒ <code>string</code>
+    * [.debug()](#module_py-logging.debug)
+    * [.info()](#module_py-logging.info)
+    * [.warning()](#module_py-logging.warning)
+    * [.error()](#module_py-logging.error)
+    * [.critical()](#module_py-logging.critical)
     * [.LogRecord](#module_py-logging.LogRecord) : <code>Object</code>
 
 <a name="module_py-logging.MODULE_IDENTIFIER"></a>
@@ -102,25 +107,14 @@ If no name is specified, return the root logger.
 
 <a name="module_py-logging.basicConfig"></a>
 
-### py-logging.basicConfig(options)
+### py-logging.basicConfig([options])
 Do basic configuration for the logging system.
 
 **Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
 
 | Param | Type |
 | --- | --- |
-| options | <code>Object</code> | 
-
-<a name="module_py-logging.getLevelName"></a>
-
-### py-logging.getLevelName(level) ⇒ <code>string</code>
-Return the textual representation of logging level.
-
-**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
+| [options] | <code>Object</code> | 
 
 <a name="module_py-logging.config"></a>
 
@@ -134,6 +128,42 @@ Configure logging using a "dict" object.
 | config | <code>Object</code> | 
 | [outerContext] | <code>Object</code> | 
 
+<a name="module_py-logging.getLevelName"></a>
+
+### py-logging.getLevelName(level) ⇒ <code>string</code>
+Return the textual representation of logging level.
+
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="module_py-logging.debug"></a>
+
+### py-logging.debug()
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+**See**: [debug](#Logger+debug)  
+<a name="module_py-logging.info"></a>
+
+### py-logging.info()
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+**See**: [info](#Logger+info)  
+<a name="module_py-logging.warning"></a>
+
+### py-logging.warning()
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+**See**: [warning](#Logger+warning)  
+<a name="module_py-logging.error"></a>
+
+### py-logging.error()
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+**See**: [error](#Logger+error)  
+<a name="module_py-logging.critical"></a>
+
+### py-logging.critical()
+**Kind**: static method of <code>[py-logging](#module_py-logging)</code>  
+**See**: [critical](#Logger+critical)  
 <a name="module_py-logging.LogRecord"></a>
 
 ### py-logging.LogRecord : <code>Object</code>
