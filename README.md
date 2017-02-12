@@ -1,105 +1,177 @@
 # py-logging
 Javascript logging library based on the Python logging module.
 
-More about Python logging here: [https://docs.python.org/2/library/logging.html](https://docs.python.org/2/library/logging.html)
+[![NPM](https://nodei.co/npm/py-logging.png)](https://nodei.co/npm/py-logging/)
 
-## Examples
+Main features:
+* Hierarchical organization of loggers.
+* Handlers for various ways of log records processing.
+* Filters for very precise log records filtering.
+* Formatters for custom layout of log records in the final output.
 
-### Basic usage
+More about Python logging here: [https://docs.python.org/2/library/logging.html][1]
 
+## Installation
+```bash
+npm install py-logging
+```
+
+## Documentation
+[https://github.com/jose-pleonasm/py-logging/tree/master/API.md][2]
+
+## Usage
+### A simplest way:
 ```javascript
 var logging = require('py-logging');
-var logger = logging.getLogger();
 
-logging.basicConfig({level: logging.INFO});
+logging.info('My message to the world.');
+// will do nothing, because default level is WARNING
 
-logger.info('Just started');
-```
-And output will be:
-```
-INFO:root:Just started
+logging.warning('My another message to the world.');
+// will print a message to the console:
+// WARNING:root:My another message to the world.
 ```
 
-### More advanced usage
-
+### Recording log records in a file:
 ```javascript
-// app.js
 var logging = require('py-logging');
-var foo = require('./foo');
-var bar = require('./bar');
-var logger = logging.getLogger();
-var format = '%(asctime) - %(levelname) - %(name) - %(message)';
-var datefmt = '%Y.%m.%d %H:%M.%S';
-var formatter = new logging.Formatter(format, datefmt);
-var cHandler = new logging.ConsoleHandler();
-var fHandler = new logging.FileHandler('./myApp.log');
- 
-cHandler.setFormatter(formatter);
-cHandler.setLevel(logging.DEBUG);
-logger.addHandler(cHandler);
 
-fHandler.setFormatter(formatter);
-fHandler.setLevel(logging.WARNING);
-logger.addHandler(fHandler);
+logging.basicConfig({ filename: 'example.log', level: 'DEBUG' });
 
-logger.setLevel(logging.DEBUG);
+logging.debug('I am going to say something...');
+logging.info('Hello!');
+// will create a file "example.log" with content like this:
+// DEBUG:root:I am going to say something...
+// INFO:root:Hello!
+```
 
-logger.info('Starting app...');
+### Custom layout of log records:
+```javascript
+var logging = require('py-logging');
+
+logging.basicConfig({
+	format: '%(asctime) - %(levelname) - %(message)',
+	timeFormat: '%ISO',
+	level: 'DEBUG'
+});
+
+logging.info('So far so good.');
+// 2017-02-12T15:02:02.910Z - INFO - So far so good.
+```
+
+### Logging an error:
+```javascript
+var logging = require('py-logging');
+
+logging.basicConfig({ level: 'DEBUG' });
 
 try {
-	foo.run();
-	bar.run();
+	someDangerousFunction();
 }
-catch (err) {
-	logger.error('Some module failed!', err);
+catch (error) {
+	logging.error('An error occurred during the function call:', error);
 }
+// ERROR:root:An error occurred during the function call:
+// ReferenceError: someDangerousFunction is not defined
+//     at Object.<anonymous> (/example.js:6:2)
+//     at Module._compile (module.js:571:32)
+//     at Object.Module._extensions..js (module.js:580:10)
+//     at Module.load (module.js:488:32)
+//     at tryModuleLoad (module.js:447:12)
+//     at Function.Module._load (module.js:439:3)
+//     at Module.runMain (module.js:605:10)
+//     at run (bootstrap_node.js:418:7)
+//     at startup (bootstrap_node.js:139:9)
+//     at bootstrap_node.js:533:3
 ```
+
+### Instantiating your own Logger:
 ```javascript
-// foo.js
 var logging = require('py-logging');
-var logger = logging.getLogger('foo');
+var logger = logging.getLogger('name');
 
-module.exports = {
-	run: function() {
-		logger.info('Starting module foo...');
-		// ...
-	}
-};
+logging.basicConfig({ level: 'DEBUG' });
+
+logger.info('Something specific for this logger.');
+// INFO:name:Something specific for this logger.
 ```
+
+### More complex configuration:
 ```javascript
-// bar.js
 var logging = require('py-logging');
-var logger = logging.getLogger('bar');
+var simpleFormatter = new logging.Formatter('%(levelname) %(name) %(message)');
+var verboseFormatter = new logging.Formatter('%(asctime) %(levelname) %(name) %(message)');
+var consoleHandler = new logging.ConsoleHandler();
+var fileHandler = new logging.RotatingFileHandler('./example.log');
+var foo = logging.getLogger('foo');
+var bar = logging.getLogger('foo.bar');
 
-module.exports = {
-	run: function() {
-		logger.info('Starting module bar...');
-		// ...
-		throw new Error('Bar error');
+consoleHandler.setFormatter(simpleFormatter);
+consoleHandler.setLevel(logging.DEBUG);
+foo.addHandler(consoleHandler);
+foo.setLevel(logging.DEBUG);
+fileHandler.setFormatter(verboseFormatter);
+fileHandler.setLevel(logging.INFO);
+bar.addHandler(fileHandler);
+
+foo.info('First message.');
+// will print a message to the console:
+// INFO foo First message.
+
+bar.info('Second message.');
+// will print a message to the console:
+// INFO foo.bar Second message.
+// and into the file:
+// 2017-02-12 15:43:52 INFO foo.bar Second message.
+```
+Or by a configuration object (can be JSON):
+```javascript
+var logging = require('py-logging');
+
+logging.config({
+	'version': 1,
+	'formatters': {
+		'simple': {
+			'format': '%(levelname) %(name) %(message)'
+		},
+		'verbose': {
+			'format': '%(asctime) %(levelname) %(name) %(message)'
+		}
+	},
+	'handlers': {
+		'console': {
+			'class': 'logging.ConsoleHandler',
+			'formatter': 'simple',
+			'level': 'DEBUG'
+		},
+		'file': {
+			'class': 'logging.RotatingFileHandler',
+			'filename': './example.log',
+			'formatter': 'verbose',
+			'level': 'INFO'
+		}
+	},
+	'loggers': {
+		'foo': {
+			'level': 'DEBUG',
+			'handlers': ['console']
+		},
+		'foo.bar': {
+			'handlers': ['file']
+		}
 	}
-};
-```
-And output (console) will be:
-```
-2015.10.28 17:19.09 - INFO - root - Starting app...
-2015.10.28 17:19.09 - INFO - foo - Starting module foo...
-2015.10.28 17:19.09 - INFO - bar - Starting module bar...
-2015.10.28 17:19.09 - ERROR - root - Some module failed!
-Error: Bar error
-    at Object.module.exports.run (/py-logging/examples/advanced/bar.js:10:9)
-    at Object.<anonymous> (/py-logging/examples/advanced/index.js:27:6)
-    at Module._compile (module.js:434:26)
-    at Object.Module._extensions..js (module.js:452:10)
-    at Module.load (module.js:355:32)
-    at Function.Module._load (module.js:310:12)
-    at Function.Module.runMain (module.js:475:10)
-    at startup (node.js:117:18)
-    at node.js:951:3
+});
+
+logging.getLogger('foo').info('First message.');
+// will print a message to the console:
+// INFO foo First message.
+
+logging.getLogger('foo.bar').info('Second message.');
+// will print a message to the console:
+// INFO foo.bar Second message.
+// and into the file:
+// 2017-02-12 15:43:52 INFO foo.bar Second message.
 ```
 
-## Usable handlers
-
-### ConsoleHandler
-### RotatingFileHandler
-### SyncRotatingFileHandler
-### BrowserBasicHttpHandler
+[1]: http://docs.python.org/2/library/logging.html
+[2]: https://github.com/jose-pleonasm/py-logging/tree/master/API.md
