@@ -259,6 +259,39 @@ describe('Logger', function() {
 
 			assert.strictEqual(Hdlr.prototype.handle.callCount, 0);
 		});
+		it('#hasHandlers should return false if there isnt any registered', function() {
+			var root = logging.getLogger();
+
+			assert.strictEqual(root.hasHandlers(), false);
+		});
+		it('#hasHandlers should return true if there is registered', function() {
+			var root = logging.getLogger();
+			var handler = new Hdlr();
+
+			root.addHandler(handler);
+
+			assert.strictEqual(root.hasHandlers(), true);
+		});
+		it('#hasHandlers should return true if parent has any', function() {
+			var root = logging.getLogger();
+			var foo = logging.getLogger('foo');
+			var handler = new Hdlr();
+
+			root.addHandler(handler);
+
+			assert.strictEqual(foo.hasHandlers(), true);
+		});
+		it('#hasHandlers should return false if parent has any handler'
+			+ ' but propagation is disabled', function() {
+			var root = logging.getLogger();
+			var foo = logging.getLogger('foo');
+			var handler = new Hdlr();
+
+			root.addHandler(handler);
+			foo.propagate = false;
+
+			assert.strictEqual(foo.hasHandlers(), false);
+		});
 		it('logger should call all of handlers', function() {
 			sandbox.spy(Hdlr.prototype, 'handle');
 			var h1 = new Hdlr();
