@@ -185,6 +185,8 @@ Return the textual representation of logging level.
 | message | <code>string</code> | The logged message. |
 | error | <code>Object</code> | The logged error. |
 | extra | <code>Object</code> | Extra data. |
+| pid | <code>number</code> | Process ID (if available). |
+| processtitle | <code>string</code> | Process title (if available). |
 
 <a name="Filterer"></a>
 
@@ -225,7 +227,7 @@ A base class for loggers and handlers which allows them to share common code.
 ### filterer.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>Filterer</code>](#Filterer)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -469,7 +471,7 @@ Create a LogRecord object.
 ### logger.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>Logger</code>](#Logger)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -505,6 +507,7 @@ Return value of the level name.
 
 * [Handler](#Handler) ⇐ [<code>Filterer</code>](#Filterer)
     * [new Handler([level])](#new_Handler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
     * [.setFormatter(formatter)](#Handler+setFormatter)
@@ -528,6 +531,12 @@ An abstract handler.
 | --- | --- |
 | [level] | <code>number</code> | 
 
+<a name="Handler+toString"></a>
+
+### handler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>Handler</code>](#Handler)  
 <a name="Handler+setLevel"></a>
 
 ### handler.setLevel(level)
@@ -637,7 +646,7 @@ Handle errors which occur during an emit() call.
 ### handler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>Handler</code>](#Handler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -650,6 +659,7 @@ Handle errors which occur during an emit() call.
 
 * [Formatter](#Formatter)
     * [new Formatter([format], [timeFormat])](#new_Formatter_new)
+    * [.toString()](#Formatter+toString) ⇒ <code>string</code>
     * [.formatTime(record)](#Formatter+formatTime) ⇒ <code>string</code>
     * [.formatError(error)](#Formatter+formatError) ⇒ <code>string</code>
     * [.format(record)](#Formatter+format) ⇒ <code>string</code>
@@ -665,6 +675,12 @@ Default formatter.
 | [format] | <code>string</code> | 
 | [timeFormat] | <code>string</code> | 
 
+<a name="Formatter+toString"></a>
+
+### formatter.toString() ⇒ <code>string</code>
+Return the text representation of this formatter.
+
+**Kind**: instance method of [<code>Formatter</code>](#Formatter)  
 <a name="Formatter+formatTime"></a>
 
 ### formatter.formatTime(record) ⇒ <code>string</code>
@@ -705,6 +721,7 @@ Return the specified LogRecord as formatted text.
 
 * [Filter](#Filter)
     * [new Filter([name])](#new_Filter_new)
+    * [.toString()](#Filter+toString) ⇒ <code>string</code>
     * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
 
 <a name="new_Filter_new"></a>
@@ -715,6 +732,12 @@ Return the specified LogRecord as formatted text.
 | --- | --- |
 | [name] | <code>string</code> | 
 
+<a name="Filter+toString"></a>
+
+### filter.toString() ⇒ <code>string</code>
+Return the text representation of this filter.
+
+**Kind**: instance method of [<code>Filter</code>](#Filter)  
 <a name="Filter+filter"></a>
 
 ### filter.filter(record) ⇒ <code>boolean</code>
@@ -722,7 +745,7 @@ Determine if the specified record has to be logged.
 
 **Kind**: instance method of [<code>Filter</code>](#Filter)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -736,6 +759,7 @@ Determine if the specified record has to be logged.
 
 * [ConsoleHandler](#ConsoleHandler) ⇐ [<code>Handler</code>](#Handler)
     * [new ConsoleHandler([level])](#new_ConsoleHandler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
     * [.setFormatter(formatter)](#Handler+setFormatter)
@@ -759,6 +783,12 @@ Console handler.
 | --- | --- |
 | [level] | <code>number</code> | 
 
+<a name="Handler+toString"></a>
+
+### consoleHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
 <a name="Handler+setLevel"></a>
 
 ### consoleHandler.setLevel(level)
@@ -869,7 +899,7 @@ Handle errors which occur during an emit() call.
 ### consoleHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -883,6 +913,7 @@ Handle errors which occur during an emit() call.
 
 * [FileHandler](#FileHandler) ⇐ [<code>Handler</code>](#Handler)
     * [new FileHandler(filename, [encoding])](#new_FileHandler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
     * [.setFormatter(formatter)](#Handler+setFormatter)
@@ -907,6 +938,12 @@ File handler.
 | filename | <code>string</code> | 
 | [encoding] | <code>string</code> | 
 
+<a name="Handler+toString"></a>
+
+### fileHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
 <a name="Handler+setLevel"></a>
 
 ### fileHandler.setLevel(level)
@@ -1017,7 +1054,7 @@ Handle errors which occur during an emit() call.
 ### fileHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -1035,6 +1072,7 @@ Handle errors which occur during an emit() call.
         * [.emit(record)](#RotatingFileHandler+emit)
         * [.shouldRollover(record)](#RotatingFileHandler+shouldRollover) ⇒ <code>Promise</code>
         * [.doRollover()](#RotatingFileHandler+doRollover) ⇒ <code>Promise</code>
+        * [.toString()](#Handler+toString) ⇒ <code>string</code>
         * [.setLevel(level)](#Handler+setLevel)
         * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
         * [.setFormatter(formatter)](#Handler+setFormatter)
@@ -1094,6 +1132,12 @@ Determine if rollover should occur.
 
 ### rotatingFileHandler.doRollover() ⇒ <code>Promise</code>
 Do a rollover.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+<a name="Handler+toString"></a>
+
+### rotatingFileHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
 
 **Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
 <a name="Handler+setLevel"></a>
@@ -1194,7 +1238,7 @@ Handle errors which occur during an emit() call.
 ### rotatingFileHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -1215,6 +1259,7 @@ Handle errors which occur during an emit() call.
     * [.emit(record)](#SyncRotatingFileHandler+emit)
     * [.shouldRollover(record)](#SyncRotatingFileHandler+shouldRollover) ⇒ <code>boolean</code>
     * [.doRollover()](#SyncRotatingFileHandler+doRollover) ⇒ <code>boolean</code>
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
     * [.setFormatter(formatter)](#Handler+setFormatter)
@@ -1260,6 +1305,12 @@ Handle errors which occur during an emit() call.
 <a name="SyncRotatingFileHandler+doRollover"></a>
 
 ### syncRotatingFileHandler.doRollover() ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
+<a name="Handler+toString"></a>
+
+### syncRotatingFileHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
 **Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
 <a name="Handler+setLevel"></a>
 
@@ -1359,7 +1410,7 @@ Handle errors which occur during an emit() call.
 ### syncRotatingFileHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -1374,6 +1425,7 @@ Handle errors which occur during an emit() call.
 * [BrowserBasicHttpHandler](#BrowserBasicHttpHandler) ⇐ [<code>Handler</code>](#Handler)
     * [new BrowserBasicHttpHandler(url)](#new_BrowserBasicHttpHandler_new)
     * [.emit(record)](#BrowserBasicHttpHandler+emit)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
     * [.setFormatter(formatter)](#Handler+setFormatter)
@@ -1404,6 +1456,12 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
+<a name="Handler+toString"></a>
+
+### browserBasicHttpHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
 <a name="Handler+setLevel"></a>
 
 ### browserBasicHttpHandler.setLevel(level)
@@ -1502,7 +1560,7 @@ Handle errors which occur during an emit() call.
 ### browserBasicHttpHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-    True otherwise.  
+	True otherwise.  
 
 | Param | Type |
 | --- | --- |
