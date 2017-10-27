@@ -63,8 +63,6 @@ logging.info('So far so good.');
 ```javascript
 var logging = require('py-logging');
 
-logging.basicConfig({ level: 'DEBUG' });
-
 try {
 	someDangerousFunction();
 }
