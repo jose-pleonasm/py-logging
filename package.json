@@ -4,7 +4,9 @@
   "description": "Javascript logging library based on the Python logging module",
   "main": "lib/logging.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "prepublishOnly": "npm run test && npm run version-check",
+    "version-check": "node ./scripts/version-check.js"
   },
   "repository": {
     "type": "git",
