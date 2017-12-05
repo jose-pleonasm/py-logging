@@ -819,84 +819,242 @@ describe('Formatter', function() {
 
 			assert.equal(formatter.format(record), 'bar');
 		});
-		it('should return correct message'
-				+ ' with length as long as really is', function() {
-			var message = 'Lorem ipsum';
-			var record = { message: message };
-			var format = '%(message)' + message.length + 's';
-			var formatter = new Fmtr(format);
+		// string
+		describe(' - string', function() {
+			it('should return correct message'
+					+ ' with length as long as really is', function() {
+				var message = 'Lorem ipsum';
+				var record = { message: message };
+				var format = '%(message)' + message.length + 's';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record), message);
-			assert.equal(formatter.format(record).length, message.length);
+				assert.strictEqual(formatter.format(record), message);
+				assert.strictEqual(formatter.format(record).length, message.length);
+			});
+			it('should return message with length 20 chars', function() {
+				var message = 'Lorem ipsum';
+				var record = { message: message };
+				var format = '%(message)20s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record).length, 20);
+			});
+			it('should return correct message with real length', function() {
+				var message = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
+				var record = { message: message };
+				var format = '%(message)20s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), message);
+				assert.strictEqual(formatter.format(record).length, message.length);
+			});
+			it('should return message aligned to right', function() {
+				var message = 'Lorem ipsum';
+				var record = { message: message };
+				var format = '%(message)20s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '         ' + message);
+			});
+			it('should return message aligned to right (explicitly)', function() {
+				var message = 'Lorem ipsum';
+				var record = { message: message };
+				var format = '%(message)+20s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '         ' + message);
+			});
+			it('should return message aligned to left', function() {
+				var message = 'Lorem ipsum';
+				var record = { message: message };
+				var format = '%(message)-20s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), message + '         ');
+			});
+			it('should return correct message with maximal 5 chars', function() {
+				var message1 = 'Lor';
+				var message2 = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
+				var record1 = { message: message1 };
+				var record2 = { message: message2 };
+				var format = '%(message).5s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1).length, 3);
+				assert.strictEqual(formatter.format(record2).length, 5);
+				assert.strictEqual(formatter.format(record2), message2.slice(0, 5));
+			});
+			it('should return correct message with exactly 20 chars'
+					+ 'but cut to maximal 5 and aligned to right', function() {
+				var message1 = 'Lor';
+				var message2 = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
+				var record1 = { message: message1 };
+				var record2 = { message: message2 };
+				var format = '%(message)20.5s';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1).length, 20);
+				assert.strictEqual(formatter.format(record2).length, 20);
+				assert.strictEqual(
+					formatter.format(record2),
+					'               ' + message2.slice(0, 5)
+				);
+			});
 		});
-		it('should return message with length 20 chars', function() {
-			var message = 'Lorem ipsum';
-			var record = { message: message };
-			var format = '%(message)20s';
-			var formatter = new Fmtr(format);
+		// integer
+		describe(' - integer', function() {
+			it('should return correct decimal number', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3.14;
+				var number2 = -123123123;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var format = '%(data)d';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record).length, 20);
+				assert.strictEqual(formatter.format(record1), String(3));
+				assert.strictEqual(formatter.format(record2), String(number2));
+			});
+			it('should return message with length 4 chars', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3.14;
+				var number2 = 16;
+				var number3 = 9999;
+				var number4 = -9;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var record3 = { message: message, data: number3 };
+				var record4 = { message: message, data: number4 };
+				var format = '%(data)4d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1).length, 4);
+				assert.strictEqual(formatter.format(record2).length, 4);
+				assert.strictEqual(formatter.format(record3).length, 4);
+				assert.strictEqual(formatter.format(record4).length, 4);
+			});
+			it('should return correct message with real length', function() {
+				var message = 'Lorem ipsum';
+				var number = -123123123;
+				var record = { message: message, data: number };
+				var format = '%(data)4d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), String(number));
+				assert.strictEqual(formatter.format(record).length, String(number).length);
+			});
+			it('should return decimal number with a sign character', function() {
+				var message = 'Lorem ipsum';
+				var number = 3.14;
+				var record = { message: message, data: number };
+				var format = '%(data)+2d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '+3');
+			});
+			it('should return message aligned to left', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)-4d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), number + '  ');
+			});
+			it('should return message aligned to left with a sign character', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)-+4d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '+' + number + ' ');
+			});
 		});
-		it('should return correct message with real length', function() {
-			var message = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
-			var record = { message: message };
-			var format = '%(message)20s';
-			var formatter = new Fmtr(format);
+		// float
+		describe(' - float', function() {
+			it('should return correct number', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3.14;
+				var number2 = -123123123;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var format = '%(data)f';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record), message);
-			assert.equal(formatter.format(record).length, message.length);
-		});
-		it('should return message aligned to right', function() {
-			var message = 'Lorem ipsum';
-			var record = { message: message };
-			var format = '%(message)20s';
-			var formatter = new Fmtr(format);
+				assert.strictEqual(formatter.format(record1), String(number1));
+				assert.strictEqual(formatter.format(record2), String(number2));
+			});
+			it('should return message with length 4 chars', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3.14;
+				var number2 = 16;
+				var number3 = 9999;
+				var number4 = -9;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var record3 = { message: message, data: number3 };
+				var record4 = { message: message, data: number4 };
+				var format = '%(data)4f';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record), '         ' + message);
-		});
-		it('should return message aligned to right (explicitly)', function() {
-			var message = 'Lorem ipsum';
-			var record = { message: message };
-			var format = '%(message)+20s';
-			var formatter = new Fmtr(format);
+				assert.strictEqual(formatter.format(record1).length, 4);
+				assert.strictEqual(formatter.format(record2).length, 4);
+				assert.strictEqual(formatter.format(record3).length, 4);
+				assert.strictEqual(formatter.format(record4).length, 4);
+			});
+			it('should return correct message with real length', function() {
+				var message = 'Lorem ipsum';
+				var number = -123123123;
+				var record = { message: message, data: number };
+				var format = '%(data)4f';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record), '         ' + message);
-		});
-		it('should return message aligned to left', function() {
-			var message = 'Lorem ipsum';
-			var record = { message: message };
-			var format = '%(message)-20s';
-			var formatter = new Fmtr(format);
+				assert.strictEqual(formatter.format(record), String(number));
+				assert.strictEqual(formatter.format(record).length, String(number).length);
+			});
+			it('should return number with a sign character', function() {
+				var message = 'Lorem ipsum';
+				var number = 3.14;
+				var record = { message: message, data: number };
+				var format = '%(data)+2f';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record), message + '         ');
-		});
-		it('should return correct message with maximal 5 chars', function() {
-			var message1 = 'Lor';
-			var message2 = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
-			var record1 = { message: message1 };
-			var record2 = { message: message2 };
-			var format = '%(message).5s';
-			var formatter = new Fmtr(format);
+				assert.strictEqual(formatter.format(record), '+' + number);
+			});
+			it('should return message aligned to left', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)-4f';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record1).length, 3);
-			assert.equal(formatter.format(record2).length, 5);
-			assert.equal(formatter.format(record2), message2.slice(0, 5));
-		});
-		it('should return correct message with exactly 20 chars'
-				+ 'but cut to maximal 5 and aligned to right', function() {
-			var message1 = 'Lor';
-			var message2 = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
-			var record1 = { message: message1 };
-			var record2 = { message: message2 };
-			var format = '%(message)20.5s';
-			var formatter = new Fmtr(format);
+				assert.strictEqual(formatter.format(record), number + '  ');
+			});
+			it('should return message aligned to left with a sign character', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)-+4f';
+				var formatter = new Fmtr(format);
 
-			assert.equal(formatter.format(record1).length, 20);
-			assert.equal(formatter.format(record2).length, 20);
-			assert.equal(
-				formatter.format(record2),
-				'               ' + message2.slice(0, 5)
-			);
+				assert.strictEqual(formatter.format(record), '+' + number + ' ');
+			});
+			it('should return float number with correct precision', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3.14;
+				var number2 = -123123123;
+				var number3 = 1.1999999999999999999;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var record3 = { message: message, data: number3 };
+				var format = '%(data)3.1f';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1), '3.1');
+				assert.strictEqual(formatter.format(record2), '-123123123.0');
+				assert.strictEqual(formatter.format(record3), '1.2');
+			});
 		});
 	});
 
