@@ -819,6 +819,85 @@ describe('Formatter', function() {
 
 			assert.equal(formatter.format(record), 'bar');
 		});
+		it('should return correct message'
+				+ ' with length as long as really is', function() {
+			var message = 'Lorem ipsum';
+			var record = { message: message };
+			var format = '%(message)' + message.length + 's';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), message);
+			assert.equal(formatter.format(record).length, message.length);
+		});
+		it('should return message with length 20 chars', function() {
+			var message = 'Lorem ipsum';
+			var record = { message: message };
+			var format = '%(message)20s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record).length, 20);
+		});
+		it('should return correct message with real length', function() {
+			var message = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
+			var record = { message: message };
+			var format = '%(message)20s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), message);
+			assert.equal(formatter.format(record).length, message.length);
+		});
+		it('should return message aligned to right', function() {
+			var message = 'Lorem ipsum';
+			var record = { message: message };
+			var format = '%(message)20s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), '         ' + message);
+		});
+		it('should return message aligned to right (explicitly)', function() {
+			var message = 'Lorem ipsum';
+			var record = { message: message };
+			var format = '%(message)+20s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), '         ' + message);
+		});
+		it('should return message aligned to left', function() {
+			var message = 'Lorem ipsum';
+			var record = { message: message };
+			var format = '%(message)-20s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record), message + '         ');
+		});
+		it('should return correct message with maximal 5 chars', function() {
+			var message1 = 'Lor';
+			var message2 = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
+			var record1 = { message: message1 };
+			var record2 = { message: message2 };
+			var format = '%(message).5s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record1).length, 3);
+			assert.equal(formatter.format(record2).length, 5);
+			assert.equal(formatter.format(record2), message2.slice(0, 5));
+		});
+		it('should return correct message with exactly 20 chars'
+				+ 'but cut to maximal 5 and aligned to right', function() {
+			var message1 = 'Lor';
+			var message2 = 'Lorem ipsum. Lorem ipsum. Lorem ipsum';
+			var record1 = { message: message1 };
+			var record2 = { message: message2 };
+			var format = '%(message)20.5s';
+			var formatter = new Fmtr(format);
+
+			assert.equal(formatter.format(record1).length, 20);
+			assert.equal(formatter.format(record2).length, 20);
+			assert.equal(
+				formatter.format(record2),
+				'               ' + message2.slice(0, 5)
+			);
+		});
 	});
 
 });
