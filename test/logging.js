@@ -970,6 +970,15 @@ describe('Formatter', function() {
 
 				assert.strictEqual(formatter.format(record), '+' + number + ' ');
 			});
+			it('should return zero padded number', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)010d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '00000000' + number);
+			});
 		});
 		// float
 		describe(' - float', function() {
@@ -1039,6 +1048,15 @@ describe('Formatter', function() {
 				var formatter = new Fmtr(format);
 
 				assert.strictEqual(formatter.format(record), '+' + number + ' ');
+			});
+			it('should return zero padded number', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)010f';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '00000000' + number);
 			});
 			it('should return float number with correct precision', function() {
 				var message = 'Lorem ipsum';
