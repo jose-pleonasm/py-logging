@@ -945,12 +945,15 @@ describe('Formatter', function() {
 			});
 			it('should return decimal number with a sign character', function() {
 				var message = 'Lorem ipsum';
-				var number = 3.14;
-				var record = { message: message, data: number };
+				var number1 = 3.14;
+				var number2 = -10;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
 				var format = '%(data)+2d';
 				var formatter = new Fmtr(format);
 
-				assert.strictEqual(formatter.format(record), '+3');
+				assert.strictEqual(formatter.format(record1), '+3');
+				assert.strictEqual(formatter.format(record2), String(number2));
 			});
 			it('should return message aligned to left', function() {
 				var message = 'Lorem ipsum';
@@ -978,6 +981,18 @@ describe('Formatter', function() {
 				var formatter = new Fmtr(format);
 
 				assert.strictEqual(formatter.format(record), '00000000' + number);
+			});
+			it('should return message with blank space before a positive number', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3;
+				var number2 = -3;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var format = '%(data) 1d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1), ' ' + number1);
+				assert.strictEqual(formatter.format(record2), String(number2));
 			});
 		});
 		// float
@@ -1024,12 +1039,15 @@ describe('Formatter', function() {
 			});
 			it('should return number with a sign character', function() {
 				var message = 'Lorem ipsum';
-				var number = 3.14;
-				var record = { message: message, data: number };
+				var number1 = 3.14;
+				var number2 = -10;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
 				var format = '%(data)+2f';
 				var formatter = new Fmtr(format);
 
-				assert.strictEqual(formatter.format(record), '+' + number);
+				assert.strictEqual(formatter.format(record1), '+' + number1);
+				assert.strictEqual(formatter.format(record2), String(number2));
 			});
 			it('should return message aligned to left', function() {
 				var message = 'Lorem ipsum';
@@ -1072,6 +1090,30 @@ describe('Formatter', function() {
 				assert.strictEqual(formatter.format(record1), '3.1');
 				assert.strictEqual(formatter.format(record2), '-123123123.0');
 				assert.strictEqual(formatter.format(record3), '1.2');
+			});
+			it('should return message with blank space before a positive number', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 3.14;
+				var number2 = -3;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var format = '%(data) 2f';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1), ' ' + number1);
+				assert.strictEqual(formatter.format(record2), String(number2));
+			});
+			it('should return correct message', function() {
+				var message = 'Lorem ipsum';
+				var number1 = 300.14;
+				var number2 = -300;
+				var record1 = { message: message, data: number1 };
+				var record2 = { message: message, data: number2 };
+				var format = '%(data) 10.2f';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record1), '    ' + number1);
+				assert.strictEqual(formatter.format(record2), '   ' + number2 + '.00');
 			});
 		});
 	});
