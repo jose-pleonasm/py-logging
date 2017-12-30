@@ -18,7 +18,7 @@
 <dd></dd>
 <dt><a href="#Filter">Filter</a></dt>
 <dd></dd>
-<dt><a href="#StreamHandler">StreamHandler</a></dt>
+<dt><a href="#StreamHandler">StreamHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
 <dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
@@ -755,12 +755,25 @@ Determine if the specified record has to be logged.
 
 <a name="StreamHandler"></a>
 
-## StreamHandler
+## StreamHandler ⇐ [<code>Handler</code>](#Handler)
 **Kind**: global class  
+**Extends**: [<code>Handler</code>](#Handler)  
 
-* [StreamHandler](#StreamHandler)
+* [StreamHandler](#StreamHandler) ⇐ [<code>Handler</code>](#Handler)
     * [new StreamHandler([stream], [recordTextEnd])](#new_StreamHandler_new)
-    * [.emit()](#StreamHandler+emit)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * [.emit(record)](#Handler+emit)
+    * [.handleError(error, [record])](#Handler+handleError)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_StreamHandler_new"></a>
 
@@ -777,10 +790,128 @@ process.stdout or process.stderr may be used.
 | [stream] | <code>Object</code> | 
 | [recordTextEnd] | <code>string</code> | 
 
-<a name="StreamHandler+emit"></a>
+<a name="Handler+toString"></a>
 
-### streamHandler.emit()
+### streamHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
 **Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+<a name="Handler+setLevel"></a>
+
+### streamHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+### streamHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+### streamHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | [<code>Formatter</code>](#Formatter) | 
+
+<a name="Handler+format"></a>
+
+### streamHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+### streamHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+### *streamHandler.acquire()*
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#StreamHandler)  
+<a name="Handler+release"></a>
+
+### *streamHandler.release()*
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#StreamHandler)  
+<a name="Handler+emit"></a>
+
+### streamHandler.emit(record)
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+**Overrides**: [<code>emit</code>](#Handler+emit)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handleError"></a>
+
+### streamHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Filterer+addFilter"></a>
+
+### streamHandler.addFilter(filter)
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+removeFilter"></a>
+
+### streamHandler.removeFilter(filter)
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+filter"></a>
+
+### streamHandler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
+	True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
 <a name="ConsoleHandler"></a>
 
 ## ConsoleHandler ⇐ [<code>Handler</code>](#Handler)
