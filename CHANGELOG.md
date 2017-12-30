@@ -1,3 +1,9 @@
+### 1.4.1 (2017-12-30)
+
+#### Fixed
+
+* Documentation.
+
 ## 1.4.0 (2017-12-30)
 
 #### Added
@@ -22,7 +28,7 @@
 * Added properties "pid" and "processtitle" to LogRecord.
 * More specific "toString" methods.
 
-## 1.1.1 (2017-10-27)
+### 1.1.1 (2017-10-27)
 
 #### Added
 
