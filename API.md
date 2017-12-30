@@ -30,6 +30,17 @@
 <dd></dd>
 </dl>
 
+## Functions
+
+<dl>
+<dt><a href="#StreamHandler">StreamHandler([stream], [recordTextEnd])</a></dt>
+<dd><p>Base stream handler.</p>
+<p>A handler class which writes logging records, appropriately formatted,
+to a stream. Note that this class does not close the stream, as
+process.stdout or process.stderr may be used.</p>
+</dd>
+</dl>
+
 <a name="module_py-logging"></a>
 
 ## py-logging
@@ -1566,3 +1577,23 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
+<a name="StreamHandler"></a>
+
+## StreamHandler([stream], [recordTextEnd])
+Base stream handler.
+
+A handler class which writes logging records, appropriately formatted,
+to a stream. Note that this class does not close the stream, as
+process.stdout or process.stderr may be used.
+
+**Kind**: global function  
+
+| Param | Type |
+| --- | --- |
+| [stream] | <code>Object</code> | 
+| [recordTextEnd] | <code>string</code> | 
+
+<a name="StreamHandler+emit"></a>
+
+### streamHandler.emit()
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
