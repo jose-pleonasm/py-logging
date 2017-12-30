@@ -785,10 +785,10 @@ to a stream. Note that this class does not close the stream, as
 process.stdout or process.stderr may be used.
 
 
-| Param | Type |
-| --- | --- |
-| [stream] | <code>Object</code> | 
-| [recordTextEnd] | <code>string</code> | 
+| Param | Type | Default |
+| --- | --- | --- |
+| [stream] | <code>Object</code> | <code>process.stderr</code> | 
+| [recordTextEnd] | <code>string</code> | <code>&quot;&#x27;\\n&#x27;&quot;</code> | 
 
 <a name="Handler+toString"></a>
 
