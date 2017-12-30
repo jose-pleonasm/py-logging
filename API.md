@@ -18,6 +18,8 @@
 <dd></dd>
 <dt><a href="#Filter">Filter</a></dt>
 <dd></dd>
+<dt><a href="#StreamHandler">StreamHandler</a></dt>
+<dd></dd>
 <dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
 <dt><a href="#FileHandler">FileHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
@@ -28,17 +30,6 @@
 <dd></dd>
 <dt><a href="#BrowserBasicHttpHandler">BrowserBasicHttpHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
-</dl>
-
-## Functions
-
-<dl>
-<dt><a href="#StreamHandler">StreamHandler([stream], [recordTextEnd])</a></dt>
-<dd><p>Base stream handler.</p>
-<p>A handler class which writes logging records, appropriately formatted,
-to a stream. Note that this class does not close the stream, as
-process.stdout or process.stderr may be used.</p>
-</dd>
 </dl>
 
 <a name="module_py-logging"></a>
@@ -762,6 +753,34 @@ Determine if the specified record has to be logged.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
+<a name="StreamHandler"></a>
+
+## StreamHandler
+**Kind**: global class  
+
+* [StreamHandler](#StreamHandler)
+    * [new StreamHandler([stream], [recordTextEnd])](#new_StreamHandler_new)
+    * [.emit()](#StreamHandler+emit)
+
+<a name="new_StreamHandler_new"></a>
+
+### new StreamHandler([stream], [recordTextEnd])
+Base stream handler.
+
+A handler class which writes logging records, appropriately formatted,
+to a stream. Note that this class does not close the stream, as
+process.stdout or process.stderr may be used.
+
+
+| Param | Type |
+| --- | --- |
+| [stream] | <code>Object</code> | 
+| [recordTextEnd] | <code>string</code> | 
+
+<a name="StreamHandler+emit"></a>
+
+### streamHandler.emit()
+**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
 <a name="ConsoleHandler"></a>
 
 ## ConsoleHandler ⇐ [<code>Handler</code>](#Handler)
@@ -1577,23 +1596,3 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="StreamHandler"></a>
-
-## StreamHandler([stream], [recordTextEnd])
-Base stream handler.
-
-A handler class which writes logging records, appropriately formatted,
-to a stream. Note that this class does not close the stream, as
-process.stdout or process.stderr may be used.
-
-**Kind**: global function  
-
-| Param | Type |
-| --- | --- |
-| [stream] | <code>Object</code> | 
-| [recordTextEnd] | <code>string</code> | 
-
-<a name="StreamHandler+emit"></a>
-
-### streamHandler.emit()
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
