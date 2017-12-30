@@ -788,7 +788,7 @@ process.stdout or process.stderr may be used.
 | Param | Type | Default |
 | --- | --- | --- |
 | [stream] | <code>Object</code> | <code>process.stderr</code> | 
-| [recordTextEnd] | <code>string</code> | <code>&quot;&#x27;\\n&#x27;&quot;</code> | 
+| [recordTextEnd] | <code>string</code> | <code>&quot;\\n&quot;</code> | 
 
 <a name="Handler+toString"></a>
 
