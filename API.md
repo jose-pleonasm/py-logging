@@ -24,7 +24,7 @@
 <dd></dd>
 <dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
-<dt><a href="#FileHandler">FileHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
+<dt><a href="#FileHandlerOld">FileHandlerOld</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
 <dt><a href="#RotatingFileHandler">RotatingFileHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
@@ -945,7 +945,6 @@ Handle errors which occur during an emit() call.
 
 * [FileHandler](#FileHandler) ⇐ [<code>StreamHandler</code>](#StreamHandler)
     * [new FileHandler(filename, [mode], [encoding])](#new_FileHandler_new)
-    * [new FileHandler(filename, [encoding])](#new_FileHandler_new)
     * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
@@ -974,24 +973,12 @@ File handler.
 | [mode] | <code>string</code> | <code>&quot;a&quot;</code> | [https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback) |
 | [encoding] | <code>string</code> | <code>&quot;utf8&quot;</code> | [https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) |
 
-<a name="new_FileHandler_new"></a>
-
-### new FileHandler(filename, [encoding])
-File handler.
-
-
-| Param | Type |
-| --- | --- |
-| filename | <code>string</code> | 
-| [encoding] | <code>string</code> | 
-
 <a name="StreamHandler+emit"></a>
 
 ### fileHandler.emit(record) ⇒ <code>boolean</code>
 Writes the record to the stream (with a trailing newline, if default setup).
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
 **Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
 	for the 'drain' event to be emitted before continuing to write additional data;
 	otherwise true.  
@@ -1006,14 +993,12 @@ Writes the record to the stream (with a trailing newline, if default setup).
 Return the text representation of this handler.
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>toString</code>](#Handler+toString)  
 <a name="Handler+setLevel"></a>
 
 ### fileHandler.setLevel(level)
 Set the logging level of this handler.
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>setLevel</code>](#Handler+setLevel)  
 
 | Param | Type |
 | --- | --- |
@@ -1025,7 +1010,6 @@ Set the logging level of this handler.
 Is this handler enabled for specified level?
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>isEnabledFor</code>](#Handler+isEnabledFor)  
 
 | Param | Type |
 | --- | --- |
@@ -1037,7 +1021,6 @@ Is this handler enabled for specified level?
 Set the formatter for this handler.
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>setFormatter</code>](#Handler+setFormatter)  
 
 | Param | Type |
 | --- | --- |
@@ -1049,7 +1032,6 @@ Set the formatter for this handler.
 Format the specified record.
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>format</code>](#Handler+format)  
 
 | Param | Type |
 | --- | --- |
@@ -1061,7 +1043,6 @@ Format the specified record.
 Handle the specified logging record.
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>handle</code>](#Handler+handle)  
 
 | Param | Type |
 | --- | --- |
@@ -1071,29 +1052,24 @@ Handle the specified logging record.
 
 ### *fileHandler.acquire()*
 **Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>acquire</code>](#Handler+acquire)  
 <a name="Handler+release"></a>
 
 ### *fileHandler.release()*
 **Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>release</code>](#Handler+release)  
 <a name="Handler+flush"></a>
 
 ### *fileHandler.flush()*
 **Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>flush</code>](#Handler+flush)  
 <a name="Handler+close"></a>
 
 ### *fileHandler.close()*
 **Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>close</code>](#Handler+close)  
 <a name="Handler+handleError"></a>
 
 ### fileHandler.handleError(error, [record])
 Handle errors which occur during an emit() call.
 
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>handleError</code>](#Handler+handleError)  
 
 | Param | Type |
 | --- | --- |
@@ -1104,7 +1080,6 @@ Handle errors which occur during an emit() call.
 
 ### fileHandler.addFilter(filter)
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>addFilter</code>](#Filterer+addFilter)  
 
 | Param | Type |
 | --- | --- |
@@ -1114,7 +1089,6 @@ Handle errors which occur during an emit() call.
 
 ### fileHandler.removeFilter(filter)
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>removeFilter</code>](#Filterer+removeFilter)  
 
 | Param | Type |
 | --- | --- |
@@ -1124,7 +1098,6 @@ Handle errors which occur during an emit() call.
 
 ### fileHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>filter</code>](#Filterer+filter)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
 	True otherwise.  
 
@@ -1296,16 +1269,14 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="FileHandler"></a>
+<a name="FileHandlerOld"></a>
 
-## FileHandler ⇐ [<code>Handler</code>](#Handler)
+## FileHandlerOld ⇐ [<code>Handler</code>](#Handler)
 **Kind**: global class  
 **Extends**: [<code>Handler</code>](#Handler)  
 
-* [FileHandler](#FileHandler) ⇐ [<code>Handler</code>](#Handler)
-    * [new FileHandler(filename, [mode], [encoding])](#new_FileHandler_new)
-    * [new FileHandler(filename, [encoding])](#new_FileHandler_new)
-    * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
+* [FileHandlerOld](#FileHandlerOld) ⇐ [<code>Handler</code>](#Handler)
+    * [new FileHandlerOld(filename, [encoding])](#new_FileHandlerOld_new)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -1314,6 +1285,7 @@ Handle errors which occur during an emit() call.
     * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
     * *[.acquire()](#Handler+acquire)*
     * *[.release()](#Handler+release)*
+    * [.emit(record)](#Handler+emit)
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
@@ -1321,21 +1293,9 @@ Handle errors which occur during an emit() call.
     * [.removeFilter(filter)](#Filterer+removeFilter)
     * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
-<a name="new_FileHandler_new"></a>
+<a name="new_FileHandlerOld_new"></a>
 
-### new FileHandler(filename, [mode], [encoding])
-File handler.
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| filename | <code>string</code> |  |  |
-| [mode] | <code>string</code> | <code>&quot;a&quot;</code> | [https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback) |
-| [encoding] | <code>string</code> | <code>&quot;utf8&quot;</code> | [https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) |
-
-<a name="new_FileHandler_new"></a>
-
-### new FileHandler(filename, [encoding])
+### new FileHandlerOld(filename, [encoding])
 File handler.
 
 
@@ -1344,35 +1304,18 @@ File handler.
 | filename | <code>string</code> | 
 | [encoding] | <code>string</code> | 
 
-<a name="StreamHandler+emit"></a>
-
-### fileHandler.emit(record) ⇒ <code>boolean</code>
-Writes the record to the stream (with a trailing newline, if default setup).
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
-**Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
-	for the 'drain' event to be emitted before continuing to write additional data;
-	otherwise true.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
 <a name="Handler+toString"></a>
 
-### fileHandler.toString() ⇒ <code>string</code>
+### fileHandlerOld.toString() ⇒ <code>string</code>
 Return the text representation of this handler.
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>toString</code>](#Handler+toString)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 <a name="Handler+setLevel"></a>
 
-### fileHandler.setLevel(level)
+### fileHandlerOld.setLevel(level)
 Set the logging level of this handler.
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>setLevel</code>](#Handler+setLevel)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1380,11 +1323,10 @@ Set the logging level of this handler.
 
 <a name="Handler+isEnabledFor"></a>
 
-### fileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+### fileHandlerOld.isEnabledFor(level) ⇒ <code>boolean</code>
 Is this handler enabled for specified level?
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>isEnabledFor</code>](#Handler+isEnabledFor)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1392,11 +1334,10 @@ Is this handler enabled for specified level?
 
 <a name="Handler+setFormatter"></a>
 
-### fileHandler.setFormatter(formatter)
+### fileHandlerOld.setFormatter(formatter)
 Set the formatter for this handler.
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>setFormatter</code>](#Handler+setFormatter)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1404,11 +1345,10 @@ Set the formatter for this handler.
 
 <a name="Handler+format"></a>
 
-### fileHandler.format(record) ⇒ <code>string</code>
+### fileHandlerOld.format(record) ⇒ <code>string</code>
 Format the specified record.
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>format</code>](#Handler+format)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1416,11 +1356,10 @@ Format the specified record.
 
 <a name="Handler+handle"></a>
 
-### fileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+### fileHandlerOld.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
 Handle the specified logging record.
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>handle</code>](#Handler+handle)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1428,31 +1367,38 @@ Handle the specified logging record.
 
 <a name="Handler+acquire"></a>
 
-### *fileHandler.acquire()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>acquire</code>](#Handler+acquire)  
+### *fileHandlerOld.acquire()*
+**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 <a name="Handler+release"></a>
 
-### *fileHandler.release()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>release</code>](#Handler+release)  
+### *fileHandlerOld.release()*
+**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+<a name="Handler+emit"></a>
+
+### fileHandlerOld.emit(record)
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Overrides**: [<code>emit</code>](#Handler+emit)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
 <a name="Handler+flush"></a>
 
-### *fileHandler.flush()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>flush</code>](#Handler+flush)  
+### *fileHandlerOld.flush()*
+**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 <a name="Handler+close"></a>
 
-### *fileHandler.close()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>close</code>](#Handler+close)  
+### *fileHandlerOld.close()*
+**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 <a name="Handler+handleError"></a>
 
-### fileHandler.handleError(error, [record])
+### fileHandlerOld.handleError(error, [record])
 Handle errors which occur during an emit() call.
 
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>handleError</code>](#Handler+handleError)  
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1461,9 +1407,8 @@ Handle errors which occur during an emit() call.
 
 <a name="Filterer+addFilter"></a>
 
-### fileHandler.addFilter(filter)
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>addFilter</code>](#Filterer+addFilter)  
+### fileHandlerOld.addFilter(filter)
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1471,9 +1416,8 @@ Handle errors which occur during an emit() call.
 
 <a name="Filterer+removeFilter"></a>
 
-### fileHandler.removeFilter(filter)
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>removeFilter</code>](#Filterer+removeFilter)  
+### fileHandlerOld.removeFilter(filter)
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 
 | Param | Type |
 | --- | --- |
@@ -1481,9 +1425,8 @@ Handle errors which occur during an emit() call.
 
 <a name="Filterer+filter"></a>
 
-### fileHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Overrides**: [<code>filter</code>](#Filterer+filter)  
+### fileHandlerOld.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
 	True otherwise.  
 
