@@ -44,7 +44,6 @@ describe('Logging', function() {
 			assert.strictEqual(l1, l2);
 		});
 		it('should return same instance using names', function() {
-			var foo = logging.getLogger('foo');
 			var baz = logging.getLogger('foo.bar.baz');
 			assert.strictEqual(logging.getLogger('foo.bar.baz'), baz);
 		});
@@ -77,22 +76,6 @@ describe('Logger (basics)', function() {
 		});
 	});
 
-	describe('#getChild()', function() {
-		it('without argument should throw an Error', function() {
-			var foo = logging.getLogger('foo');
-			assert.throws(foo.getChild, Error);
-		});
-		it('should return instance of Logger', function() {
-			var foo = logging.getLogger('foo');
-			assert.strictEqual(foo.getChild('bar') instanceof Logger, true);
-		});
-		it('should return correct instance', function() {
-			var foo = logging.getLogger('foo');
-			var bar = logging.getLogger('foo.bar');
-			assert.strictEqual(foo.getChild('bar'), bar);
-		});
-	});
-
 });
 
 /**
@@ -100,22 +83,14 @@ describe('Logger (basics)', function() {
  */
 describe('Creating hierarchical list of loggers', function() {
 
-	it('#getChild should return same instance', function() {
+	it('should return same instance', function() {
 		var root = logging.getLogger();
 		var foo = logging.getLogger('foo');
-		assert.strictEqual(root.getChild('foo'), foo);
+		assert.strictEqual(logging.getLogger('foo'), foo);
 	});
-	it('#getChild should return different instances', function() {
-		assert.strictEqual(
-			logging.getLogger().getChild('foo')
-				!== logging.getLogger().getChild('bar'),
-			true
-		);
-	});
-	it('#getChild should return correct instance', function() {
+	it('should return correct instance', function() {
 		var baz = logging.getLogger('foo.bar.baz');
-		var foo = logging.getLogger('foo');
-		assert.strictEqual(foo.getChild('bar.baz'), baz);
+		assert.strictEqual(logging.getLogger('foo.bar.baz'), baz);
 	});
 
 });
