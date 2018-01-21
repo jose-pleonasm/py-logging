@@ -20,18 +20,27 @@
 <dd></dd>
 <dt><a href="#StreamHandler">StreamHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
-<dt><a href="#FileHandler">FileHandler</a> ⇐ <code><a href="#StreamHandler">StreamHandler</a></code></dt>
-<dd></dd>
 <dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
-<dt><a href="#FileHandlerOld">FileHandlerOld</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
+<dt><a href="#FileHandler">FileHandler</a> ⇐ <code><a href="#StreamHandler">StreamHandler</a></code></dt>
 <dd></dd>
-<dt><a href="#RotatingFileHandler">RotatingFileHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
+<dt><a href="#RotatingFileHandler">RotatingFileHandler</a></dt>
 <dd></dd>
-<dt><a href="#SyncRotatingFileHandler">SyncRotatingFileHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
+<dt><a href="#HttpHandler">HttpHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
-<dt><a href="#BrowserBasicHttpHandler">BrowserBasicHttpHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
+<dt><a href="#AsyncHandler">AsyncHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
+</dl>
+
+## Functions
+
+<dl>
+<dt><a href="#extend">extend(ns)</a> ⇒ <code>Object</code></dt>
+<dd><p>Extends given object by functions from this module.</p>
+</dd>
+<dt><a href="#basicConfig">basicConfig([options])</a></dt>
+<dd><p>Do basic configuration for the logging system.</p>
+</dd>
 </dl>
 
 <a name="module_py-logging"></a>
@@ -47,17 +56,16 @@
     * [.WARNING](#module_py-logging.WARNING) : <code>number</code>
     * [.ERROR](#module_py-logging.ERROR) : <code>number</code>
     * [.CRITICAL](#module_py-logging.CRITICAL) : <code>number</code>
-    * [.getLoggerClass()](#module_py-logging.getLoggerClass) ⇒ <code>function</code>
-    * [.getLogger(name)](#module_py-logging.getLogger) ⇒ [<code>Logger</code>](#Logger)
-    * [.basicConfig([options])](#module_py-logging.basicConfig)
-    * [.config(config, [outerContext])](#module_py-logging.config)
-    * [.getLevelName(level)](#module_py-logging.getLevelName) ⇒ <code>string</code>
     * [.debug()](#module_py-logging.debug)
     * [.info()](#module_py-logging.info)
     * [.warning()](#module_py-logging.warning)
     * [.error()](#module_py-logging.error)
     * [.critical()](#module_py-logging.critical)
     * [.log()](#module_py-logging.log)
+    * [.getLoggerClass()](#module_py-logging.getLoggerClass) ⇒ <code>function</code>
+    * [.getLogger([name])](#module_py-logging.getLogger) ⇒ [<code>Logger</code>](#Logger)
+    * [.config(config, [outerContext])](#module_py-logging.config)
+    * [.getLevelName(level)](#module_py-logging.getLevelName) ⇒ <code>string</code>
     * [.LogRecord](#module_py-logging.LogRecord) : <code>Object</code>
 
 <a name="module_py-logging.MODULE_IDENTIFIER"></a>
@@ -92,58 +100,6 @@
 
 ### py-logging.CRITICAL : <code>number</code>
 **Kind**: static constant of [<code>py-logging</code>](#module_py-logging)  
-<a name="module_py-logging.getLoggerClass"></a>
-
-### py-logging.getLoggerClass() ⇒ <code>function</code>
-Return the class to be used when instantiating a logger.
-
-**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
-<a name="module_py-logging.getLogger"></a>
-
-### py-logging.getLogger(name) ⇒ [<code>Logger</code>](#Logger)
-Return a logger with the specified name, creating it if necessary.
-If no name is specified, return the root logger.
-
-**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
-
-| Param | Type |
-| --- | --- |
-| name | <code>string</code> | 
-
-<a name="module_py-logging.basicConfig"></a>
-
-### py-logging.basicConfig([options])
-Do basic configuration for the logging system.
-
-**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
-
-| Param | Type |
-| --- | --- |
-| [options] | <code>Object</code> | 
-
-<a name="module_py-logging.config"></a>
-
-### py-logging.config(config, [outerContext])
-Configure logging using a "dict" object.
-
-**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
-
-| Param | Type |
-| --- | --- |
-| config | <code>Object</code> | 
-| [outerContext] | <code>Object</code> | 
-
-<a name="module_py-logging.getLevelName"></a>
-
-### py-logging.getLevelName(level) ⇒ <code>string</code>
-Return the textual representation of logging level.
-
-**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
 <a name="module_py-logging.debug"></a>
 
 ### py-logging.debug()
@@ -174,6 +130,47 @@ Return the textual representation of logging level.
 ### py-logging.log()
 **Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
 **See**: [log](#Logger+log)  
+<a name="module_py-logging.getLoggerClass"></a>
+
+### py-logging.getLoggerClass() ⇒ <code>function</code>
+Return the class to be used when instantiating a logger.
+
+**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
+<a name="module_py-logging.getLogger"></a>
+
+### py-logging.getLogger([name]) ⇒ [<code>Logger</code>](#Logger)
+Return a logger with the specified name, creating it if necessary.
+If no name is specified, return the root logger.
+
+**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
+
+| Param | Type |
+| --- | --- |
+| [name] | <code>string</code> | 
+
+<a name="module_py-logging.config"></a>
+
+### py-logging.config(config, [outerContext])
+Configure logging using a "dict" object.
+
+**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
+
+| Param | Type |
+| --- | --- |
+| config | <code>Object</code> | 
+| [outerContext] | <code>Object</code> | 
+
+<a name="module_py-logging.getLevelName"></a>
+
+### py-logging.getLevelName(level) ⇒ <code>string</code>
+Return the textual representation of logging level.
+
+**Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
 <a name="module_py-logging.LogRecord"></a>
 
 ### py-logging.LogRecord : <code>Object</code>
@@ -189,8 +186,8 @@ Return the textual representation of logging level.
 | message | <code>string</code> | The logged message. |
 | error | <code>Object</code> | The logged error. |
 | extra | <code>Object</code> | Extra data. |
-| pid | <code>number</code> | Process ID (if available). |
-| processtitle | <code>string</code> | Process title (if available). |
+| process | <code>number</code> | Process ID (if available). |
+| processName | <code>string</code> | Process title (if available). |
 
 <a name="Filterer"></a>
 
@@ -230,8 +227,8 @@ A base class for loggers and handlers which allows them to share common code.
 
 ### filterer.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>Filterer</code>](#Filterer)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -244,11 +241,10 @@ A base class for loggers and handlers which allows them to share common code.
 **Extends**: [<code>Filterer</code>](#Filterer)  
 
 * [Logger](#Logger) ⇐ [<code>Filterer</code>](#Filterer)
-    * [new Logger(manager, parent, name, [level])](#new_Logger_new)
+    * [new Logger(parent, name, [level])](#new_Logger_new)
     * _instance_
         * [.toString()](#Logger+toString) ⇒ <code>string</code>
         * [.getName()](#Logger+getName) ⇒ <code>string</code>
-        * [.getChild(suffix)](#Logger+getChild) ⇒ <code>Object</code>
         * [.getEffectiveLevel()](#Logger+getEffectiveLevel) ⇒ <code>number</code>
         * [.isEnabledFor(level)](#Logger+isEnabledFor) ⇒ <code>boolean</code>
         * [.setLevel(level)](#Logger+setLevel)
@@ -271,14 +267,13 @@ A base class for loggers and handlers which allows them to share common code.
 
 <a name="new_Logger_new"></a>
 
-### new Logger(manager, parent, name, [level])
+### new Logger(parent, name, [level])
 
-| Param | Type |
-| --- | --- |
-| manager | <code>Object</code> | 
-| parent | <code>Object</code> | 
-| name | <code>string</code> | 
-| [level] | <code>number</code> | 
+| Param | Type | Default |
+| --- | --- | --- |
+| parent | <code>Object</code> |  | 
+| name | <code>string</code> |  | 
+| [level] | <code>number</code> | <code>NOTSET</code> | 
 
 <a name="Logger+toString"></a>
 
@@ -292,17 +287,6 @@ Return the text representation of this logger.
 Return the name of this logger.
 
 **Kind**: instance method of [<code>Logger</code>](#Logger)  
-<a name="Logger+getChild"></a>
-
-### logger.getChild(suffix) ⇒ <code>Object</code>
-Return a logger which is a descendant to this one.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| suffix | <code>string</code> | 
-
 <a name="Logger+getEffectiveLevel"></a>
 
 ### logger.getEffectiveLevel() ⇒ <code>number</code>
@@ -474,8 +458,8 @@ Create a LogRecord object.
 
 ### logger.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>Logger</code>](#Logger)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -533,9 +517,9 @@ Return value of the level name.
 An abstract handler.
 
 
-| Param | Type |
-| --- | --- |
-| [level] | <code>number</code> | 
+| Param | Type | Default |
+| --- | --- | --- |
+| [level] | <code>number</code> | <code>NOTSET</code> | 
 
 <a name="Handler+toString"></a>
 
@@ -659,8 +643,8 @@ Handle errors which occur during an emit() call.
 
 ### handler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>Handler</code>](#Handler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -812,8 +796,8 @@ Writes the record to the stream (with a trailing newline, if default setup).
 **Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
 **Overrides**: [<code>emit</code>](#Handler+emit)  
 **Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
-	for the 'drain' event to be emitted before continuing to write additional data;
-	otherwise true.  
+	for the 'drain' event to be emitted before continuing to write
+	additional data; otherwise true.  
 
 | Param | Type |
 | --- | --- |
@@ -930,176 +914,8 @@ Handle errors which occur during an emit() call.
 
 ### streamHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="FileHandler"></a>
-
-## FileHandler ⇐ [<code>StreamHandler</code>](#StreamHandler)
-**Kind**: global class  
-**Extends**: [<code>StreamHandler</code>](#StreamHandler)  
-
-* [FileHandler](#FileHandler) ⇐ [<code>StreamHandler</code>](#StreamHandler)
-    * [new FileHandler(filename, [mode], [encoding])](#new_FileHandler_new)
-    * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-
-<a name="new_FileHandler_new"></a>
-
-### new FileHandler(filename, [mode], [encoding])
-File handler.
-
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| filename | <code>string</code> |  |  |
-| [mode] | <code>string</code> | <code>&quot;a&quot;</code> | [https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback) |
-| [encoding] | <code>string</code> | <code>&quot;utf8&quot;</code> | [https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) |
-
-<a name="StreamHandler+emit"></a>
-
-### fileHandler.emit(record) ⇒ <code>boolean</code>
-Writes the record to the stream (with a trailing newline, if default setup).
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
-	for the 'drain' event to be emitted before continuing to write additional data;
-	otherwise true.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+toString"></a>
-
-### fileHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-<a name="Handler+setLevel"></a>
-
-### fileHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### fileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### fileHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
-
-<a name="Handler+format"></a>
-
-### fileHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### fileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *fileHandler.acquire()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-<a name="Handler+release"></a>
-
-### *fileHandler.release()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-<a name="Handler+flush"></a>
-
-### *fileHandler.flush()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-<a name="Handler+close"></a>
-
-### *fileHandler.close()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
-<a name="Handler+handleError"></a>
-
-### fileHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-### fileHandler.addFilter(filter)
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### fileHandler.removeFilter(filter)
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### fileHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
 
 | Param | Type |
 | --- | --- |
@@ -1112,7 +928,7 @@ Handle errors which occur during an emit() call.
 **Extends**: [<code>Handler</code>](#Handler)  
 
 * [ConsoleHandler](#ConsoleHandler) ⇐ [<code>Handler</code>](#Handler)
-    * [new ConsoleHandler([level])](#new_ConsoleHandler_new)
+    * [new ConsoleHandler([level], [grouping])](#new_ConsoleHandler_new)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -1131,13 +947,14 @@ Handle errors which occur during an emit() call.
 
 <a name="new_ConsoleHandler_new"></a>
 
-### new ConsoleHandler([level])
+### new ConsoleHandler([level], [grouping])
 Console handler.
 
 
-| Param | Type |
-| --- | --- |
-| [level] | <code>number</code> | 
+| Param | Type | Default |
+| --- | --- | --- |
+| [level] | <code>number</code> |  | 
+| [grouping] | <code>boolean</code> | <code>true</code> | 
 
 <a name="Handler+toString"></a>
 
@@ -1262,21 +1079,425 @@ Handle errors which occur during an emit() call.
 
 ### consoleHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
 
 | Param | Type |
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="FileHandlerOld"></a>
+<a name="FileHandler"></a>
 
-## FileHandlerOld ⇐ [<code>Handler</code>](#Handler)
+## FileHandler ⇐ [<code>StreamHandler</code>](#StreamHandler)
+**Kind**: global class  
+**Extends**: [<code>StreamHandler</code>](#StreamHandler)  
+
+* [FileHandler](#FileHandler) ⇐ [<code>StreamHandler</code>](#StreamHandler)
+    * [new FileHandler(filename, [mode], [encoding], [delay])](#new_FileHandler_new)
+    * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * *[.flush()](#Handler+flush)*
+    * *[.close()](#Handler+close)*
+    * [.handleError(error, [record])](#Handler+handleError)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+
+<a name="new_FileHandler_new"></a>
+
+### new FileHandler(filename, [mode], [encoding], [delay])
+File handler.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| filename | <code>string</code> |  |  |
+| [mode] | <code>string</code> | <code>&quot;a&quot;</code> | [https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback) |
+| [encoding] | <code>string</code> | <code>&quot;utf8&quot;</code> | [https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) |
+| [delay] | <code>boolean</code> | <code>false</code> |  |
+
+<a name="StreamHandler+emit"></a>
+
+### fileHandler.emit(record) ⇒ <code>boolean</code>
+Writes the record to the stream (with a trailing newline, if default setup).
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+**Overrides**: [<code>emit</code>](#StreamHandler+emit)  
+**Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
+	for the 'drain' event to be emitted before continuing to write
+	additional data; otherwise true.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+toString"></a>
+
+### fileHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+<a name="Handler+setLevel"></a>
+
+### fileHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+### fileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+### fileHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | [<code>Formatter</code>](#Formatter) | 
+
+<a name="Handler+format"></a>
+
+### fileHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+### fileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+### *fileHandler.acquire()*
+**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
+<a name="Handler+release"></a>
+
+### *fileHandler.release()*
+**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
+<a name="Handler+flush"></a>
+
+### *fileHandler.flush()*
+**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
+<a name="Handler+close"></a>
+
+### *fileHandler.close()*
+**Kind**: instance abstract method of [<code>FileHandler</code>](#FileHandler)  
+<a name="Handler+handleError"></a>
+
+### fileHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Filterer+addFilter"></a>
+
+### fileHandler.addFilter(filter)
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+removeFilter"></a>
+
+### fileHandler.removeFilter(filter)
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+filter"></a>
+
+### fileHandler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>FileHandler</code>](#FileHandler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="RotatingFileHandler"></a>
+
+## RotatingFileHandler
+**Kind**: global class  
+
+* [RotatingFileHandler](#RotatingFileHandler)
+    * [new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])](#new_RotatingFileHandler_new)
+    * [.shouldRollover(formatedRecord)](#RotatingFileHandler+shouldRollover) ⇒ <code>Promise.&lt;boolean&gt;</code>
+    * [.doRollover()](#RotatingFileHandler+doRollover) ⇒ <code>Promise</code>
+    * [.emit(record)](#RotatingFileHandler+emit) ⇒ <code>Promise</code>
+    * [.close()](#RotatingFileHandler+close) ⇒ <code>Promise</code>
+
+<a name="new_RotatingFileHandler_new"></a>
+
+### new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])
+Handler for logging to a set of files, which switches from one file
+to the next when the current file reaches a certain size.
+
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| filename | <code>string</code> |  |  |
+| [mode] | <code>string</code> | <code>&quot;a&quot;</code> | [https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback](https://nodejs.org/api/fs.html#fs_fs_open_path_flags_mode_callback) |
+| [maxBytes] | <code>number</code> | <code>0</code> |  |
+| [backupCount] | <code>number</code> | <code>0</code> |  |
+| [encoding] | <code>string</code> | <code>&quot;utf8&quot;</code> | [https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) |
+| [delay] | <code>boolean</code> | <code>false</code> |  |
+
+<a name="RotatingFileHandler+shouldRollover"></a>
+
+### rotatingFileHandler.shouldRollover(formatedRecord) ⇒ <code>Promise.&lt;boolean&gt;</code>
+Determine if rollover should occur.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+**Returns**: <code>Promise.&lt;boolean&gt;</code> - True if rollover should occur, false otherwise.  
+**Access**: protected  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| formatedRecord | <code>string</code> | Formatted (ready to actually make log) 	record. |
+
+<a name="RotatingFileHandler+doRollover"></a>
+
+### rotatingFileHandler.doRollover() ⇒ <code>Promise</code>
+Do a rollover.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+**Access**: protected  
+<a name="RotatingFileHandler+emit"></a>
+
+### rotatingFileHandler.emit(record) ⇒ <code>Promise</code>
+Emit a record.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="RotatingFileHandler+close"></a>
+
+### rotatingFileHandler.close() ⇒ <code>Promise</code>
+Closes the stream.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+<a name="HttpHandler"></a>
+
+## HttpHandler ⇐ [<code>Handler</code>](#Handler)
 **Kind**: global class  
 **Extends**: [<code>Handler</code>](#Handler)  
 
-* [FileHandlerOld](#FileHandlerOld) ⇐ [<code>Handler</code>](#Handler)
-    * [new FileHandlerOld(filename, [encoding])](#new_FileHandlerOld_new)
+* [HttpHandler](#HttpHandler) ⇐ [<code>Handler</code>](#Handler)
+    * [new HttpHandler(url, [method], [headers])](#new_HttpHandler_new)
+    * [.format(record)](#HttpHandler+format) ⇒ <code>string</code>
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * [.emit(record)](#Handler+emit)
+    * *[.flush()](#Handler+flush)*
+    * *[.close()](#Handler+close)*
+    * [.handleError(error, [record])](#Handler+handleError)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+
+<a name="new_HttpHandler_new"></a>
+
+### new HttpHandler(url, [method], [headers])
+A class which sends records to a Web server, using either GET or
+POST semantics.
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| url | <code>string</code> |  | 
+| [method] | <code>string</code> | <code>&quot;GET&quot;</code> | 
+| [headers] | <code>Object</code> |  | 
+
+<a name="HttpHandler+format"></a>
+
+### httpHandler.format(record) ⇒ <code>string</code>
+Format the specified record for sending over HTTP.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+**Overrides**: [<code>format</code>](#Handler+format)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+toString"></a>
+
+### httpHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+<a name="Handler+setLevel"></a>
+
+### httpHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+### httpHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+### httpHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | [<code>Formatter</code>](#Formatter) | 
+
+<a name="Handler+handle"></a>
+
+### httpHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+### *httpHandler.acquire()*
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#HttpHandler)  
+<a name="Handler+release"></a>
+
+### *httpHandler.release()*
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#HttpHandler)  
+<a name="Handler+emit"></a>
+
+### httpHandler.emit(record)
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+**Overrides**: [<code>emit</code>](#Handler+emit)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+flush"></a>
+
+### *httpHandler.flush()*
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#HttpHandler)  
+<a name="Handler+close"></a>
+
+### *httpHandler.close()*
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#HttpHandler)  
+<a name="Handler+handleError"></a>
+
+### httpHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Filterer+addFilter"></a>
+
+### httpHandler.addFilter(filter)
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+removeFilter"></a>
+
+### httpHandler.removeFilter(filter)
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+filter"></a>
+
+### httpHandler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>HttpHandler</code>](#HttpHandler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="AsyncHandler"></a>
+
+## AsyncHandler ⇐ [<code>Handler</code>](#Handler)
+**Kind**: global class  
+**Extends**: [<code>Handler</code>](#Handler)  
+
+* [AsyncHandler](#AsyncHandler) ⇐ [<code>Handler</code>](#Handler)
+    * [new AsyncHandler([target])](#new_AsyncHandler_new)
+    * [.setTarget(target)](#AsyncHandler+setTarget)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -1293,29 +1514,37 @@ Handle errors which occur during an emit() call.
     * [.removeFilter(filter)](#Filterer+removeFilter)
     * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
-<a name="new_FileHandlerOld_new"></a>
+<a name="new_AsyncHandler_new"></a>
 
-### new FileHandlerOld(filename, [encoding])
-File handler.
-
+### new AsyncHandler([target])
 
 | Param | Type |
 | --- | --- |
-| filename | <code>string</code> | 
-| [encoding] | <code>string</code> | 
+| [target] | [<code>Handler</code>](#Handler) | 
+
+<a name="AsyncHandler+setTarget"></a>
+
+### asyncHandler.setTarget(target)
+Set the target handler for this handler.
+
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
+
+| Param | Type |
+| --- | --- |
+| target | [<code>Handler</code>](#Handler) | 
 
 <a name="Handler+toString"></a>
 
-### fileHandlerOld.toString() ⇒ <code>string</code>
+### asyncHandler.toString() ⇒ <code>string</code>
 Return the text representation of this handler.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 <a name="Handler+setLevel"></a>
 
-### fileHandlerOld.setLevel(level)
+### asyncHandler.setLevel(level)
 Set the logging level of this handler.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1323,10 +1552,10 @@ Set the logging level of this handler.
 
 <a name="Handler+isEnabledFor"></a>
 
-### fileHandlerOld.isEnabledFor(level) ⇒ <code>boolean</code>
+### asyncHandler.isEnabledFor(level) ⇒ <code>boolean</code>
 Is this handler enabled for specified level?
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1334,10 +1563,10 @@ Is this handler enabled for specified level?
 
 <a name="Handler+setFormatter"></a>
 
-### fileHandlerOld.setFormatter(formatter)
+### asyncHandler.setFormatter(formatter)
 Set the formatter for this handler.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1345,10 +1574,10 @@ Set the formatter for this handler.
 
 <a name="Handler+format"></a>
 
-### fileHandlerOld.format(record) ⇒ <code>string</code>
+### asyncHandler.format(record) ⇒ <code>string</code>
 Format the specified record.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1356,10 +1585,10 @@ Format the specified record.
 
 <a name="Handler+handle"></a>
 
-### fileHandlerOld.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+### asyncHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
 Handle the specified logging record.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1367,18 +1596,18 @@ Handle the specified logging record.
 
 <a name="Handler+acquire"></a>
 
-### *fileHandlerOld.acquire()*
-**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+### *asyncHandler.acquire()*
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#AsyncHandler)  
 <a name="Handler+release"></a>
 
-### *fileHandlerOld.release()*
-**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+### *asyncHandler.release()*
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#AsyncHandler)  
 <a name="Handler+emit"></a>
 
-### fileHandlerOld.emit(record)
+### asyncHandler.emit(record)
 Do whatever it takes to actually log the specified logging record.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 **Overrides**: [<code>emit</code>](#Handler+emit)  
 
 | Param | Type |
@@ -1387,18 +1616,18 @@ Do whatever it takes to actually log the specified logging record.
 
 <a name="Handler+flush"></a>
 
-### *fileHandlerOld.flush()*
-**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+### *asyncHandler.flush()*
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#AsyncHandler)  
 <a name="Handler+close"></a>
 
-### *fileHandlerOld.close()*
-**Kind**: instance abstract method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+### *asyncHandler.close()*
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#AsyncHandler)  
 <a name="Handler+handleError"></a>
 
-### fileHandlerOld.handleError(error, [record])
+### asyncHandler.handleError(error, [record])
 Handle errors which occur during an emit() call.
 
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1407,8 +1636,8 @@ Handle errors which occur during an emit() call.
 
 <a name="Filterer+addFilter"></a>
 
-### fileHandlerOld.addFilter(filter)
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+### asyncHandler.addFilter(filter)
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1416,8 +1645,8 @@ Handle errors which occur during an emit() call.
 
 <a name="Filterer+removeFilter"></a>
 
-### fileHandlerOld.removeFilter(filter)
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
+### asyncHandler.removeFilter(filter)
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1425,548 +1654,34 @@ Handle errors which occur during an emit() call.
 
 <a name="Filterer+filter"></a>
 
-### fileHandlerOld.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>FileHandlerOld</code>](#FileHandlerOld)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
+### asyncHandler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>AsyncHandler</code>](#AsyncHandler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
 
 | Param | Type |
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="RotatingFileHandler"></a>
+<a name="extend"></a>
 
-## RotatingFileHandler ⇐ [<code>Handler</code>](#Handler)
-**Kind**: global class  
-**Extends**: [<code>Handler</code>](#Handler)  
+## extend(ns) ⇒ <code>Object</code>
+Extends given object by functions from this module.
 
-* [RotatingFileHandler](#RotatingFileHandler) ⇐ [<code>Handler</code>](#Handler)
-    * [new RotatingFileHandler(filename, [maxBytes], [backupCount], [encoding])](#new_RotatingFileHandler_new)
-    * _instance_
-        * [.emit(record)](#RotatingFileHandler+emit)
-        * [.shouldRollover(record)](#RotatingFileHandler+shouldRollover) ⇒ <code>Promise</code>
-        * [.doRollover()](#RotatingFileHandler+doRollover) ⇒ <code>Promise</code>
-        * [.toString()](#Handler+toString) ⇒ <code>string</code>
-        * [.setLevel(level)](#Handler+setLevel)
-        * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-        * [.setFormatter(formatter)](#Handler+setFormatter)
-        * [.format(record)](#Handler+format) ⇒ <code>string</code>
-        * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * *[.acquire()](#Handler+acquire)*
-        * *[.release()](#Handler+release)*
-        * *[.flush()](#Handler+flush)*
-        * *[.close()](#Handler+close)*
-        * [.handleError(error, [record])](#Handler+handleError)
-        * [.addFilter(filter)](#Filterer+addFilter)
-        * [.removeFilter(filter)](#Filterer+removeFilter)
-        * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-    * _static_
-        * [.queueLimit](#RotatingFileHandler.queueLimit) : <code>number</code>
-
-<a name="new_RotatingFileHandler_new"></a>
-
-### new RotatingFileHandler(filename, [maxBytes], [backupCount], [encoding])
-Handler for logging to a set of files, which switches from one file
-to the next when the current file reaches a certain size.
-
+**Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| filename | <code>string</code> | 
-| [maxBytes] | <code>number</code> | 
-| [backupCount] | <code>number</code> | 
-| [encoding] | <code>string</code> | 
+| ns | <code>Object</code> | 
 
-<a name="RotatingFileHandler+emit"></a>
+<a name="basicConfig"></a>
 
-### rotatingFileHandler.emit(record)
-Output the record to the file, catering for rollover.
+## basicConfig([options])
+Do basic configuration for the logging system.
 
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
-**Throws**:
-
-- <code>Error</code> When there are too many unhandled log events.
-
+**Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="RotatingFileHandler+shouldRollover"></a>
-
-### rotatingFileHandler.shouldRollover(record) ⇒ <code>Promise</code>
-Determine if rollover should occur.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="RotatingFileHandler+doRollover"></a>
-
-### rotatingFileHandler.doRollover() ⇒ <code>Promise</code>
-Do a rollover.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="Handler+toString"></a>
-
-### rotatingFileHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="Handler+setLevel"></a>
-
-### rotatingFileHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### rotatingFileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### rotatingFileHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
-
-<a name="Handler+format"></a>
-
-### rotatingFileHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### rotatingFileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *rotatingFileHandler.acquire()*
-**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="Handler+release"></a>
-
-### *rotatingFileHandler.release()*
-**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="Handler+flush"></a>
-
-### *rotatingFileHandler.flush()*
-**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="Handler+close"></a>
-
-### *rotatingFileHandler.close()*
-**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="Handler+handleError"></a>
-
-### rotatingFileHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-### rotatingFileHandler.addFilter(filter)
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### rotatingFileHandler.removeFilter(filter)
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### rotatingFileHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="RotatingFileHandler.queueLimit"></a>
-
-### RotatingFileHandler.queueLimit : <code>number</code>
-**Kind**: static property of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
-<a name="SyncRotatingFileHandler"></a>
-
-## SyncRotatingFileHandler ⇐ [<code>Handler</code>](#Handler)
-**Kind**: global class  
-**Extends**: [<code>Handler</code>](#Handler)  
-
-* [SyncRotatingFileHandler](#SyncRotatingFileHandler) ⇐ [<code>Handler</code>](#Handler)
-    * [new SyncRotatingFileHandler(filename, [maxBytes], [backupCount], [encoding])](#new_SyncRotatingFileHandler_new)
-    * [.emit(record)](#SyncRotatingFileHandler+emit)
-    * [.shouldRollover(record)](#SyncRotatingFileHandler+shouldRollover) ⇒ <code>boolean</code>
-    * [.doRollover()](#SyncRotatingFileHandler+doRollover) ⇒ <code>boolean</code>
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-
-<a name="new_SyncRotatingFileHandler_new"></a>
-
-### new SyncRotatingFileHandler(filename, [maxBytes], [backupCount], [encoding])
-
-| Param | Type |
-| --- | --- |
-| filename | <code>string</code> | 
-| [maxBytes] | <code>number</code> | 
-| [backupCount] | <code>number</code> | 
-| [encoding] | <code>string</code> | 
-
-<a name="SyncRotatingFileHandler+emit"></a>
-
-### syncRotatingFileHandler.emit(record)
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="SyncRotatingFileHandler+shouldRollover"></a>
-
-### syncRotatingFileHandler.shouldRollover(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="SyncRotatingFileHandler+doRollover"></a>
-
-### syncRotatingFileHandler.doRollover() ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-<a name="Handler+toString"></a>
-
-### syncRotatingFileHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-<a name="Handler+setLevel"></a>
-
-### syncRotatingFileHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### syncRotatingFileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### syncRotatingFileHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
-
-<a name="Handler+format"></a>
-
-### syncRotatingFileHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### syncRotatingFileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *syncRotatingFileHandler.acquire()*
-**Kind**: instance abstract method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-<a name="Handler+release"></a>
-
-### *syncRotatingFileHandler.release()*
-**Kind**: instance abstract method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-<a name="Handler+flush"></a>
-
-### *syncRotatingFileHandler.flush()*
-**Kind**: instance abstract method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-<a name="Handler+close"></a>
-
-### *syncRotatingFileHandler.close()*
-**Kind**: instance abstract method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-<a name="Handler+handleError"></a>
-
-### syncRotatingFileHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-### syncRotatingFileHandler.addFilter(filter)
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### syncRotatingFileHandler.removeFilter(filter)
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### syncRotatingFileHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>SyncRotatingFileHandler</code>](#SyncRotatingFileHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="BrowserBasicHttpHandler"></a>
-
-## BrowserBasicHttpHandler ⇐ [<code>Handler</code>](#Handler)
-**Kind**: global class  
-**Extends**: [<code>Handler</code>](#Handler)  
-
-* [BrowserBasicHttpHandler](#BrowserBasicHttpHandler) ⇐ [<code>Handler</code>](#Handler)
-    * [new BrowserBasicHttpHandler(url)](#new_BrowserBasicHttpHandler_new)
-    * [.emit(record)](#BrowserBasicHttpHandler+emit)
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-
-<a name="new_BrowserBasicHttpHandler_new"></a>
-
-### new BrowserBasicHttpHandler(url)
-
-| Param | Type |
-| --- | --- |
-| url | <code>string</code> | 
-
-<a name="BrowserBasicHttpHandler+emit"></a>
-
-### browserBasicHttpHandler.emit(record)
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+toString"></a>
-
-### browserBasicHttpHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-<a name="Handler+setLevel"></a>
-
-### browserBasicHttpHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### browserBasicHttpHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### browserBasicHttpHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
-
-<a name="Handler+format"></a>
-
-### browserBasicHttpHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### browserBasicHttpHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *browserBasicHttpHandler.acquire()*
-**Kind**: instance abstract method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-<a name="Handler+release"></a>
-
-### *browserBasicHttpHandler.release()*
-**Kind**: instance abstract method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-<a name="Handler+flush"></a>
-
-### *browserBasicHttpHandler.flush()*
-**Kind**: instance abstract method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-<a name="Handler+close"></a>
-
-### *browserBasicHttpHandler.close()*
-**Kind**: instance abstract method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-<a name="Handler+handleError"></a>
-
-### browserBasicHttpHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-### browserBasicHttpHandler.addFilter(filter)
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### browserBasicHttpHandler.removeFilter(filter)
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### browserBasicHttpHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>BrowserBasicHttpHandler</code>](#BrowserBasicHttpHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+| [options] | <code>Object</code> | 
 
