@@ -24,7 +24,7 @@
 <dd></dd>
 <dt><a href="#FileHandler">FileHandler</a> ⇐ <code><a href="#StreamHandler">StreamHandler</a></code></dt>
 <dd></dd>
-<dt><a href="#RotatingFileHandler">RotatingFileHandler</a></dt>
+<dt><a href="#RotatingFileHandler">RotatingFileHandler</a> ⇐ <code><a href="#FileHandler">FileHandler</a></code></dt>
 <dd></dd>
 <dt><a href="#HttpHandler">HttpHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
 <dd></dd>
@@ -271,7 +271,7 @@ A base class for loggers and handlers which allows them to share common code.
 
 | Param | Type | Default |
 | --- | --- | --- |
-| parent | <code>Object</code> |  | 
+| parent | [<code>Logger</code>](#Logger) |  | 
 | name | <code>string</code> |  | 
 | [level] | <code>number</code> | <code>NOTSET</code> | 
 
@@ -1258,15 +1258,29 @@ Handle errors which occur during an emit() call.
 
 <a name="RotatingFileHandler"></a>
 
-## RotatingFileHandler
+## RotatingFileHandler ⇐ [<code>FileHandler</code>](#FileHandler)
 **Kind**: global class  
+**Extends**: [<code>FileHandler</code>](#FileHandler)  
 
-* [RotatingFileHandler](#RotatingFileHandler)
+* [RotatingFileHandler](#RotatingFileHandler) ⇐ [<code>FileHandler</code>](#FileHandler)
     * [new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])](#new_RotatingFileHandler_new)
     * [.shouldRollover(formatedRecord)](#RotatingFileHandler+shouldRollover) ⇒ <code>Promise.&lt;boolean&gt;</code>
     * [.doRollover()](#RotatingFileHandler+doRollover) ⇒ <code>Promise</code>
     * [.emit(record)](#RotatingFileHandler+emit) ⇒ <code>Promise</code>
     * [.close()](#RotatingFileHandler+close) ⇒ <code>Promise</code>
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * *[.flush()](#Handler+flush)*
+    * [.handleError(error, [record])](#Handler+handleError)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_RotatingFileHandler_new"></a>
 
@@ -1310,6 +1324,7 @@ Do a rollover.
 Emit a record.
 
 **Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+**Overrides**: [<code>emit</code>](#StreamHandler+emit)  
 
 | Param | Type |
 | --- | --- |
@@ -1321,6 +1336,121 @@ Emit a record.
 Closes the stream.
 
 **Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+**Overrides**: [<code>close</code>](#Handler+close)  
+<a name="Handler+toString"></a>
+
+### rotatingFileHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+<a name="Handler+setLevel"></a>
+
+### rotatingFileHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+### rotatingFileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+### rotatingFileHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | [<code>Formatter</code>](#Formatter) | 
+
+<a name="Handler+format"></a>
+
+### rotatingFileHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+### rotatingFileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+### *rotatingFileHandler.acquire()*
+**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+<a name="Handler+release"></a>
+
+### *rotatingFileHandler.release()*
+**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+<a name="Handler+flush"></a>
+
+### *rotatingFileHandler.flush()*
+**Kind**: instance abstract method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+<a name="Handler+handleError"></a>
+
+### rotatingFileHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Filterer+addFilter"></a>
+
+### rotatingFileHandler.addFilter(filter)
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+removeFilter"></a>
+
+### rotatingFileHandler.removeFilter(filter)
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) | 
+
+<a name="Filterer+filter"></a>
+
+### rotatingFileHandler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>RotatingFileHandler</code>](#RotatingFileHandler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
 <a name="HttpHandler"></a>
 
 ## HttpHandler ⇐ [<code>Handler</code>](#Handler)
