@@ -982,6 +982,24 @@ describe('Formatter', function() {
 
 				assert.strictEqual(formatter.format(record), '00000000' + number);
 			});
+			it('should return zero and blank space padded number', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)5.3d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), '  0' + number);
+			});
+			it('should return zero and blank space padded number', function() {
+				var message = 'Lorem ipsum';
+				var number = 16;
+				var record = { message: message, data: number };
+				var format = '%(data)+5.3d';
+				var formatter = new Fmtr(format);
+
+				assert.strictEqual(formatter.format(record), ' +0' + number);
+			});
 			it('should return message with blank space before a positive number', function() {
 				var message = 'Lorem ipsum';
 				var number1 = 3;
