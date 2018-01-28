@@ -10,19 +10,9 @@
 ## Classes
 
 <dl>
-<dt><a href="#Filterer">Filterer</a></dt>
+<dt><a href="#StreamHandler">StreamHandler</a> ⇐ <code>Handler</code></dt>
 <dd></dd>
-<dt><a href="#Logger">Logger</a> ⇐ <code><a href="#Filterer">Filterer</a></code></dt>
-<dd></dd>
-<dt><a href="#Handler">Handler</a> ⇐ <code><a href="#Filterer">Filterer</a></code></dt>
-<dd></dd>
-<dt><a href="#Formatter">Formatter</a></dt>
-<dd></dd>
-<dt><a href="#Filter">Filter</a></dt>
-<dd></dd>
-<dt><a href="#StreamHandler">StreamHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
-<dd></dd>
-<dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code><a href="#Handler">Handler</a></code></dt>
+<dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code>Handler</code></dt>
 <dd></dd>
 </dl>
 
@@ -31,6 +21,22 @@
 ## py-logging
 
 * [py-logging](#module_py-logging)
+    * [.Filterer](#module_py-logging.Filterer)
+        * [new Filterer()](#new_module_py-logging.Filterer_new)
+    * [.Logger](#module_py-logging.Logger) ⇐ <code>Filterer</code>
+        * [new Logger(parent, name, [level])](#new_module_py-logging.Logger_new)
+        * [.addFilter(filter)](#Filterer+addFilter)
+        * [.removeFilter(filter)](#Filterer+removeFilter)
+        * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+    * [.Handler](#module_py-logging.Handler) ⇐ <code>Filterer</code>
+        * [new Handler([level])](#new_module_py-logging.Handler_new)
+        * [.addFilter(filter)](#Filterer+addFilter)
+        * [.removeFilter(filter)](#Filterer+removeFilter)
+        * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+    * [.Formatter](#module_py-logging.Formatter)
+        * [new Formatter([format], [timeFormat])](#new_module_py-logging.Formatter_new)
+    * [.Filter](#module_py-logging.Filter)
+        * [new Filter([name])](#new_module_py-logging.Filter_new)
     * [.MODULE_IDENTIFIER](#module_py-logging.MODULE_IDENTIFIER) : <code>string</code>
     * [.VERSION](#module_py-logging.VERSION) : <code>string</code>
     * [.NOTSET](#module_py-logging.NOTSET) : <code>number</code>
@@ -47,10 +53,148 @@
     * [.critical()](#module_py-logging.critical)
     * [.log()](#module_py-logging.log)
     * [.getLoggerClass()](#module_py-logging.getLoggerClass) ⇒ <code>function</code>
-    * [.getLogger([name])](#module_py-logging.getLogger) ⇒ [<code>Logger</code>](#Logger)
+    * [.getLogger([name])](#module_py-logging.getLogger) ⇒ <code>Logger</code>
     * [.config(config, [outerContext])](#module_py-logging.config)
     * [.getLevelName(level)](#module_py-logging.getLevelName) ⇒ <code>string</code>
     * [.LogRecord](#module_py-logging.LogRecord) : <code>Object</code>
+
+<a name="module_py-logging.Filterer"></a>
+
+### py-logging.Filterer
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+<a name="new_module_py-logging.Filterer_new"></a>
+
+#### new Filterer()
+A base class for loggers and handlers which allows them to share common code.
+
+<a name="module_py-logging.Logger"></a>
+
+### py-logging.Logger ⇐ <code>Filterer</code>
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+**Extends**: <code>Filterer</code>  
+
+* [.Logger](#module_py-logging.Logger) ⇐ <code>Filterer</code>
+    * [new Logger(parent, name, [level])](#new_module_py-logging.Logger_new)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+
+<a name="new_module_py-logging.Logger_new"></a>
+
+#### new Logger(parent, name, [level])
+
+| Param | Type | Default |
+| --- | --- | --- |
+| parent | <code>Logger</code> |  | 
+| name | <code>string</code> |  | 
+| [level] | <code>number</code> | <code>NOTSET</code> | 
+
+<a name="Filterer+addFilter"></a>
+
+#### logger.addFilter(filter)
+**Kind**: instance method of [<code>Logger</code>](#module_py-logging.Logger)  
+
+| Param | Type |
+| --- | --- |
+| filter | <code>Filter</code> | 
+
+<a name="Filterer+removeFilter"></a>
+
+#### logger.removeFilter(filter)
+**Kind**: instance method of [<code>Logger</code>](#module_py-logging.Logger)  
+
+| Param | Type |
+| --- | --- |
+| filter | <code>Filter</code> | 
+
+<a name="Filterer+filter"></a>
+
+#### logger.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>Logger</code>](#module_py-logging.Logger)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging.Handler"></a>
+
+### py-logging.Handler ⇐ <code>Filterer</code>
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+**Extends**: <code>Filterer</code>  
+
+* [.Handler](#module_py-logging.Handler) ⇐ <code>Filterer</code>
+    * [new Handler([level])](#new_module_py-logging.Handler_new)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+
+<a name="new_module_py-logging.Handler_new"></a>
+
+#### new Handler([level])
+An abstract handler.
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [level] | <code>number</code> | <code>NOTSET</code> | 
+
+<a name="Filterer+addFilter"></a>
+
+#### handler.addFilter(filter)
+**Kind**: instance method of [<code>Handler</code>](#module_py-logging.Handler)  
+
+| Param | Type |
+| --- | --- |
+| filter | <code>Filter</code> | 
+
+<a name="Filterer+removeFilter"></a>
+
+#### handler.removeFilter(filter)
+**Kind**: instance method of [<code>Handler</code>](#module_py-logging.Handler)  
+
+| Param | Type |
+| --- | --- |
+| filter | <code>Filter</code> | 
+
+<a name="Filterer+filter"></a>
+
+#### handler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>Handler</code>](#module_py-logging.Handler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging.Formatter"></a>
+
+### py-logging.Formatter
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+<a name="new_module_py-logging.Formatter_new"></a>
+
+#### new Formatter([format], [timeFormat])
+Default formatter.
+
+
+| Param | Type |
+| --- | --- |
+| [format] | <code>string</code> | 
+| [timeFormat] | <code>string</code> | 
+
+<a name="module_py-logging.Filter"></a>
+
+### py-logging.Filter
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+<a name="new_module_py-logging.Filter_new"></a>
+
+#### new Filter([name])
+
+| Param | Type |
+| --- | --- |
+| [name] | <code>string</code> | 
 
 <a name="module_py-logging.MODULE_IDENTIFIER"></a>
 
@@ -133,7 +277,7 @@ Return the class to be used when instantiating a logger.
 **Kind**: static method of [<code>py-logging</code>](#module_py-logging)  
 <a name="module_py-logging.getLogger"></a>
 
-### py-logging.getLogger([name]) ⇒ [<code>Logger</code>](#Logger)
+### py-logging.getLogger([name]) ⇒ <code>Logger</code>
 Return a logger with the specified name, creating it if necessary.
 If no name is specified, return the root logger.
 
@@ -207,16 +351,13 @@ Return the textual representation of logging level.
             * *[.flush()](#Handler+flush)*
             * *[.close()](#Handler+close)*
             * [.handleError(error, [record])](#Handler+handleError)
-            * [.addFilter(filter)](#Filterer+addFilter)
-            * [.removeFilter(filter)](#Filterer+removeFilter)
-            * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
         * [~RotatingFileHandler](#module_py-logging-nodekit..RotatingFileHandler) ⇐ <code>FileHandler</code>
             * [new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])](#new_module_py-logging-nodekit..RotatingFileHandler_new)
             * [.shouldRollover(formatedRecord)](#module_py-logging-nodekit..RotatingFileHandler+shouldRollover) ⇒ <code>Promise.&lt;boolean&gt;</code>
             * [.doRollover()](#module_py-logging-nodekit..RotatingFileHandler+doRollover) ⇒ <code>Promise</code>
             * [.emit(record)](#module_py-logging-nodekit..RotatingFileHandler+emit) ⇒ <code>Promise</code>
             * [.close()](#module_py-logging-nodekit..RotatingFileHandler+close) ⇒ <code>Promise</code>
-        * [~HttpHandler](#module_py-logging-nodekit..HttpHandler) ⇐ [<code>Handler</code>](#Handler)
+        * [~HttpHandler](#module_py-logging-nodekit..HttpHandler) ⇐ <code>Handler</code>
             * [new HttpHandler(url, [method], [headers])](#new_module_py-logging-nodekit..HttpHandler_new)
             * [.format(record)](#module_py-logging-nodekit..HttpHandler+format) ⇒ <code>string</code>
             * [.toString()](#Handler+toString) ⇒ <code>string</code>
@@ -230,10 +371,7 @@ Return the textual representation of logging level.
             * *[.flush()](#Handler+flush)*
             * *[.close()](#Handler+close)*
             * [.handleError(error, [record])](#Handler+handleError)
-            * [.addFilter(filter)](#Filterer+addFilter)
-            * [.removeFilter(filter)](#Filterer+removeFilter)
-            * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-        * [~AsyncHandler](#module_py-logging-nodekit..AsyncHandler) ⇐ [<code>Handler</code>](#Handler)
+        * [~AsyncHandler](#module_py-logging-nodekit..AsyncHandler) ⇐ <code>Handler</code>
             * [new AsyncHandler([target])](#new_module_py-logging-nodekit..AsyncHandler_new)
             * [.setTarget(target)](#module_py-logging-nodekit..AsyncHandler+setTarget)
             * [.toString()](#Handler+toString) ⇒ <code>string</code>
@@ -248,9 +386,6 @@ Return the textual representation of logging level.
             * *[.flush()](#Handler+flush)*
             * *[.close()](#Handler+close)*
             * [.handleError(error, [record])](#Handler+handleError)
-            * [.addFilter(filter)](#Filterer+addFilter)
-            * [.removeFilter(filter)](#Filterer+removeFilter)
-            * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="module_py-logging-nodekit.extend"></a>
 
@@ -294,9 +429,6 @@ Do basic configuration for the logging system.
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_module_py-logging-nodekit..FileHandler_new"></a>
 
@@ -363,7 +495,7 @@ Set the formatter for this handler.
 
 | Param | Type |
 | --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
+| formatter | <code>Formatter</code> | 
 
 <a name="Handler+format"></a>
 
@@ -414,35 +546,6 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-#### fileHandler.addFilter(filter)
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-#### fileHandler.removeFilter(filter)
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-#### fileHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
 <a name="module_py-logging-nodekit..RotatingFileHandler"></a>
 
@@ -512,11 +615,11 @@ Closes the stream.
 **Kind**: instance method of [<code>RotatingFileHandler</code>](#module_py-logging-nodekit..RotatingFileHandler)  
 <a name="module_py-logging-nodekit..HttpHandler"></a>
 
-### py-logging-nodekit~HttpHandler ⇐ [<code>Handler</code>](#Handler)
+### py-logging-nodekit~HttpHandler ⇐ <code>Handler</code>
 **Kind**: inner class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
-**Extends**: [<code>Handler</code>](#Handler)  
+**Extends**: <code>Handler</code>  
 
-* [~HttpHandler](#module_py-logging-nodekit..HttpHandler) ⇐ [<code>Handler</code>](#Handler)
+* [~HttpHandler](#module_py-logging-nodekit..HttpHandler) ⇐ <code>Handler</code>
     * [new HttpHandler(url, [method], [headers])](#new_module_py-logging-nodekit..HttpHandler_new)
     * [.format(record)](#module_py-logging-nodekit..HttpHandler+format) ⇒ <code>string</code>
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
@@ -530,9 +633,6 @@ Closes the stream.
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_module_py-logging-nodekit..HttpHandler_new"></a>
 
@@ -596,7 +696,7 @@ Set the formatter for this handler.
 
 | Param | Type |
 | --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
+| formatter | <code>Formatter</code> | 
 
 <a name="Handler+handle"></a>
 
@@ -649,42 +749,13 @@ Handle errors which occur during an emit() call.
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Filterer+addFilter"></a>
-
-#### httpHandler.addFilter(filter)
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit..HttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-#### httpHandler.removeFilter(filter)
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit..HttpHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-#### httpHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit..HttpHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
 <a name="module_py-logging-nodekit..AsyncHandler"></a>
 
-### py-logging-nodekit~AsyncHandler ⇐ [<code>Handler</code>](#Handler)
+### py-logging-nodekit~AsyncHandler ⇐ <code>Handler</code>
 **Kind**: inner class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
-**Extends**: [<code>Handler</code>](#Handler)  
+**Extends**: <code>Handler</code>  
 
-* [~AsyncHandler](#module_py-logging-nodekit..AsyncHandler) ⇐ [<code>Handler</code>](#Handler)
+* [~AsyncHandler](#module_py-logging-nodekit..AsyncHandler) ⇐ <code>Handler</code>
     * [new AsyncHandler([target])](#new_module_py-logging-nodekit..AsyncHandler_new)
     * [.setTarget(target)](#module_py-logging-nodekit..AsyncHandler+setTarget)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
@@ -699,9 +770,6 @@ Handle errors which occur during an emit() call.
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_module_py-logging-nodekit..AsyncHandler_new"></a>
 
@@ -709,7 +777,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| [target] | [<code>Handler</code>](#Handler) | 
+| [target] | <code>Handler</code> | 
 
 <a name="module_py-logging-nodekit..AsyncHandler+setTarget"></a>
 
@@ -720,7 +788,7 @@ Set the target handler for this handler.
 
 | Param | Type |
 | --- | --- |
-| target | [<code>Handler</code>](#Handler) | 
+| target | <code>Handler</code> | 
 
 <a name="Handler+toString"></a>
 
@@ -759,7 +827,7 @@ Set the formatter for this handler.
 
 | Param | Type |
 | --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
+| formatter | <code>Formatter</code> | 
 
 <a name="Handler+format"></a>
 
@@ -823,602 +891,13 @@ Handle errors which occur during an emit() call.
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Filterer+addFilter"></a>
-
-#### asyncHandler.addFilter(filter)
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit..AsyncHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-#### asyncHandler.removeFilter(filter)
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit..AsyncHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-#### asyncHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit..AsyncHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer"></a>
-
-## Filterer
-**Kind**: global class  
-
-* [Filterer](#Filterer)
-    * [new Filterer()](#new_Filterer_new)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-
-<a name="new_Filterer_new"></a>
-
-### new Filterer()
-A base class for loggers and handlers which allows them to share common code.
-
-<a name="Filterer+addFilter"></a>
-
-### filterer.addFilter(filter)
-**Kind**: instance method of [<code>Filterer</code>](#Filterer)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### filterer.removeFilter(filter)
-**Kind**: instance method of [<code>Filterer</code>](#Filterer)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### filterer.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>Filterer</code>](#Filterer)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Logger"></a>
-
-## Logger ⇐ [<code>Filterer</code>](#Filterer)
-**Kind**: global class  
-**Extends**: [<code>Filterer</code>](#Filterer)  
-
-* [Logger](#Logger) ⇐ [<code>Filterer</code>](#Filterer)
-    * [new Logger(parent, name, [level])](#new_Logger_new)
-    * _instance_
-        * [.toString()](#Logger+toString) ⇒ <code>string</code>
-        * [.getName()](#Logger+getName) ⇒ <code>string</code>
-        * [.getEffectiveLevel()](#Logger+getEffectiveLevel) ⇒ <code>number</code>
-        * [.isEnabledFor(level)](#Logger+isEnabledFor) ⇒ <code>boolean</code>
-        * [.setLevel(level)](#Logger+setLevel)
-        * [.addHandler(handler)](#Logger+addHandler)
-        * [.removeHandler(handler)](#Logger+removeHandler)
-        * [.hasHandlers()](#Logger+hasHandlers) ⇒ <code>boolean</code>
-        * [.debug(msg, [error], [extra])](#Logger+debug)
-        * [.info(msg, [error], [extra])](#Logger+info)
-        * [.warning(msg, [error], [extra])](#Logger+warning)
-        * [.error(msg, [error], [extra])](#Logger+error)
-        * [.critical(msg, [error], [extra])](#Logger+critical)
-        * [.log(level, msg, [error], [extra])](#Logger+log)
-        * [.makeRecord(level, msg, [error], [extra])](#Logger+makeRecord) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * [.addFilter(filter)](#Filterer+addFilter)
-        * [.removeFilter(filter)](#Filterer+removeFilter)
-        * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-    * _static_
-        * [.getLevelName(level)](#Logger.getLevelName) ⇒ <code>string</code>
-        * [.getLevelByName(levelName)](#Logger.getLevelByName) ⇒ <code>number</code>
-
-<a name="new_Logger_new"></a>
-
-### new Logger(parent, name, [level])
-
-| Param | Type | Default |
-| --- | --- | --- |
-| parent | [<code>Logger</code>](#Logger) |  | 
-| name | <code>string</code> |  | 
-| [level] | <code>number</code> | <code>NOTSET</code> | 
-
-<a name="Logger+toString"></a>
-
-### logger.toString() ⇒ <code>string</code>
-Return the text representation of this logger.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-<a name="Logger+getName"></a>
-
-### logger.getName() ⇒ <code>string</code>
-Return the name of this logger.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-<a name="Logger+getEffectiveLevel"></a>
-
-### logger.getEffectiveLevel() ⇒ <code>number</code>
-Return the effective level for this logger.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-<a name="Logger+isEnabledFor"></a>
-
-### logger.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this logger enabled for specified level?
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Logger+setLevel"></a>
-
-### logger.setLevel(level)
-Set the logging level of this logger.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Logger+addHandler"></a>
-
-### logger.addHandler(handler)
-Add the specified handler to this logger.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| handler | [<code>Handler</code>](#Handler) | 
-
-<a name="Logger+removeHandler"></a>
-
-### logger.removeHandler(handler)
-Remove the specified handler from this logger.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| handler | [<code>Handler</code>](#Handler) | 
-
-<a name="Logger+hasHandlers"></a>
-
-### logger.hasHandlers() ⇒ <code>boolean</code>
-See if this logger has any handlers configured.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-<a name="Logger+debug"></a>
-
-### logger.debug(msg, [error], [extra])
-Log msg with severity 'DEBUG'.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Logger+info"></a>
-
-### logger.info(msg, [error], [extra])
-Log msg with severity 'INFO'.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Logger+warning"></a>
-
-### logger.warning(msg, [error], [extra])
-Log msg with severity 'WARNING'.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Logger+error"></a>
-
-### logger.error(msg, [error], [extra])
-Log msg with severity 'ERROR'.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Logger+critical"></a>
-
-### logger.critical(msg, [error], [extra])
-Log msg with severity 'CRITICAL'.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Logger+log"></a>
-
-### logger.log(level, msg, [error], [extra])
-Log msg with specified severity.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Logger+makeRecord"></a>
-
-### logger.makeRecord(level, msg, [error], [extra]) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Create a LogRecord object.
-
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-| msg | <code>string</code> | 
-| [error] | <code>Object</code> | 
-| [extra] | <code>Object</code> | 
-
-<a name="Filterer+addFilter"></a>
-
-### logger.addFilter(filter)
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### logger.removeFilter(filter)
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### logger.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>Logger</code>](#Logger)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Logger.getLevelName"></a>
-
-### Logger.getLevelName(level) ⇒ <code>string</code>
-Return the textual representation of logging level.
-
-**Kind**: static method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Logger.getLevelByName"></a>
-
-### Logger.getLevelByName(levelName) ⇒ <code>number</code>
-Return value of the level name.
-
-**Kind**: static method of [<code>Logger</code>](#Logger)  
-
-| Param | Type |
-| --- | --- |
-| levelName | <code>string</code> | 
-
-<a name="Handler"></a>
-
-## Handler ⇐ [<code>Filterer</code>](#Filterer)
-**Kind**: global class  
-**Extends**: [<code>Filterer</code>](#Filterer)  
-
-* [Handler](#Handler) ⇐ [<code>Filterer</code>](#Filterer)
-    * [new Handler([level])](#new_Handler_new)
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * *[.emit(record)](#Handler+emit)*
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
-
-<a name="new_Handler_new"></a>
-
-### new Handler([level])
-An abstract handler.
-
-
-| Param | Type | Default |
-| --- | --- | --- |
-| [level] | <code>number</code> | <code>NOTSET</code> | 
-
-<a name="Handler+toString"></a>
-
-### handler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-<a name="Handler+setLevel"></a>
-
-### handler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### handler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### handler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
-
-<a name="Handler+format"></a>
-
-### handler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### handler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *handler.acquire()*
-**Kind**: instance abstract method of [<code>Handler</code>](#Handler)  
-<a name="Handler+release"></a>
-
-### *handler.release()*
-**Kind**: instance abstract method of [<code>Handler</code>](#Handler)  
-<a name="Handler+emit"></a>
-
-### *handler.emit(record)*
-Do whatever it takes to actually log the specified logging record.
-
-**Kind**: instance abstract method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+flush"></a>
-
-### *handler.flush()*
-**Kind**: instance abstract method of [<code>Handler</code>](#Handler)  
-<a name="Handler+close"></a>
-
-### *handler.close()*
-**Kind**: instance abstract method of [<code>Handler</code>](#Handler)  
-<a name="Handler+handleError"></a>
-
-### handler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-### handler.addFilter(filter)
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### handler.removeFilter(filter)
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### handler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>Handler</code>](#Handler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Formatter"></a>
-
-## Formatter
-**Kind**: global class  
-
-* [Formatter](#Formatter)
-    * [new Formatter([format], [timeFormat])](#new_Formatter_new)
-    * [.toString()](#Formatter+toString) ⇒ <code>string</code>
-    * [.formatTime(record)](#Formatter+formatTime) ⇒ <code>string</code>
-    * [.formatError(error)](#Formatter+formatError) ⇒ <code>string</code>
-    * [.format(record)](#Formatter+format) ⇒ <code>string</code>
-
-<a name="new_Formatter_new"></a>
-
-### new Formatter([format], [timeFormat])
-Default formatter.
-
-
-| Param | Type |
-| --- | --- |
-| [format] | <code>string</code> | 
-| [timeFormat] | <code>string</code> | 
-
-<a name="Formatter+toString"></a>
-
-### formatter.toString() ⇒ <code>string</code>
-Return the text representation of this formatter.
-
-**Kind**: instance method of [<code>Formatter</code>](#Formatter)  
-<a name="Formatter+formatTime"></a>
-
-### formatter.formatTime(record) ⇒ <code>string</code>
-Return the creation time of the specified LogRecord as formatted text.
-
-**Kind**: instance method of [<code>Formatter</code>](#Formatter)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Formatter+formatError"></a>
-
-### formatter.formatError(error) ⇒ <code>string</code>
-Return the specified Error object as formatted text.
-
-**Kind**: instance method of [<code>Formatter</code>](#Formatter)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Object</code> | 
-
-<a name="Formatter+format"></a>
-
-### formatter.format(record) ⇒ <code>string</code>
-Return the specified LogRecord as formatted text.
-
-**Kind**: instance method of [<code>Formatter</code>](#Formatter)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filter"></a>
-
-## Filter
-**Kind**: global class  
-
-* [Filter](#Filter)
-    * [new Filter([name])](#new_Filter_new)
-    * [.toString()](#Filter+toString) ⇒ <code>string</code>
-    * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
-
-<a name="new_Filter_new"></a>
-
-### new Filter([name])
-
-| Param | Type |
-| --- | --- |
-| [name] | <code>string</code> | 
-
-<a name="Filter+toString"></a>
-
-### filter.toString() ⇒ <code>string</code>
-Return the text representation of this filter.
-
-**Kind**: instance method of [<code>Filter</code>](#Filter)  
-<a name="Filter+filter"></a>
-
-### filter.filter(record) ⇒ <code>boolean</code>
-Determine if the specified record has to be logged.
-
-**Kind**: instance method of [<code>Filter</code>](#Filter)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
-	True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
 <a name="StreamHandler"></a>
 
-## StreamHandler ⇐ [<code>Handler</code>](#Handler)
+## StreamHandler ⇐ <code>Handler</code>
 **Kind**: global class  
-**Extends**: [<code>Handler</code>](#Handler)  
+**Extends**: <code>Handler</code>  
 
-* [StreamHandler](#StreamHandler) ⇐ [<code>Handler</code>](#Handler)
+* [StreamHandler](#StreamHandler) ⇐ <code>Handler</code>
     * [new StreamHandler([stream], [recordTextEnd])](#new_StreamHandler_new)
     * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
@@ -1432,9 +911,6 @@ Determine if the specified record has to be logged.
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_StreamHandler_new"></a>
 
@@ -1503,7 +979,7 @@ Set the formatter for this handler.
 
 | Param | Type |
 | --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
+| formatter | <code>Formatter</code> | 
 
 <a name="Handler+format"></a>
 
@@ -1555,42 +1031,13 @@ Handle errors which occur during an emit() call.
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Filterer+addFilter"></a>
-
-### streamHandler.addFilter(filter)
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### streamHandler.removeFilter(filter)
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### streamHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
 <a name="ConsoleHandler"></a>
 
-## ConsoleHandler ⇐ [<code>Handler</code>](#Handler)
+## ConsoleHandler ⇐ <code>Handler</code>
 **Kind**: global class  
-**Extends**: [<code>Handler</code>](#Handler)  
+**Extends**: <code>Handler</code>  
 
-* [ConsoleHandler](#ConsoleHandler) ⇐ [<code>Handler</code>](#Handler)
+* [ConsoleHandler](#ConsoleHandler) ⇐ <code>Handler</code>
     * [new ConsoleHandler([level], [grouping], [collapsed])](#new_ConsoleHandler_new)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
@@ -1604,9 +1051,6 @@ Handle errors which occur during an emit() call.
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
-    * [.addFilter(filter)](#Filterer+addFilter)
-    * [.removeFilter(filter)](#Filterer+removeFilter)
-    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="new_ConsoleHandler_new"></a>
 
@@ -1657,7 +1101,7 @@ Set the formatter for this handler.
 
 | Param | Type |
 | --- | --- |
-| formatter | [<code>Formatter</code>](#Formatter) | 
+| formatter | <code>Formatter</code> | 
 
 <a name="Handler+format"></a>
 
@@ -1720,33 +1164,4 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Filterer+addFilter"></a>
-
-### consoleHandler.addFilter(filter)
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+removeFilter"></a>
-
-### consoleHandler.removeFilter(filter)
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
-
-<a name="Filterer+filter"></a>
-
-### consoleHandler.filter(record) ⇒ <code>boolean</code>
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
-	to be processed. True otherwise.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
