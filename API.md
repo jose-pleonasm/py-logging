@@ -7,15 +7,6 @@
 <dd></dd>
 </dl>
 
-## Classes
-
-<dl>
-<dt><a href="#StreamHandler">StreamHandler</a> ⇐ <code>Handler</code></dt>
-<dd></dd>
-<dt><a href="#ConsoleHandler">ConsoleHandler</a> ⇐ <code>Handler</code></dt>
-<dd></dd>
-</dl>
-
 <a name="module_py-logging"></a>
 
 ## py-logging
@@ -37,6 +28,34 @@
         * [new Formatter([format], [timeFormat])](#new_module_py-logging.Formatter_new)
     * [.Filter](#module_py-logging.Filter)
         * [new Filter([name])](#new_module_py-logging.Filter_new)
+    * [.StreamHandler](#module_py-logging.StreamHandler) ⇐ <code>Handler</code>
+        * [new StreamHandler([stream], [recordTextEnd])](#new_module_py-logging.StreamHandler_new)
+        * [.toString()](#Handler+toString) ⇒ <code>string</code>
+        * [.setLevel(level)](#Handler+setLevel)
+        * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+        * [.setFormatter(formatter)](#Handler+setFormatter)
+        * [.format(record)](#Handler+format) ⇒ <code>string</code>
+        * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+        * *[.acquire()](#Handler+acquire)*
+        * *[.release()](#Handler+release)*
+        * *[.emit(record)](#Handler+emit)*
+        * *[.flush()](#Handler+flush)*
+        * *[.close()](#Handler+close)*
+        * [.handleError(error, [record])](#Handler+handleError)
+    * [.ConsoleHandler](#module_py-logging.ConsoleHandler) ⇐ <code>Handler</code>
+        * [new ConsoleHandler([level], [grouping], [collapsed])](#new_module_py-logging.ConsoleHandler_new)
+        * [.toString()](#Handler+toString) ⇒ <code>string</code>
+        * [.setLevel(level)](#Handler+setLevel)
+        * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+        * [.setFormatter(formatter)](#Handler+setFormatter)
+        * [.format(record)](#Handler+format) ⇒ <code>string</code>
+        * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+        * *[.acquire()](#Handler+acquire)*
+        * *[.release()](#Handler+release)*
+        * *[.emit(record)](#Handler+emit)*
+        * *[.flush()](#Handler+flush)*
+        * *[.close()](#Handler+close)*
+        * [.handleError(error, [record])](#Handler+handleError)
     * [.MODULE_IDENTIFIER](#module_py-logging.MODULE_IDENTIFIER) : <code>string</code>
     * [.VERSION](#module_py-logging.VERSION) : <code>string</code>
     * [.NOTSET](#module_py-logging.NOTSET) : <code>number</code>
@@ -196,6 +215,275 @@ Default formatter.
 | --- | --- |
 | [name] | <code>string</code> | 
 
+<a name="module_py-logging.StreamHandler"></a>
+
+### py-logging.StreamHandler ⇐ <code>Handler</code>
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+**Extends**: <code>Handler</code>  
+
+* [.StreamHandler](#module_py-logging.StreamHandler) ⇐ <code>Handler</code>
+    * [new StreamHandler([stream], [recordTextEnd])](#new_module_py-logging.StreamHandler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * *[.emit(record)](#Handler+emit)*
+    * *[.flush()](#Handler+flush)*
+    * *[.close()](#Handler+close)*
+    * [.handleError(error, [record])](#Handler+handleError)
+
+<a name="new_module_py-logging.StreamHandler_new"></a>
+
+#### new StreamHandler([stream], [recordTextEnd])
+Base stream handler.
+
+A handler class which writes logging records, appropriately formatted,
+to a stream. Note that this class does not close the stream, as
+process.stdout or process.stderr may be used.
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [stream] | <code>Object</code> | <code>process.stderr</code> | 
+| [recordTextEnd] | <code>string</code> | <code>&quot;\\n&quot;</code> | 
+
+<a name="Handler+toString"></a>
+
+#### streamHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+<a name="Handler+setLevel"></a>
+
+#### streamHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+#### streamHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+#### streamHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | <code>Formatter</code> | 
+
+<a name="Handler+format"></a>
+
+#### streamHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+#### streamHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+#### *streamHandler.acquire()*
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+<a name="Handler+release"></a>
+
+#### *streamHandler.release()*
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+<a name="Handler+emit"></a>
+
+#### *streamHandler.emit(record)*
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+flush"></a>
+
+#### *streamHandler.flush()*
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+<a name="Handler+close"></a>
+
+#### *streamHandler.close()*
+**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+<a name="Handler+handleError"></a>
+
+#### streamHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging.ConsoleHandler"></a>
+
+### py-logging.ConsoleHandler ⇐ <code>Handler</code>
+**Kind**: static class of [<code>py-logging</code>](#module_py-logging)  
+**Extends**: <code>Handler</code>  
+
+* [.ConsoleHandler](#module_py-logging.ConsoleHandler) ⇐ <code>Handler</code>
+    * [new ConsoleHandler([level], [grouping], [collapsed])](#new_module_py-logging.ConsoleHandler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * *[.emit(record)](#Handler+emit)*
+    * *[.flush()](#Handler+flush)*
+    * *[.close()](#Handler+close)*
+    * [.handleError(error, [record])](#Handler+handleError)
+
+<a name="new_module_py-logging.ConsoleHandler_new"></a>
+
+#### new ConsoleHandler([level], [grouping], [collapsed])
+Console handler.
+
+
+| Param | Type | Default |
+| --- | --- | --- |
+| [level] | <code>number</code> |  | 
+| [grouping] | <code>boolean</code> | <code>true</code> | 
+| [collapsed] | <code>boolean</code> | <code>false</code> | 
+
+<a name="Handler+toString"></a>
+
+#### consoleHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+<a name="Handler+setLevel"></a>
+
+#### consoleHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+#### consoleHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+#### consoleHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | <code>Formatter</code> | 
+
+<a name="Handler+format"></a>
+
+#### consoleHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+#### consoleHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+#### *consoleHandler.acquire()*
+**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+<a name="Handler+release"></a>
+
+#### *consoleHandler.release()*
+**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+<a name="Handler+emit"></a>
+
+#### *consoleHandler.emit(record)*
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+flush"></a>
+
+#### *consoleHandler.flush()*
+**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+<a name="Handler+close"></a>
+
+#### *consoleHandler.close()*
+**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+<a name="Handler+handleError"></a>
+
+#### consoleHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
 <a name="module_py-logging.MODULE_IDENTIFIER"></a>
 
 ### py-logging.MODULE_IDENTIFIER : <code>string</code>
@@ -337,20 +625,9 @@ Return the textual representation of logging level.
         * [.extend(ns)](#module_py-logging-nodekit.extend) ⇒ <code>Object</code>
         * [.basicConfig([options])](#module_py-logging-nodekit.basicConfig)
     * _inner_
-        * [~FileHandler](#module_py-logging-nodekit..FileHandler) ⇐ [<code>StreamHandler</code>](#StreamHandler)
+        * [~FileHandler](#module_py-logging-nodekit..FileHandler) ⇐ <code>StreamHandler</code>
             * [new FileHandler(filename, [mode], [encoding], [delay])](#new_module_py-logging-nodekit..FileHandler_new)
             * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
-            * [.toString()](#Handler+toString) ⇒ <code>string</code>
-            * [.setLevel(level)](#Handler+setLevel)
-            * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-            * [.setFormatter(formatter)](#Handler+setFormatter)
-            * [.format(record)](#Handler+format) ⇒ <code>string</code>
-            * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-            * *[.acquire()](#Handler+acquire)*
-            * *[.release()](#Handler+release)*
-            * *[.flush()](#Handler+flush)*
-            * *[.close()](#Handler+close)*
-            * [.handleError(error, [record])](#Handler+handleError)
         * [~RotatingFileHandler](#module_py-logging-nodekit..RotatingFileHandler) ⇐ <code>FileHandler</code>
             * [new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])](#new_module_py-logging-nodekit..RotatingFileHandler_new)
             * [.shouldRollover(formatedRecord)](#module_py-logging-nodekit..RotatingFileHandler+shouldRollover) ⇒ <code>Promise.&lt;boolean&gt;</code>
@@ -411,24 +688,13 @@ Do basic configuration for the logging system.
 
 <a name="module_py-logging-nodekit..FileHandler"></a>
 
-### py-logging-nodekit~FileHandler ⇐ [<code>StreamHandler</code>](#StreamHandler)
+### py-logging-nodekit~FileHandler ⇐ <code>StreamHandler</code>
 **Kind**: inner class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
-**Extends**: [<code>StreamHandler</code>](#StreamHandler)  
+**Extends**: <code>StreamHandler</code>  
 
-* [~FileHandler](#module_py-logging-nodekit..FileHandler) ⇐ [<code>StreamHandler</code>](#StreamHandler)
+* [~FileHandler](#module_py-logging-nodekit..FileHandler) ⇐ <code>StreamHandler</code>
     * [new FileHandler(filename, [mode], [encoding], [delay])](#new_module_py-logging-nodekit..FileHandler_new)
     * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
 
 <a name="new_module_py-logging-nodekit..FileHandler_new"></a>
 
@@ -457,95 +723,6 @@ Writes the record to the stream (with a trailing newline, if default setup).
 | Param | Type |
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+toString"></a>
-
-#### fileHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-<a name="Handler+setLevel"></a>
-
-#### fileHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-#### fileHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-#### fileHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | <code>Formatter</code> | 
-
-<a name="Handler+format"></a>
-
-#### fileHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-#### fileHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-#### *fileHandler.acquire()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-<a name="Handler+release"></a>
-
-#### *fileHandler.release()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-<a name="Handler+flush"></a>
-
-#### *fileHandler.flush()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-<a name="Handler+close"></a>
-
-#### *fileHandler.close()*
-**Kind**: instance abstract method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-<a name="Handler+handleError"></a>
-
-#### fileHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit..FileHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
 <a name="module_py-logging-nodekit..RotatingFileHandler"></a>
 
@@ -885,280 +1062,6 @@ Do whatever it takes to actually log the specified logging record.
 Handle errors which occur during an emit() call.
 
 **Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit..AsyncHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="StreamHandler"></a>
-
-## StreamHandler ⇐ <code>Handler</code>
-**Kind**: global class  
-**Extends**: <code>Handler</code>  
-
-* [StreamHandler](#StreamHandler) ⇐ <code>Handler</code>
-    * [new StreamHandler([stream], [recordTextEnd])](#new_StreamHandler_new)
-    * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
-
-<a name="new_StreamHandler_new"></a>
-
-### new StreamHandler([stream], [recordTextEnd])
-Base stream handler.
-
-A handler class which writes logging records, appropriately formatted,
-to a stream. Note that this class does not close the stream, as
-process.stdout or process.stderr may be used.
-
-
-| Param | Type | Default |
-| --- | --- | --- |
-| [stream] | <code>Object</code> | <code>process.stderr</code> | 
-| [recordTextEnd] | <code>string</code> | <code>&quot;\\n&quot;</code> | 
-
-<a name="StreamHandler+emit"></a>
-
-### streamHandler.emit(record) ⇒ <code>boolean</code>
-Writes the record to the stream (with a trailing newline, if default setup).
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
-**Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
-	for the 'drain' event to be emitted before continuing to write
-	additional data; otherwise true.  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+toString"></a>
-
-### streamHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-<a name="Handler+setLevel"></a>
-
-### streamHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### streamHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### streamHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | <code>Formatter</code> | 
-
-<a name="Handler+format"></a>
-
-### streamHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### streamHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *streamHandler.acquire()*
-**Kind**: instance abstract method of [<code>StreamHandler</code>](#StreamHandler)  
-<a name="Handler+release"></a>
-
-### *streamHandler.release()*
-**Kind**: instance abstract method of [<code>StreamHandler</code>](#StreamHandler)  
-<a name="Handler+flush"></a>
-
-### *streamHandler.flush()*
-**Kind**: instance abstract method of [<code>StreamHandler</code>](#StreamHandler)  
-<a name="Handler+close"></a>
-
-### *streamHandler.close()*
-**Kind**: instance abstract method of [<code>StreamHandler</code>](#StreamHandler)  
-<a name="Handler+handleError"></a>
-
-### streamHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>StreamHandler</code>](#StreamHandler)  
-
-| Param | Type |
-| --- | --- |
-| error | <code>Error</code> | 
-| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="ConsoleHandler"></a>
-
-## ConsoleHandler ⇐ <code>Handler</code>
-**Kind**: global class  
-**Extends**: <code>Handler</code>  
-
-* [ConsoleHandler](#ConsoleHandler) ⇐ <code>Handler</code>
-    * [new ConsoleHandler([level], [grouping], [collapsed])](#new_ConsoleHandler_new)
-    * [.toString()](#Handler+toString) ⇒ <code>string</code>
-    * [.setLevel(level)](#Handler+setLevel)
-    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
-    * [.setFormatter(formatter)](#Handler+setFormatter)
-    * [.format(record)](#Handler+format) ⇒ <code>string</code>
-    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
-    * [.emit(record)](#Handler+emit)
-    * *[.flush()](#Handler+flush)*
-    * *[.close()](#Handler+close)*
-    * [.handleError(error, [record])](#Handler+handleError)
-
-<a name="new_ConsoleHandler_new"></a>
-
-### new ConsoleHandler([level], [grouping], [collapsed])
-Console handler.
-
-
-| Param | Type | Default |
-| --- | --- | --- |
-| [level] | <code>number</code> |  | 
-| [grouping] | <code>boolean</code> | <code>true</code> | 
-| [collapsed] | <code>boolean</code> | <code>false</code> | 
-
-<a name="Handler+toString"></a>
-
-### consoleHandler.toString() ⇒ <code>string</code>
-Return the text representation of this handler.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-<a name="Handler+setLevel"></a>
-
-### consoleHandler.setLevel(level)
-Set the logging level of this handler.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+isEnabledFor"></a>
-
-### consoleHandler.isEnabledFor(level) ⇒ <code>boolean</code>
-Is this handler enabled for specified level?
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| level | <code>number</code> | 
-
-<a name="Handler+setFormatter"></a>
-
-### consoleHandler.setFormatter(formatter)
-Set the formatter for this handler.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| formatter | <code>Formatter</code> | 
-
-<a name="Handler+format"></a>
-
-### consoleHandler.format(record) ⇒ <code>string</code>
-Format the specified record.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+handle"></a>
-
-### consoleHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-Handle the specified logging record.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+acquire"></a>
-
-### *consoleHandler.acquire()*
-**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-<a name="Handler+release"></a>
-
-### *consoleHandler.release()*
-**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-<a name="Handler+emit"></a>
-
-### consoleHandler.emit(record)
-Do whatever it takes to actually log the specified logging record.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-**Overrides**: [<code>emit</code>](#Handler+emit)  
-
-| Param | Type |
-| --- | --- |
-| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
-
-<a name="Handler+flush"></a>
-
-### *consoleHandler.flush()*
-**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-<a name="Handler+close"></a>
-
-### *consoleHandler.close()*
-**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
-<a name="Handler+handleError"></a>
-
-### consoleHandler.handleError(error, [record])
-Handle errors which occur during an emit() call.
-
-**Kind**: instance method of [<code>ConsoleHandler</code>](#ConsoleHandler)  
 
 | Param | Type |
 | --- | --- |
