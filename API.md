@@ -3,7 +3,11 @@
 <dl>
 <dt><a href="#module_py-logging">py-logging</a></dt>
 <dd></dd>
+<dt><a href="#module_py-logging-commonkit">py-logging-commonkit</a></dt>
+<dd></dd>
 <dt><a href="#module_py-logging-nodekit">py-logging-nodekit</a></dt>
+<dd></dd>
+<dt><a href="#module_py-logging-browserkit">py-logging-browserkit</a></dt>
 <dd></dd>
 </dl>
 
@@ -614,7 +618,257 @@ Return the textual representation of logging level.
 | error | <code>Object</code> | The logged error. |
 | extra | <code>Object</code> | Extra data. |
 | process | <code>number</code> | Process ID (if available). |
-| processName | <code>string</code> | Process title (if available). |
+| processname | <code>string</code> | Process title (if available). |
+
+<a name="module_py-logging-commonkit"></a>
+
+## py-logging-commonkit
+
+* [py-logging-commonkit](#module_py-logging-commonkit)
+    * [.JsonFormatter](#module_py-logging-commonkit.JsonFormatter)
+        * [new JsonFormatter()](#new_module_py-logging-commonkit.JsonFormatter_new)
+    * [.WhiteListFilter](#module_py-logging-commonkit.WhiteListFilter) ⇐ <code>Filter</code>
+        * [new WhiteListFilter(names)](#new_module_py-logging-commonkit.WhiteListFilter_new)
+        * [.toString()](#Filter+toString) ⇒ <code>string</code>
+        * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
+    * [.BlackListFilter](#module_py-logging-commonkit.BlackListFilter) ⇐ <code>Filter</code>
+        * [new BlackListFilter(names)](#new_module_py-logging-commonkit.BlackListFilter_new)
+        * [.toString()](#Filter+toString) ⇒ <code>string</code>
+        * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
+    * [.AccumulativeHandler](#module_py-logging-commonkit.AccumulativeHandler) ⇐ <code>Handler</code>
+        * [new AccumulativeHandler([target])](#new_module_py-logging-commonkit.AccumulativeHandler_new)
+        * [.toString()](#Handler+toString) ⇒ <code>string</code>
+        * [.setLevel(level)](#Handler+setLevel)
+        * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+        * [.setFormatter(formatter)](#Handler+setFormatter)
+        * [.format(record)](#Handler+format) ⇒ <code>string</code>
+        * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+        * *[.acquire()](#Handler+acquire)*
+        * *[.release()](#Handler+release)*
+        * *[.emit(record)](#Handler+emit)*
+        * *[.flush()](#Handler+flush)*
+        * *[.close()](#Handler+close)*
+        * [.handleError(error, [record])](#Handler+handleError)
+
+<a name="module_py-logging-commonkit.JsonFormatter"></a>
+
+### py-logging-commonkit.JsonFormatter
+**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+<a name="new_module_py-logging-commonkit.JsonFormatter_new"></a>
+
+#### new JsonFormatter()
+JSON formatter.
+
+<a name="module_py-logging-commonkit.WhiteListFilter"></a>
+
+### py-logging-commonkit.WhiteListFilter ⇐ <code>Filter</code>
+**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+**Extends**: <code>Filter</code>  
+
+* [.WhiteListFilter](#module_py-logging-commonkit.WhiteListFilter) ⇐ <code>Filter</code>
+    * [new WhiteListFilter(names)](#new_module_py-logging-commonkit.WhiteListFilter_new)
+    * [.toString()](#Filter+toString) ⇒ <code>string</code>
+    * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
+
+<a name="new_module_py-logging-commonkit.WhiteListFilter_new"></a>
+
+#### new WhiteListFilter(names)
+Whitelist.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| names | <code>Array.&lt;string&gt;</code> | Names of Loggers, that are allowed. |
+
+<a name="Filter+toString"></a>
+
+#### whiteListFilter.toString() ⇒ <code>string</code>
+Return the text representation of this filter.
+
+**Kind**: instance method of [<code>WhiteListFilter</code>](#module_py-logging-commonkit.WhiteListFilter)  
+<a name="Filter+filter"></a>
+
+#### whiteListFilter.filter(record) ⇒ <code>boolean</code>
+Determine if the specified record has to be logged.
+
+**Kind**: instance method of [<code>WhiteListFilter</code>](#module_py-logging-commonkit.WhiteListFilter)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
+	True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging-commonkit.BlackListFilter"></a>
+
+### py-logging-commonkit.BlackListFilter ⇐ <code>Filter</code>
+**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+**Extends**: <code>Filter</code>  
+
+* [.BlackListFilter](#module_py-logging-commonkit.BlackListFilter) ⇐ <code>Filter</code>
+    * [new BlackListFilter(names)](#new_module_py-logging-commonkit.BlackListFilter_new)
+    * [.toString()](#Filter+toString) ⇒ <code>string</code>
+    * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
+
+<a name="new_module_py-logging-commonkit.BlackListFilter_new"></a>
+
+#### new BlackListFilter(names)
+Blacklist.
+
+
+| Param | Type | Description |
+| --- | --- | --- |
+| names | <code>Array.&lt;string&gt;</code> | Names of Loggers, that are disallowed. |
+
+<a name="Filter+toString"></a>
+
+#### blackListFilter.toString() ⇒ <code>string</code>
+Return the text representation of this filter.
+
+**Kind**: instance method of [<code>BlackListFilter</code>](#module_py-logging-commonkit.BlackListFilter)  
+<a name="Filter+filter"></a>
+
+#### blackListFilter.filter(record) ⇒ <code>boolean</code>
+Determine if the specified record has to be logged.
+
+**Kind**: instance method of [<code>BlackListFilter</code>](#module_py-logging-commonkit.BlackListFilter)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
+	True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging-commonkit.AccumulativeHandler"></a>
+
+### py-logging-commonkit.AccumulativeHandler ⇐ <code>Handler</code>
+**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+**Extends**: <code>Handler</code>  
+
+* [.AccumulativeHandler](#module_py-logging-commonkit.AccumulativeHandler) ⇐ <code>Handler</code>
+    * [new AccumulativeHandler([target])](#new_module_py-logging-commonkit.AccumulativeHandler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.acquire()](#Handler+acquire)*
+    * *[.release()](#Handler+release)*
+    * *[.emit(record)](#Handler+emit)*
+    * *[.flush()](#Handler+flush)*
+    * *[.close()](#Handler+close)*
+    * [.handleError(error, [record])](#Handler+handleError)
+
+<a name="new_module_py-logging-commonkit.AccumulativeHandler_new"></a>
+
+#### new AccumulativeHandler([target])
+Accumulates equal records and transmits them when is necessary.
+
+
+| Param | Type |
+| --- | --- |
+| [target] | <code>Handler</code> | 
+
+<a name="Handler+toString"></a>
+
+#### accumulativeHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+<a name="Handler+setLevel"></a>
+
+#### accumulativeHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+#### accumulativeHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+#### accumulativeHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | <code>Formatter</code> | 
+
+<a name="Handler+format"></a>
+
+#### accumulativeHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+#### accumulativeHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+acquire"></a>
+
+#### *accumulativeHandler.acquire()*
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+<a name="Handler+release"></a>
+
+#### *accumulativeHandler.release()*
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+<a name="Handler+emit"></a>
+
+#### *accumulativeHandler.emit(record)*
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+flush"></a>
+
+#### *accumulativeHandler.flush()*
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+<a name="Handler+close"></a>
+
+#### *accumulativeHandler.close()*
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+<a name="Handler+handleError"></a>
+
+#### accumulativeHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
 <a name="module_py-logging-nodekit"></a>
 
@@ -999,4 +1253,145 @@ Do basic configuration for the logging system.
 | Param | Type |
 | --- | --- |
 | [options] | <code>Object</code> | 
+
+<a name="module_py-logging-browserkit"></a>
+
+## py-logging-browserkit
+
+* [py-logging-browserkit](#module_py-logging-browserkit)
+    * [.ConsoleFormatter](#module_py-logging-browserkit.ConsoleFormatter) ⇐ <code>Formatter</code>
+        * [new ConsoleFormatter([format], [timeFormat])](#new_module_py-logging-browserkit.ConsoleFormatter_new)
+        * [.toString()](#Formatter+toString) ⇒ <code>string</code>
+        * [.formatTime(record)](#Formatter+formatTime) ⇒ <code>string</code>
+        * [.formatError(error)](#Formatter+formatError) ⇒ <code>string</code>
+        * [.format(record)](#Formatter+format) ⇒ <code>string</code>
+    * [.StylishConsoleFormatter](#module_py-logging-browserkit.StylishConsoleFormatter) ⇐ <code>Formatter</code>
+        * [new StylishConsoleFormatter(format, timeFormat, styles)](#new_module_py-logging-browserkit.StylishConsoleFormatter_new)
+        * [.toString()](#Formatter+toString) ⇒ <code>string</code>
+        * [.formatTime(record)](#Formatter+formatTime) ⇒ <code>string</code>
+        * [.formatError(error)](#Formatter+formatError) ⇒ <code>string</code>
+        * [.format(record)](#Formatter+format) ⇒ <code>string</code>
+
+<a name="module_py-logging-browserkit.ConsoleFormatter"></a>
+
+### py-logging-browserkit.ConsoleFormatter ⇐ <code>Formatter</code>
+**Kind**: static class of [<code>py-logging-browserkit</code>](#module_py-logging-browserkit)  
+**Extends**: <code>Formatter</code>  
+
+* [.ConsoleFormatter](#module_py-logging-browserkit.ConsoleFormatter) ⇐ <code>Formatter</code>
+    * [new ConsoleFormatter([format], [timeFormat])](#new_module_py-logging-browserkit.ConsoleFormatter_new)
+    * [.toString()](#Formatter+toString) ⇒ <code>string</code>
+    * [.formatTime(record)](#Formatter+formatTime) ⇒ <code>string</code>
+    * [.formatError(error)](#Formatter+formatError) ⇒ <code>string</code>
+    * [.format(record)](#Formatter+format) ⇒ <code>string</code>
+
+<a name="new_module_py-logging-browserkit.ConsoleFormatter_new"></a>
+
+#### new ConsoleFormatter([format], [timeFormat])
+
+| Param | Type |
+| --- | --- |
+| [format] | <code>string</code> | 
+| [timeFormat] | <code>string</code> | 
+
+<a name="Formatter+toString"></a>
+
+#### consoleFormatter.toString() ⇒ <code>string</code>
+Return the text representation of this formatter.
+
+**Kind**: instance method of [<code>ConsoleFormatter</code>](#module_py-logging-browserkit.ConsoleFormatter)  
+<a name="Formatter+formatTime"></a>
+
+#### consoleFormatter.formatTime(record) ⇒ <code>string</code>
+Return the creation time of the specified LogRecord as formatted text.
+
+**Kind**: instance method of [<code>ConsoleFormatter</code>](#module_py-logging-browserkit.ConsoleFormatter)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Formatter+formatError"></a>
+
+#### consoleFormatter.formatError(error) ⇒ <code>string</code>
+Return the specified Error object as formatted text.
+
+**Kind**: instance method of [<code>ConsoleFormatter</code>](#module_py-logging-browserkit.ConsoleFormatter)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Object</code> | 
+
+<a name="Formatter+format"></a>
+
+#### consoleFormatter.format(record) ⇒ <code>string</code>
+Return the specified LogRecord as formatted text.
+
+**Kind**: instance method of [<code>ConsoleFormatter</code>](#module_py-logging-browserkit.ConsoleFormatter)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging-browserkit.StylishConsoleFormatter"></a>
+
+### py-logging-browserkit.StylishConsoleFormatter ⇐ <code>Formatter</code>
+**Kind**: static class of [<code>py-logging-browserkit</code>](#module_py-logging-browserkit)  
+**Extends**: <code>Formatter</code>  
+
+* [.StylishConsoleFormatter](#module_py-logging-browserkit.StylishConsoleFormatter) ⇐ <code>Formatter</code>
+    * [new StylishConsoleFormatter(format, timeFormat, styles)](#new_module_py-logging-browserkit.StylishConsoleFormatter_new)
+    * [.toString()](#Formatter+toString) ⇒ <code>string</code>
+    * [.formatTime(record)](#Formatter+formatTime) ⇒ <code>string</code>
+    * [.formatError(error)](#Formatter+formatError) ⇒ <code>string</code>
+    * [.format(record)](#Formatter+format) ⇒ <code>string</code>
+
+<a name="new_module_py-logging-browserkit.StylishConsoleFormatter_new"></a>
+
+#### new StylishConsoleFormatter(format, timeFormat, styles)
+
+| Param | Type |
+| --- | --- |
+| format | <code>string</code> | 
+| timeFormat | <code>string</code> | 
+| styles | <code>Object</code> | 
+
+<a name="Formatter+toString"></a>
+
+#### stylishConsoleFormatter.toString() ⇒ <code>string</code>
+Return the text representation of this formatter.
+
+**Kind**: instance method of [<code>StylishConsoleFormatter</code>](#module_py-logging-browserkit.StylishConsoleFormatter)  
+<a name="Formatter+formatTime"></a>
+
+#### stylishConsoleFormatter.formatTime(record) ⇒ <code>string</code>
+Return the creation time of the specified LogRecord as formatted text.
+
+**Kind**: instance method of [<code>StylishConsoleFormatter</code>](#module_py-logging-browserkit.StylishConsoleFormatter)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Formatter+formatError"></a>
+
+#### stylishConsoleFormatter.formatError(error) ⇒ <code>string</code>
+Return the specified Error object as formatted text.
+
+**Kind**: instance method of [<code>StylishConsoleFormatter</code>](#module_py-logging-browserkit.StylishConsoleFormatter)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Object</code> | 
+
+<a name="Formatter+format"></a>
+
+#### stylishConsoleFormatter.format(record) ⇒ <code>string</code>
+Return the specified LogRecord as formatted text.
+
+**Kind**: instance method of [<code>StylishConsoleFormatter</code>](#module_py-logging-browserkit.StylishConsoleFormatter)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
