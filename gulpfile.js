@@ -14,8 +14,7 @@ gulp.task('docs', function () {
 		'lib/Manager.js',
 		'lib/common-handlers.js',
 		'lib/commonkit.js',
-		'lib/nodekit.js',
-		'lib/browserkit.js'
+		'lib/nodekit.js'
 	] })
 		.then(output => fs.writeFile('API.md', output));
 });
