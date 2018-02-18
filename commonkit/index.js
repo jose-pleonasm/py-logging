@@ -16,7 +16,7 @@ var Handler = require('../core/Handler');
  * Extends given object by functions from this module.
  *
  * @function
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging-commonkit
  * @param  {Object} ns
  * @return {Object}
  */
