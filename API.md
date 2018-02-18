@@ -38,8 +38,6 @@
         * [.setFormatter(formatter)](#Handler+setFormatter)
         * [.format(record)](#Handler+format) ⇒ <code>string</code>
         * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * *[.acquire()](#Handler+acquire)*
-        * *[.release()](#Handler+release)*
         * *[.emit(record)](#Handler+emit)*
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
@@ -52,8 +50,6 @@
         * [.setFormatter(formatter)](#Handler+setFormatter)
         * [.format(record)](#Handler+format) ⇒ <code>string</code>
         * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * *[.acquire()](#Handler+acquire)*
-        * *[.release()](#Handler+release)*
         * *[.emit(record)](#Handler+emit)*
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
@@ -231,8 +227,6 @@ Default formatter.
     * [.setFormatter(formatter)](#Handler+setFormatter)
     * [.format(record)](#Handler+format) ⇒ <code>string</code>
     * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
     * *[.emit(record)](#Handler+emit)*
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
@@ -314,14 +308,6 @@ Handle the specified logging record.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Handler+acquire"></a>
-
-#### *streamHandler.acquire()*
-**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
-<a name="Handler+release"></a>
-
-#### *streamHandler.release()*
-**Kind**: instance abstract method of [<code>StreamHandler</code>](#module_py-logging.StreamHandler)  
 <a name="Handler+emit"></a>
 
 #### *streamHandler.emit(record)*
@@ -367,8 +353,6 @@ Handle errors which occur during an emit() call.
     * [.setFormatter(formatter)](#Handler+setFormatter)
     * [.format(record)](#Handler+format) ⇒ <code>string</code>
     * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
     * *[.emit(record)](#Handler+emit)*
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
@@ -447,14 +431,6 @@ Handle the specified logging record.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Handler+acquire"></a>
-
-#### *consoleHandler.acquire()*
-**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
-<a name="Handler+release"></a>
-
-#### *consoleHandler.release()*
-**Kind**: instance abstract method of [<code>ConsoleHandler</code>](#module_py-logging.ConsoleHandler)  
 <a name="Handler+emit"></a>
 
 #### *consoleHandler.emit(record)*
@@ -641,8 +617,6 @@ Return the textual representation of logging level.
         * [.setFormatter(formatter)](#Handler+setFormatter)
         * [.format(record)](#Handler+format) ⇒ <code>string</code>
         * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * *[.acquire()](#Handler+acquire)*
-        * *[.release()](#Handler+release)*
         * *[.emit(record)](#Handler+emit)*
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
@@ -751,8 +725,6 @@ Determine if the specified record has to be logged.
     * [.setFormatter(formatter)](#Handler+setFormatter)
     * [.format(record)](#Handler+format) ⇒ <code>string</code>
     * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
     * *[.emit(record)](#Handler+emit)*
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
@@ -829,14 +801,6 @@ Handle the specified logging record.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Handler+acquire"></a>
-
-#### *accumulativeHandler.acquire()*
-**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
-<a name="Handler+release"></a>
-
-#### *accumulativeHandler.release()*
-**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
 <a name="Handler+emit"></a>
 
 #### *accumulativeHandler.emit(record)*
@@ -886,8 +850,6 @@ Handle errors which occur during an emit() call.
         * [.setFormatter(formatter)](#Handler+setFormatter)
         * [.format(record)](#Handler+format) ⇒ <code>string</code>
         * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * *[.acquire()](#Handler+acquire)*
-        * *[.release()](#Handler+release)*
         * *[.emit(record)](#Handler+emit)*
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
@@ -900,13 +862,11 @@ Handle errors which occur during an emit() call.
         * [.setFormatter(formatter)](#Handler+setFormatter)
         * [.format(record)](#Handler+format) ⇒ <code>string</code>
         * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-        * *[.acquire()](#Handler+acquire)*
-        * *[.release()](#Handler+release)*
         * *[.emit(record)](#Handler+emit)*
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
         * [.handleError(error, [record])](#Handler+handleError)
-    * [.extend(ns)](#module_py-logging-nodekit.extend) ⇒ <code>Object</code>
+    * [.install(ns)](#module_py-logging-nodekit.install) ⇒ <code>Object</code>
     * [.basicConfig([options])](#module_py-logging-nodekit.basicConfig)
 
 <a name="module_py-logging-nodekit.FileHandler"></a>
@@ -981,8 +941,6 @@ to the next when the current file reaches a certain size.
     * [.setFormatter(formatter)](#Handler+setFormatter)
     * [.format(record)](#Handler+format) ⇒ <code>string</code>
     * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
     * *[.emit(record)](#Handler+emit)*
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
@@ -1062,14 +1020,6 @@ Handle the specified logging record.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Handler+acquire"></a>
-
-#### *httpHandler.acquire()*
-**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
-<a name="Handler+release"></a>
-
-#### *httpHandler.release()*
-**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
 <a name="Handler+emit"></a>
 
 #### *httpHandler.emit(record)*
@@ -1115,8 +1065,6 @@ Handle errors which occur during an emit() call.
     * [.setFormatter(formatter)](#Handler+setFormatter)
     * [.format(record)](#Handler+format) ⇒ <code>string</code>
     * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
-    * *[.acquire()](#Handler+acquire)*
-    * *[.release()](#Handler+release)*
     * *[.emit(record)](#Handler+emit)*
     * *[.flush()](#Handler+flush)*
     * *[.close()](#Handler+close)*
@@ -1191,14 +1139,6 @@ Handle the specified logging record.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="Handler+acquire"></a>
-
-#### *asyncHandler.acquire()*
-**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
-<a name="Handler+release"></a>
-
-#### *asyncHandler.release()*
-**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
 <a name="Handler+emit"></a>
 
 #### *asyncHandler.emit(record)*
@@ -1230,9 +1170,9 @@ Handle errors which occur during an emit() call.
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-nodekit.extend"></a>
+<a name="module_py-logging-nodekit.install"></a>
 
-### py-logging-nodekit.extend(ns) ⇒ <code>Object</code>
+### py-logging-nodekit.install(ns) ⇒ <code>Object</code>
 Extends given object by functions from this module.
 
 **Kind**: static method of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
