@@ -5,7 +5,6 @@ var Logger = require('./Logger');
 /**
  * An abstract handler.
  *
- * @memberof module:py-logging
  * @constructor Handler
  * @extends Filterer
  * @param {number} [level=NOTSET]

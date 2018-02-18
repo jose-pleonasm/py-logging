@@ -3,7 +3,6 @@ var strftime = require('./strftime');
 /**
  * Default formatter.
  *
- * @memberof module:py-logging
  * @constructor Formatter
  * @param {string} [format]
  * @param {string} [timeFormat]

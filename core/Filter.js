@@ -1,6 +1,5 @@
 
 /**
- * @memberof module:py-logging
  * @constructor Filter
  * @param {string} [name]
  */

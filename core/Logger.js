@@ -15,7 +15,6 @@ var Filterer = require('./Filterer');
  */
 
 /**
- * @memberof module:py-logging
  * @constructor Logger
  * @extends Filterer
  * @param {?Logger} parent

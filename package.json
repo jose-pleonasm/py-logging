@@ -26,7 +26,7 @@
   "devDependencies": {
     "fs-then-native": "^2.0.0",
     "gulp": "^3.9.1",
-    "jsdoc-to-markdown": "^3.0.0",
+    "jsdoc-to-markdown": "^4.0.0",
     "mocha": "^2.5.3",
     "sinon": "^1.17.7"
   }

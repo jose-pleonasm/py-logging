@@ -2,7 +2,6 @@
 /**
  * A base class for loggers and handlers which allows them to share common code.
  *
- * @memberof module:py-logging
  * @constructor Filterer
  */
 function Filterer() {

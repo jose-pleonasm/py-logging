@@ -13,7 +13,6 @@ var Handler = require('./Handler');
  * to a stream. Note that this class does not close the stream, as
  * process.stdout or process.stderr may be used.
  *
- * @memberof module:py-logging
  * @constructor StreamHandler
  * @extends Handler
  * @param {Object} [stream=process.stderr]
@@ -73,7 +72,6 @@ var methodMap = {
 /**
  * Console handler.
  *
- * @memberof module:py-logging
  * @constructor ConsoleHandler
  * @extends Handler
  * @param {number} [level]
