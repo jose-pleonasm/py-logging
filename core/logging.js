@@ -11,7 +11,7 @@ var Manager = require('./Manager');
  */
 
 var MODULE_IDENTIFIER = 'logging';
-var VERSION = '2.0.0-beta.4';
+var VERSION = '2.0.0-beta.5';
 
 
 //------------------------------------------------------------------------------
