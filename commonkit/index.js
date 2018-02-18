@@ -4,7 +4,7 @@ var Handler = require('../core/Handler');
 
 
 /**
- * @module py-logging-commonkit
+ * @module py-logging/commonkit
  */
 
 
@@ -16,7 +16,7 @@ var Handler = require('../core/Handler');
  * Extends given object by functions from this module.
  *
  * @function
- * @memberof module:py-logging-commonkit
+ * @memberof module:py-logging/commonkit
  * @param  {Object} ns
  * @return {Object}
  */
@@ -36,7 +36,7 @@ function install(ns) {
 /**
  * JSON formatter.
  *
- * @memberof module:py-logging-commonkit
+ * @memberof module:py-logging/commonkit
  * @constructor JsonFormatter
  */
 function JsonFormatter() {}
@@ -59,7 +59,7 @@ JsonFormatter.prototype.toString = function() {
 /**
  * Whitelist.
  *
- * @memberof module:py-logging-commonkit
+ * @memberof module:py-logging/commonkit
  * @constructor WhiteListFilter
  * @extends Filter
  * @param {Array<string>} names Names of Loggers, that are allowed.
@@ -80,7 +80,7 @@ WhiteListFilter.prototype.filter = function(record) {
 /**
  * Blacklist.
  *
- * @memberof module:py-logging-commonkit
+ * @memberof module:py-logging/commonkit
  * @constructor BlackListFilter
  * @extends Filter
  * @param {Array<string>} names Names of Loggers, that are disallowed.
@@ -105,7 +105,7 @@ BlackListFilter.prototype.filter = function(record) {
 /**
  * Accumulates equal records and transmits them when is necessary.
  *
- * @memberof module:py-logging-commonkit
+ * @memberof module:py-logging/commonkit
  * @constructor AccumulativeHandler
  * @extends Handler
  * @param {Handler} [target]

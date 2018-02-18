@@ -10,7 +10,7 @@ var StreamHandler = require('../core/handlers').StreamHandler;
 
 
 /**
- * @module py-logging-nodekit
+ * @module py-logging/nodekit
  */
 
 
@@ -22,7 +22,7 @@ var StreamHandler = require('../core/handlers').StreamHandler;
  * Extends given object by functions from this module.
  *
  * @function
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging/nodekit
  * @param  {Object} ns
  * @return {Object}
  */
@@ -44,7 +44,7 @@ function install(ns) {
  *
  * @function
  * @override
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging/nodekit
  * @param  {Object} [options]
  */
 function basicConfig(options) {
@@ -115,7 +115,7 @@ function renameFile(oldPath, newPath) {
 /**
  * File handler.
  *
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging/nodekit
  * @constructor FileHandler
  * @extends StreamHandler
  * @param {string} filename
@@ -192,7 +192,7 @@ FileHandler.prototype._open = function(errorHandler) {
  * Handler for logging to a set of files, which switches from one file
  * to the next when the current file reaches a certain size.
  *
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging/nodekit
  * @constructor RotatingFileHandler
  * @extends FileHandler
  * @param {string} filename
@@ -403,7 +403,7 @@ RotatingFileHandler.prototype._handleReject = function(record, error) {
  * A class which sends records to a Web server, using either GET or
  * POST semantics.
  *
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging/nodekit
  * @constructor HttpHandler
  * @extends Handler
  * @param {string} url
@@ -577,7 +577,7 @@ HttpPostStrategy.prototype.send = function(data) {
 //------------------------------------------------------------------------------
 
 /**
- * @memberof module:py-logging-nodekit
+ * @memberof module:py-logging/nodekit
  * @constructor AsyncHandler
  * @extends Handler
  * @param {Handler} [target]

@@ -3,9 +3,9 @@
 <dl>
 <dt><a href="#module_py-logging">py-logging</a></dt>
 <dd></dd>
-<dt><a href="#module_py-logging-commonkit">py-logging-commonkit</a></dt>
+<dt><a href="#module_py-logging/commonkit">py-logging/commonkit</a></dt>
 <dd></dd>
-<dt><a href="#module_py-logging-nodekit">py-logging-nodekit</a></dt>
+<dt><a href="#module_py-logging/nodekit">py-logging/nodekit</a></dt>
 <dd></dd>
 </dl>
 
@@ -594,23 +594,23 @@ Return the textual representation of logging level.
 | process | <code>number</code> | Process ID (if available). |
 | processname | <code>string</code> | Process title (if available). |
 
-<a name="module_py-logging-commonkit"></a>
+<a name="module_py-logging/commonkit"></a>
 
-## py-logging-commonkit
+## py-logging/commonkit
 
-* [py-logging-commonkit](#module_py-logging-commonkit)
-    * [.JsonFormatter](#module_py-logging-commonkit.JsonFormatter)
-        * [new JsonFormatter()](#new_module_py-logging-commonkit.JsonFormatter_new)
-    * [.WhiteListFilter](#module_py-logging-commonkit.WhiteListFilter) ⇐ <code>Filter</code>
-        * [new WhiteListFilter(names)](#new_module_py-logging-commonkit.WhiteListFilter_new)
+* [py-logging/commonkit](#module_py-logging/commonkit)
+    * [.JsonFormatter](#module_py-logging/commonkit.JsonFormatter)
+        * [new JsonFormatter()](#new_module_py-logging/commonkit.JsonFormatter_new)
+    * [.WhiteListFilter](#module_py-logging/commonkit.WhiteListFilter) ⇐ <code>Filter</code>
+        * [new WhiteListFilter(names)](#new_module_py-logging/commonkit.WhiteListFilter_new)
         * [.toString()](#Filter+toString) ⇒ <code>string</code>
         * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
-    * [.BlackListFilter](#module_py-logging-commonkit.BlackListFilter) ⇐ <code>Filter</code>
-        * [new BlackListFilter(names)](#new_module_py-logging-commonkit.BlackListFilter_new)
+    * [.BlackListFilter](#module_py-logging/commonkit.BlackListFilter) ⇐ <code>Filter</code>
+        * [new BlackListFilter(names)](#new_module_py-logging/commonkit.BlackListFilter_new)
         * [.toString()](#Filter+toString) ⇒ <code>string</code>
         * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
-    * [.AccumulativeHandler](#module_py-logging-commonkit.AccumulativeHandler) ⇐ <code>Handler</code>
-        * [new AccumulativeHandler([target])](#new_module_py-logging-commonkit.AccumulativeHandler_new)
+    * [.AccumulativeHandler](#module_py-logging/commonkit.AccumulativeHandler) ⇐ <code>Handler</code>
+        * [new AccumulativeHandler([target])](#new_module_py-logging/commonkit.AccumulativeHandler_new)
         * [.toString()](#Handler+toString) ⇒ <code>string</code>
         * [.setLevel(level)](#Handler+setLevel)
         * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -621,29 +621,29 @@ Return the textual representation of logging level.
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
         * [.handleError(error, [record])](#Handler+handleError)
-    * [.install(ns)](#module_py-logging-commonkit.install) ⇒ <code>Object</code>
+    * [.install(ns)](#module_py-logging/commonkit.install) ⇒ <code>Object</code>
 
-<a name="module_py-logging-commonkit.JsonFormatter"></a>
+<a name="module_py-logging/commonkit.JsonFormatter"></a>
 
-### py-logging-commonkit.JsonFormatter
-**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
-<a name="new_module_py-logging-commonkit.JsonFormatter_new"></a>
+### py-logging/commonkit.JsonFormatter
+**Kind**: static class of [<code>py-logging/commonkit</code>](#module_py-logging/commonkit)  
+<a name="new_module_py-logging/commonkit.JsonFormatter_new"></a>
 
 #### new JsonFormatter()
 JSON formatter.
 
-<a name="module_py-logging-commonkit.WhiteListFilter"></a>
+<a name="module_py-logging/commonkit.WhiteListFilter"></a>
 
-### py-logging-commonkit.WhiteListFilter ⇐ <code>Filter</code>
-**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+### py-logging/commonkit.WhiteListFilter ⇐ <code>Filter</code>
+**Kind**: static class of [<code>py-logging/commonkit</code>](#module_py-logging/commonkit)  
 **Extends**: <code>Filter</code>  
 
-* [.WhiteListFilter](#module_py-logging-commonkit.WhiteListFilter) ⇐ <code>Filter</code>
-    * [new WhiteListFilter(names)](#new_module_py-logging-commonkit.WhiteListFilter_new)
+* [.WhiteListFilter](#module_py-logging/commonkit.WhiteListFilter) ⇐ <code>Filter</code>
+    * [new WhiteListFilter(names)](#new_module_py-logging/commonkit.WhiteListFilter_new)
     * [.toString()](#Filter+toString) ⇒ <code>string</code>
     * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
 
-<a name="new_module_py-logging-commonkit.WhiteListFilter_new"></a>
+<a name="new_module_py-logging/commonkit.WhiteListFilter_new"></a>
 
 #### new WhiteListFilter(names)
 Whitelist.
@@ -658,13 +658,13 @@ Whitelist.
 #### whiteListFilter.toString() ⇒ <code>string</code>
 Return the text representation of this filter.
 
-**Kind**: instance method of [<code>WhiteListFilter</code>](#module_py-logging-commonkit.WhiteListFilter)  
+**Kind**: instance method of [<code>WhiteListFilter</code>](#module_py-logging/commonkit.WhiteListFilter)  
 <a name="Filter+filter"></a>
 
 #### whiteListFilter.filter(record) ⇒ <code>boolean</code>
 Determine if the specified record has to be logged.
 
-**Kind**: instance method of [<code>WhiteListFilter</code>](#module_py-logging-commonkit.WhiteListFilter)  
+**Kind**: instance method of [<code>WhiteListFilter</code>](#module_py-logging/commonkit.WhiteListFilter)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
 	True otherwise.  
 
@@ -672,18 +672,18 @@ Determine if the specified record has to be logged.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-commonkit.BlackListFilter"></a>
+<a name="module_py-logging/commonkit.BlackListFilter"></a>
 
-### py-logging-commonkit.BlackListFilter ⇐ <code>Filter</code>
-**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+### py-logging/commonkit.BlackListFilter ⇐ <code>Filter</code>
+**Kind**: static class of [<code>py-logging/commonkit</code>](#module_py-logging/commonkit)  
 **Extends**: <code>Filter</code>  
 
-* [.BlackListFilter](#module_py-logging-commonkit.BlackListFilter) ⇐ <code>Filter</code>
-    * [new BlackListFilter(names)](#new_module_py-logging-commonkit.BlackListFilter_new)
+* [.BlackListFilter](#module_py-logging/commonkit.BlackListFilter) ⇐ <code>Filter</code>
+    * [new BlackListFilter(names)](#new_module_py-logging/commonkit.BlackListFilter_new)
     * [.toString()](#Filter+toString) ⇒ <code>string</code>
     * [.filter(record)](#Filter+filter) ⇒ <code>boolean</code>
 
-<a name="new_module_py-logging-commonkit.BlackListFilter_new"></a>
+<a name="new_module_py-logging/commonkit.BlackListFilter_new"></a>
 
 #### new BlackListFilter(names)
 Blacklist.
@@ -698,13 +698,13 @@ Blacklist.
 #### blackListFilter.toString() ⇒ <code>string</code>
 Return the text representation of this filter.
 
-**Kind**: instance method of [<code>BlackListFilter</code>](#module_py-logging-commonkit.BlackListFilter)  
+**Kind**: instance method of [<code>BlackListFilter</code>](#module_py-logging/commonkit.BlackListFilter)  
 <a name="Filter+filter"></a>
 
 #### blackListFilter.filter(record) ⇒ <code>boolean</code>
 Determine if the specified record has to be logged.
 
-**Kind**: instance method of [<code>BlackListFilter</code>](#module_py-logging-commonkit.BlackListFilter)  
+**Kind**: instance method of [<code>BlackListFilter</code>](#module_py-logging/commonkit.BlackListFilter)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed to be processed.
 	True otherwise.  
 
@@ -712,14 +712,14 @@ Determine if the specified record has to be logged.
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-commonkit.AccumulativeHandler"></a>
+<a name="module_py-logging/commonkit.AccumulativeHandler"></a>
 
-### py-logging-commonkit.AccumulativeHandler ⇐ <code>Handler</code>
-**Kind**: static class of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+### py-logging/commonkit.AccumulativeHandler ⇐ <code>Handler</code>
+**Kind**: static class of [<code>py-logging/commonkit</code>](#module_py-logging/commonkit)  
 **Extends**: <code>Handler</code>  
 
-* [.AccumulativeHandler](#module_py-logging-commonkit.AccumulativeHandler) ⇐ <code>Handler</code>
-    * [new AccumulativeHandler([target])](#new_module_py-logging-commonkit.AccumulativeHandler_new)
+* [.AccumulativeHandler](#module_py-logging/commonkit.AccumulativeHandler) ⇐ <code>Handler</code>
+    * [new AccumulativeHandler([target])](#new_module_py-logging/commonkit.AccumulativeHandler_new)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -731,7 +731,7 @@ Determine if the specified record has to be logged.
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
 
-<a name="new_module_py-logging-commonkit.AccumulativeHandler_new"></a>
+<a name="new_module_py-logging/commonkit.AccumulativeHandler_new"></a>
 
 #### new AccumulativeHandler([target])
 Accumulates equal records and transmits them when is necessary.
@@ -746,13 +746,13 @@ Accumulates equal records and transmits them when is necessary.
 #### accumulativeHandler.toString() ⇒ <code>string</code>
 Return the text representation of this handler.
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 <a name="Handler+setLevel"></a>
 
 #### accumulativeHandler.setLevel(level)
 Set the logging level of this handler.
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -763,7 +763,7 @@ Set the logging level of this handler.
 #### accumulativeHandler.isEnabledFor(level) ⇒ <code>boolean</code>
 Is this handler enabled for specified level?
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -774,7 +774,7 @@ Is this handler enabled for specified level?
 #### accumulativeHandler.setFormatter(formatter)
 Set the formatter for this handler.
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -785,7 +785,7 @@ Set the formatter for this handler.
 #### accumulativeHandler.format(record) ⇒ <code>string</code>
 Format the specified record.
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -796,7 +796,7 @@ Format the specified record.
 #### accumulativeHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
 Handle the specified logging record.
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -807,7 +807,7 @@ Handle the specified logging record.
 #### *accumulativeHandler.emit(record)*
 Do whatever it takes to actually log the specified logging record.
 
-**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -816,46 +816,46 @@ Do whatever it takes to actually log the specified logging record.
 <a name="Handler+flush"></a>
 
 #### *accumulativeHandler.flush()*
-**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 <a name="Handler+close"></a>
 
 #### *accumulativeHandler.close()*
-**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance abstract method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 <a name="Handler+handleError"></a>
 
 #### accumulativeHandler.handleError(error, [record])
 Handle errors which occur during an emit() call.
 
-**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging-commonkit.AccumulativeHandler)  
+**Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit.AccumulativeHandler)  
 
 | Param | Type |
 | --- | --- |
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-commonkit.install"></a>
+<a name="module_py-logging/commonkit.install"></a>
 
-### py-logging-commonkit.install(ns) ⇒ <code>Object</code>
+### py-logging/commonkit.install(ns) ⇒ <code>Object</code>
 Extends given object by functions from this module.
 
-**Kind**: static method of [<code>py-logging-commonkit</code>](#module_py-logging-commonkit)  
+**Kind**: static method of [<code>py-logging/commonkit</code>](#module_py-logging/commonkit)  
 
 | Param | Type |
 | --- | --- |
 | ns | <code>Object</code> | 
 
-<a name="module_py-logging-nodekit"></a>
+<a name="module_py-logging/nodekit"></a>
 
-## py-logging-nodekit
+## py-logging/nodekit
 
-* [py-logging-nodekit](#module_py-logging-nodekit)
-    * [.FileHandler](#module_py-logging-nodekit.FileHandler) ⇐ <code>StreamHandler</code>
-        * [new FileHandler(filename, [mode], [encoding], [delay])](#new_module_py-logging-nodekit.FileHandler_new)
+* [py-logging/nodekit](#module_py-logging/nodekit)
+    * [.FileHandler](#module_py-logging/nodekit.FileHandler) ⇐ <code>StreamHandler</code>
+        * [new FileHandler(filename, [mode], [encoding], [delay])](#new_module_py-logging/nodekit.FileHandler_new)
         * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
-    * [.RotatingFileHandler](#module_py-logging-nodekit.RotatingFileHandler) ⇐ <code>FileHandler</code>
-        * [new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])](#new_module_py-logging-nodekit.RotatingFileHandler_new)
-    * [.HttpHandler](#module_py-logging-nodekit.HttpHandler) ⇐ <code>Handler</code>
-        * [new HttpHandler(url, [method], [headers])](#new_module_py-logging-nodekit.HttpHandler_new)
+    * [.RotatingFileHandler](#module_py-logging/nodekit.RotatingFileHandler) ⇐ <code>FileHandler</code>
+        * [new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])](#new_module_py-logging/nodekit.RotatingFileHandler_new)
+    * [.HttpHandler](#module_py-logging/nodekit.HttpHandler) ⇐ <code>Handler</code>
+        * [new HttpHandler(url, [method], [headers])](#new_module_py-logging/nodekit.HttpHandler_new)
         * [.toString()](#Handler+toString) ⇒ <code>string</code>
         * [.setLevel(level)](#Handler+setLevel)
         * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -866,8 +866,8 @@ Extends given object by functions from this module.
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
         * [.handleError(error, [record])](#Handler+handleError)
-    * [.AsyncHandler](#module_py-logging-nodekit.AsyncHandler) ⇐ <code>Handler</code>
-        * [new AsyncHandler([target])](#new_module_py-logging-nodekit.AsyncHandler_new)
+    * [.AsyncHandler](#module_py-logging/nodekit.AsyncHandler) ⇐ <code>Handler</code>
+        * [new AsyncHandler([target])](#new_module_py-logging/nodekit.AsyncHandler_new)
         * [.toString()](#Handler+toString) ⇒ <code>string</code>
         * [.setLevel(level)](#Handler+setLevel)
         * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -878,20 +878,20 @@ Extends given object by functions from this module.
         * *[.flush()](#Handler+flush)*
         * *[.close()](#Handler+close)*
         * [.handleError(error, [record])](#Handler+handleError)
-    * [.install(ns)](#module_py-logging-nodekit.install) ⇒ <code>Object</code>
-    * [.basicConfig([options])](#module_py-logging-nodekit.basicConfig)
+    * [.install(ns)](#module_py-logging/nodekit.install) ⇒ <code>Object</code>
+    * [.basicConfig([options])](#module_py-logging/nodekit.basicConfig)
 
-<a name="module_py-logging-nodekit.FileHandler"></a>
+<a name="module_py-logging/nodekit.FileHandler"></a>
 
-### py-logging-nodekit.FileHandler ⇐ <code>StreamHandler</code>
-**Kind**: static class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+### py-logging/nodekit.FileHandler ⇐ <code>StreamHandler</code>
+**Kind**: static class of [<code>py-logging/nodekit</code>](#module_py-logging/nodekit)  
 **Extends**: <code>StreamHandler</code>  
 
-* [.FileHandler](#module_py-logging-nodekit.FileHandler) ⇐ <code>StreamHandler</code>
-    * [new FileHandler(filename, [mode], [encoding], [delay])](#new_module_py-logging-nodekit.FileHandler_new)
+* [.FileHandler](#module_py-logging/nodekit.FileHandler) ⇐ <code>StreamHandler</code>
+    * [new FileHandler(filename, [mode], [encoding], [delay])](#new_module_py-logging/nodekit.FileHandler_new)
     * [.emit(record)](#StreamHandler+emit) ⇒ <code>boolean</code>
 
-<a name="new_module_py-logging-nodekit.FileHandler_new"></a>
+<a name="new_module_py-logging/nodekit.FileHandler_new"></a>
 
 #### new FileHandler(filename, [mode], [encoding], [delay])
 File handler.
@@ -909,7 +909,7 @@ File handler.
 #### fileHandler.emit(record) ⇒ <code>boolean</code>
 Writes the record to the stream (with a trailing newline, if default setup).
 
-**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging-nodekit.FileHandler)  
+**Kind**: instance method of [<code>FileHandler</code>](#module_py-logging/nodekit.FileHandler)  
 **Returns**: <code>boolean</code> - false if the stream wishes for the calling code to wait
 	for the 'drain' event to be emitted before continuing to write
 	additional data; otherwise true.  
@@ -918,12 +918,12 @@ Writes the record to the stream (with a trailing newline, if default setup).
 | --- | --- |
 | record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-nodekit.RotatingFileHandler"></a>
+<a name="module_py-logging/nodekit.RotatingFileHandler"></a>
 
-### py-logging-nodekit.RotatingFileHandler ⇐ <code>FileHandler</code>
-**Kind**: static class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+### py-logging/nodekit.RotatingFileHandler ⇐ <code>FileHandler</code>
+**Kind**: static class of [<code>py-logging/nodekit</code>](#module_py-logging/nodekit)  
 **Extends**: <code>FileHandler</code>  
-<a name="new_module_py-logging-nodekit.RotatingFileHandler_new"></a>
+<a name="new_module_py-logging/nodekit.RotatingFileHandler_new"></a>
 
 #### new RotatingFileHandler(filename, [mode], [maxBytes], [backupCount], [encoding], [delay])
 Handler for logging to a set of files, which switches from one file
@@ -939,14 +939,14 @@ to the next when the current file reaches a certain size.
 | [encoding] | <code>string</code> | <code>&quot;utf8&quot;</code> | [https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings](https://nodejs.org/api/buffer.html#buffer_buffers_and_character_encodings) |
 | [delay] | <code>boolean</code> | <code>false</code> |  |
 
-<a name="module_py-logging-nodekit.HttpHandler"></a>
+<a name="module_py-logging/nodekit.HttpHandler"></a>
 
-### py-logging-nodekit.HttpHandler ⇐ <code>Handler</code>
-**Kind**: static class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+### py-logging/nodekit.HttpHandler ⇐ <code>Handler</code>
+**Kind**: static class of [<code>py-logging/nodekit</code>](#module_py-logging/nodekit)  
 **Extends**: <code>Handler</code>  
 
-* [.HttpHandler](#module_py-logging-nodekit.HttpHandler) ⇐ <code>Handler</code>
-    * [new HttpHandler(url, [method], [headers])](#new_module_py-logging-nodekit.HttpHandler_new)
+* [.HttpHandler](#module_py-logging/nodekit.HttpHandler) ⇐ <code>Handler</code>
+    * [new HttpHandler(url, [method], [headers])](#new_module_py-logging/nodekit.HttpHandler_new)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -958,7 +958,7 @@ to the next when the current file reaches a certain size.
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
 
-<a name="new_module_py-logging-nodekit.HttpHandler_new"></a>
+<a name="new_module_py-logging/nodekit.HttpHandler_new"></a>
 
 #### new HttpHandler(url, [method], [headers])
 A class which sends records to a Web server, using either GET or
@@ -976,13 +976,13 @@ POST semantics.
 #### httpHandler.toString() ⇒ <code>string</code>
 Return the text representation of this handler.
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 <a name="Handler+setLevel"></a>
 
 #### httpHandler.setLevel(level)
 Set the logging level of this handler.
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -993,7 +993,7 @@ Set the logging level of this handler.
 #### httpHandler.isEnabledFor(level) ⇒ <code>boolean</code>
 Is this handler enabled for specified level?
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1004,7 +1004,7 @@ Is this handler enabled for specified level?
 #### httpHandler.setFormatter(formatter)
 Set the formatter for this handler.
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1015,7 +1015,7 @@ Set the formatter for this handler.
 #### httpHandler.format(record) ⇒ <code>string</code>
 Format the specified record.
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1026,7 +1026,7 @@ Format the specified record.
 #### httpHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
 Handle the specified logging record.
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1037,7 +1037,7 @@ Handle the specified logging record.
 #### *httpHandler.emit(record)*
 Do whatever it takes to actually log the specified logging record.
 
-**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1046,31 +1046,31 @@ Do whatever it takes to actually log the specified logging record.
 <a name="Handler+flush"></a>
 
 #### *httpHandler.flush()*
-**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 <a name="Handler+close"></a>
 
 #### *httpHandler.close()*
-**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance abstract method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 <a name="Handler+handleError"></a>
 
 #### httpHandler.handleError(error, [record])
 Handle errors which occur during an emit() call.
 
-**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging-nodekit.HttpHandler)  
+**Kind**: instance method of [<code>HttpHandler</code>](#module_py-logging/nodekit.HttpHandler)  
 
 | Param | Type |
 | --- | --- |
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-nodekit.AsyncHandler"></a>
+<a name="module_py-logging/nodekit.AsyncHandler"></a>
 
-### py-logging-nodekit.AsyncHandler ⇐ <code>Handler</code>
-**Kind**: static class of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+### py-logging/nodekit.AsyncHandler ⇐ <code>Handler</code>
+**Kind**: static class of [<code>py-logging/nodekit</code>](#module_py-logging/nodekit)  
 **Extends**: <code>Handler</code>  
 
-* [.AsyncHandler](#module_py-logging-nodekit.AsyncHandler) ⇐ <code>Handler</code>
-    * [new AsyncHandler([target])](#new_module_py-logging-nodekit.AsyncHandler_new)
+* [.AsyncHandler](#module_py-logging/nodekit.AsyncHandler) ⇐ <code>Handler</code>
+    * [new AsyncHandler([target])](#new_module_py-logging/nodekit.AsyncHandler_new)
     * [.toString()](#Handler+toString) ⇒ <code>string</code>
     * [.setLevel(level)](#Handler+setLevel)
     * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
@@ -1082,7 +1082,7 @@ Handle errors which occur during an emit() call.
     * *[.close()](#Handler+close)*
     * [.handleError(error, [record])](#Handler+handleError)
 
-<a name="new_module_py-logging-nodekit.AsyncHandler_new"></a>
+<a name="new_module_py-logging/nodekit.AsyncHandler_new"></a>
 
 #### new AsyncHandler([target])
 
@@ -1095,13 +1095,13 @@ Handle errors which occur during an emit() call.
 #### asyncHandler.toString() ⇒ <code>string</code>
 Return the text representation of this handler.
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 <a name="Handler+setLevel"></a>
 
 #### asyncHandler.setLevel(level)
 Set the logging level of this handler.
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1112,7 +1112,7 @@ Set the logging level of this handler.
 #### asyncHandler.isEnabledFor(level) ⇒ <code>boolean</code>
 Is this handler enabled for specified level?
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1123,7 +1123,7 @@ Is this handler enabled for specified level?
 #### asyncHandler.setFormatter(formatter)
 Set the formatter for this handler.
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1134,7 +1134,7 @@ Set the formatter for this handler.
 #### asyncHandler.format(record) ⇒ <code>string</code>
 Format the specified record.
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1145,7 +1145,7 @@ Format the specified record.
 #### asyncHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
 Handle the specified logging record.
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1156,7 +1156,7 @@ Handle the specified logging record.
 #### *asyncHandler.emit(record)*
 Do whatever it takes to actually log the specified logging record.
 
-**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
@@ -1165,40 +1165,40 @@ Do whatever it takes to actually log the specified logging record.
 <a name="Handler+flush"></a>
 
 #### *asyncHandler.flush()*
-**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 <a name="Handler+close"></a>
 
 #### *asyncHandler.close()*
-**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance abstract method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 <a name="Handler+handleError"></a>
 
 #### asyncHandler.handleError(error, [record])
 Handle errors which occur during an emit() call.
 
-**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging-nodekit.AsyncHandler)  
+**Kind**: instance method of [<code>AsyncHandler</code>](#module_py-logging/nodekit.AsyncHandler)  
 
 | Param | Type |
 | --- | --- |
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
 
-<a name="module_py-logging-nodekit.install"></a>
+<a name="module_py-logging/nodekit.install"></a>
 
-### py-logging-nodekit.install(ns) ⇒ <code>Object</code>
+### py-logging/nodekit.install(ns) ⇒ <code>Object</code>
 Extends given object by functions from this module.
 
-**Kind**: static method of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+**Kind**: static method of [<code>py-logging/nodekit</code>](#module_py-logging/nodekit)  
 
 | Param | Type |
 | --- | --- |
 | ns | <code>Object</code> | 
 
-<a name="module_py-logging-nodekit.basicConfig"></a>
+<a name="module_py-logging/nodekit.basicConfig"></a>
 
-### py-logging-nodekit.basicConfig([options])
+### py-logging/nodekit.basicConfig([options])
 Do basic configuration for the logging system.
 
-**Kind**: static method of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+**Kind**: static method of [<code>py-logging/nodekit</code>](#module_py-logging/nodekit)  
 
 | Param | Type |
 | --- | --- |
