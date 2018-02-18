@@ -59,7 +59,7 @@ function basicConfig(options) {
 	if (filename) {
 		var encoding = options.encoding || '';
 
-		handler = new FileHandler(filename, encoding);
+		handler = new FileHandler(filename, '', encoding);
 	} else {
 		handler = new StreamHandler(options.stream);
 	}

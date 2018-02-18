@@ -1,5 +1,5 @@
 const packageVer = require('../package.json').version;
-const libVer = require('../lib/logging.js').VERSION;
+const libVer = require('../core/logging.js').VERSION;
 
 if (packageVer !== libVer) {
 	console.warn(`Versions don't match!`

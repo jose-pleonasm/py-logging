@@ -1,6 +1,6 @@
 {
   "name": "py-logging",
-  "version": "2.0.0-beta.5",
+  "version": "2.0.0",
   "description": "Javascript logging library based on the Python logging module",
   "main": "core/logging.js",
   "scripts": {

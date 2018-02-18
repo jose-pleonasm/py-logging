@@ -35,6 +35,8 @@ logging.warning('My another message to the world.');
 ### Recording log records in a file:
 ```javascript
 var logging = require('py-logging');
+// for recording log records to the file is necessary to install nodekit
+require('py-logging/nodekit').install(logging);
 
 logging.basicConfig({ filename: 'example.log', level: 'DEBUG' });
 
@@ -97,6 +99,9 @@ logger.info('Something specific for this logger.');
 ### More complex configuration:
 ```javascript
 var logging = require('py-logging');
+// for recording log records to the file is necessary to install nodekit
+require('py-logging/nodekit').install(logging);
+
 var simpleFormatter = new logging.Formatter('%(levelname) %(name) %(message)');
 var verboseFormatter = new logging.Formatter('%(asctime) %(levelname) %(name) %(message)');
 var consoleHandler = new logging.ConsoleHandler();
@@ -125,6 +130,8 @@ bar.info('Second message.');
 Or by a configuration object (can be JSON):
 ```javascript
 var logging = require('py-logging');
+// for recording log records to the file is necessary to install nodekit
+require('py-logging/nodekit').install(logging);
 
 logging.config({
 	'version': 1,

@@ -1,3 +1,30 @@
+# 2.0.0 (2018-02-18)
+
+#### Breaking Changes
+
+* The library is divided into 3 modules:
+	* **py-logging** (core),
+	* **py-logging/commonkit** (more features for both platforms),
+	* **py-logging/nodekit** (features for Node.js platform, mostly handlers).
+	* There is also separate package for browsers: [py-logging-browserkit](https://github.com/jose-pleonasm/py-logging-browserkit)
+* Handlers are redesigned:
+	* (Abstract) lock mechanism has been removed.
+	* Node.js handlers are completely rewritten.
+	* New API, but almost the same as the old one.
+* Renamed properties of LogRecord:
+	* pid -> process
+	* processtitle -> processname
+* Method Logger#getChild has been removed.
+
+#### Added
+
+* HttpHandler
+* py-logging/commonkit:
+	* JsonFormatter
+	* WhiteListFilter
+	* BlackListFilter
+	* AccumulativeHandler
+
 ### 1.4.2 (2018-01-28)
 
 #### Fixed
