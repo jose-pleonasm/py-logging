@@ -2,7 +2,7 @@ var Logger = require('./Logger');
 var Filter = require('./Filter');
 var Formatter = require('./Formatter');
 var Handler = require('./Handler');
-var handlers = require('./common-handlers');
+var handlers = require('./handlers');
 var Manager = require('./Manager');
 
 

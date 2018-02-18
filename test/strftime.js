@@ -1,5 +1,5 @@
 var assert = require('assert');
-var strftime = require('../lib/strftime');
+var strftime = require('../core/strftime');
 
 describe('strftime', function() {
 	it('should throw an error', function() {

@@ -867,6 +867,7 @@ Handle errors which occur during an emit() call.
         * *[.close()](#Handler+close)*
         * [.handleError(error, [record])](#Handler+handleError)
     * [.install(ns)](#module_py-logging-nodekit.install) ⇒ <code>Object</code>
+    * [.install(ns)](#module_py-logging-nodekit.install) ⇒ <code>Object</code>
     * [.basicConfig([options])](#module_py-logging-nodekit.basicConfig)
 
 <a name="module_py-logging-nodekit.FileHandler"></a>
@@ -1169,6 +1170,17 @@ Handle errors which occur during an emit() call.
 | --- | --- |
 | error | <code>Error</code> | 
 | [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging-nodekit.install"></a>
+
+### py-logging-nodekit.install(ns) ⇒ <code>Object</code>
+Extends given object by functions from this module.
+
+**Kind**: static method of [<code>py-logging-nodekit</code>](#module_py-logging-nodekit)  
+
+| Param | Type |
+| --- | --- |
+| ns | <code>Object</code> | 
 
 <a name="module_py-logging-nodekit.install"></a>
 

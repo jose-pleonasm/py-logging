@@ -2,11 +2,11 @@ var fs = require('fs');
 var libUrl = require('url');
 var http = require('http');
 var util = require('util');
-var Logger = require('./Logger');
-var Manager = require('./Manager');
-var Formatter = require('./Formatter');
-var Handler = require('./Handler');
-var StreamHandler = require('./common-handlers').StreamHandler;
+var Logger = require('../core/Logger');
+var Manager = require('../core/Manager');
+var Formatter = require('../core/Formatter');
+var Handler = require('../core/Handler');
+var StreamHandler = require('../core/handlers').StreamHandler;
 
 
 /**
@@ -27,6 +27,10 @@ var StreamHandler = require('./common-handlers').StreamHandler;
  * @return {Object}
  */
 function install(ns) {
+	if (!ns || typeof ns !== 'object') {
+		throw new Error('Argument 0 of install is not valid.');
+	}
+
 	return Object.assign(ns, module.exports);
 }
 

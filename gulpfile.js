@@ -5,16 +5,16 @@ gulp.task('docs', function () {
 	const jsdoc2md = require('jsdoc-to-markdown');
 
 	return jsdoc2md.render({ files: [
-		'lib/logging.js',
-		'lib/Filterer.js',
-		'lib/Logger.js',
-		'lib/Handler.js',
-		'lib/Formatter.js',
-		'lib/Filter.js',
-		'lib/Manager.js',
-		'lib/common-handlers.js',
-		'lib/commonkit.js',
-		'lib/nodekit.js'
+		'core/logging.js',
+		'core/Filterer.js',
+		'core/Logger.js',
+		'core/Handler.js',
+		'core/Formatter.js',
+		'core/Filter.js',
+		'core/Manager.js',
+		'core/handlers.js',
+		'commonkit/index.js',
+		'nodekit/index.js'
 	] })
 		.then(output => fs.writeFile('API.md', output));
 });

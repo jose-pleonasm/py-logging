@@ -1,5 +1,5 @@
 var util = require('util');
-var Handler = require('../lib/logging').Handler;
+var Handler = require('../core/logging').Handler;
 
 function MockHandler() {
 	Handler.call(this);

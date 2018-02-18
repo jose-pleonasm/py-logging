@@ -1,11 +1,32 @@
 var util = require('util');
-var Filter = require('./Filter');
-var Handler = require('./Handler');
+var Filter = require('../core/Filter');
+var Handler = require('../core/Handler');
 
 
 /**
  * @module py-logging-commonkit
  */
+
+
+//------------------------------------------------------------------------------
+//   Helper function for extending
+//------------------------------------------------------------------------------
+
+/**
+ * Extends given object by functions from this module.
+ *
+ * @function
+ * @memberof module:py-logging-nodekit
+ * @param  {Object} ns
+ * @return {Object}
+ */
+function install(ns) {
+	if (!ns || typeof ns !== 'object') {
+		throw new Error('Argument 0 of install is not valid.');
+	}
+
+	return Object.assign(ns, module.exports);
+}
 
 
 //------------------------------------------------------------------------------
@@ -150,6 +171,7 @@ AccumulativeHandler.prototype.equal = function(recordA, recordB) {
 
 
 module.exports = {
+	install: install,
 	JsonFormatter: JsonFormatter,
 	WhiteListFilter: WhiteListFilter,
 	BlackListFilter: BlackListFilter,
