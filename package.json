@@ -13,6 +13,7 @@
     "url": "git+https://github.com/jose-pleonasm/py-logging.git"
   },
   "keywords": [
+    "py-logging",
     "logging",
     "logger",
     "python"
