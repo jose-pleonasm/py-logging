@@ -27,7 +27,7 @@ Filter.prototype.toString = function() {
  *
  * @param  {module:py-logging.LogRecord} record
  * @return {boolean} Returns false if specified record is not supposed to be processed.
- * 	True otherwise.
+ * 	True otherwise. // TODO: really?
  */
 Filter.prototype.filter = function(record) {
 	if (this._name.length === 0) {
