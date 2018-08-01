@@ -96,48 +96,6 @@ BlackListFilter.prototype.filter = function(record) {
 
 
 //------------------------------------------------------------------------------
-//   Filters that mutates LogRecord
-//------------------------------------------------------------------------------
-
-/**
- * Transformer.
- *
- * @constructor Transformer
- * @extends Filter
- * @param {{rules: Array<{property: string, operation: Function}>}} config
- */
-function Transformer(config) {
-	Filter.call(this);
-
-	for (var i = config.rules.length - 1; i >= 0; i--) {
-		var rule = config.rules[i];
-
-		if (!rule || !rule.property || !rule.operation
-			|| typeof rule.property !== 'string'
-			|| typeof rule.operation !== 'function') {
-			throw new Error(
-				'Argument 1 of Transformer.constructor is not valid.'
-			);
-		}
-	}
-
-	this._rules = config.rules;
-}
-util.inherits(Transformer, Filter);
-
-/** @inheritdoc */
-Transformer.prototype.filter = function(record) {
-	for (var i = 0, len = this._rules.length; i < len; i++) {
-		var rule = this._rules[i];
-
-		record[rule.property] = rule.operation(record[rule.property]);
-	}
-
-	return false;
-};
-
-
-//------------------------------------------------------------------------------
 //   Accumulator
 //------------------------------------------------------------------------------
 
@@ -213,6 +171,5 @@ module.exports = {
 	JsonFormatter: JsonFormatter,
 	WhiteListFilter: WhiteListFilter,
 	BlackListFilter: BlackListFilter,
-	Transformer: Transformer,
 	AccumulativeHandler: AccumulativeHandler,
 };
