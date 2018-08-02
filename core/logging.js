@@ -68,6 +68,8 @@ Configurator.FORMAT_VERSION = 1;
 
 Configurator.FUNCTION_SIGNATURE_PATTERN = /function[^(]*\(([^)]*)\)/;
 
+Configurator.CLASS_SIGNATURE_PATTERN = /class[^{]*\{(?:.|\s)*constructor\s*\(([^)]*)\)/;
+
 /**
  * Configure logging using a "dict" object.
  *
@@ -367,10 +369,22 @@ Configurator._getNestedProperty = function(object, propertiesChain) {
  * @return {Array<string>}
  */
 Configurator._getArgsList = function(func) {
-	var args = func.toString().match(Configurator.FUNCTION_SIGNATURE_PATTERN)[1]
-		.split(/\s*,\s*/);
+	var constructorArgs = null;
+	var funcMatch = func.toString().match(Configurator.FUNCTION_SIGNATURE_PATTERN);
 
-	return args;
+	if (funcMatch) {
+		constructorArgs = funcMatch[1];
+
+	} else {
+		var classMatch = func.toString().match(Configurator.CLASS_SIGNATURE_PATTERN);
+		constructorArgs = classMatch ? classMatch[1] : '';
+	}
+
+	return constructorArgs
+		.split(/\s*,\s*/)
+		.map(function(arg) {
+			return arg.split(/\s*=\s*/)[0];
+		});
 };
 
 /**
