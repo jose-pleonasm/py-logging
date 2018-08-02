@@ -18,8 +18,8 @@ function Filterer() {
  * @param {Filter} filter
  */
 Filterer.prototype.addFilter = function(filter) {
-	if (typeof filter !== 'object') {
-		throw new Error('Argument filter is not an object.');
+	if (typeof filter !== 'object' && typeof filter !== 'function') {
+		throw new Error('Argument filter is not an object nor a function.');
 	}
 
 	this._filters.push(filter);
@@ -42,7 +42,10 @@ Filterer.prototype.removeFilter = function(filter) {
  */
 Filterer.prototype.filter = function(record) {
 	for (var i = 0, len = this._filters.length; i < len; i++) {
-		if (!this._filters[i].filter(record)) {
+		var f = this._filters[i];
+		var result = f.filter ? f.filter.call(f, record) : f(record);
+
+		if (!result) {
 			return false;
 		}
 	}
