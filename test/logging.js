@@ -576,6 +576,15 @@ describe('Filters', function() {
 			assert(Fltr.prototype.filter.calledOnce);
 			assert(Fltr.prototype.filter.calledOn(filter2));
 		});
+		it('#addFilter should accept function', function() {
+			var filter = sinon.spy();
+			var root = logging.getLogger();
+
+			root.addFilter(filter);
+			root.warning('message');
+
+			assert(filter.calledOnce);
+		});
 	});
 	describe('Handler', function() {
 		it('#addFilter should register a new filter'
