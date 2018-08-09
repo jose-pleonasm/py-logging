@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/jose-pleonasm/py-logging#readme",
   "devDependencies": {
-    "jsdoc-to-markdown": "^4.0.0",
+    "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^5.2.0",
     "sinon": "^1.17.7"
   }
