@@ -501,7 +501,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -510,7 +510,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -745,7 +745,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -754,7 +754,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -969,7 +969,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -978,7 +978,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -1133,7 +1133,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -1142,7 +1142,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -1178,7 +1178,7 @@ A base class for loggers and handlers which allows them to share common code.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -1187,7 +1187,7 @@ A base class for loggers and handlers which allows them to share common code.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -1409,7 +1409,7 @@ Create a LogRecord object.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -1418,7 +1418,7 @@ Create a LogRecord object.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -1584,7 +1584,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -1593,7 +1593,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -1845,7 +1845,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -1854,7 +1854,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 
@@ -2001,7 +2001,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+removeFilter"></a>
 
@@ -2010,7 +2010,7 @@ Handle errors which occur during an emit() call.
 
 | Param | Type |
 | --- | --- |
-| filter | [<code>Filter</code>](#Filter) | 
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
 
 <a name="Filterer+filter"></a>
 

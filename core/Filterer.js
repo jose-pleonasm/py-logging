@@ -9,13 +9,13 @@ function Filterer() {
 	 * Array of set filters.
 	 *
 	 * @private
-	 * @type {Array<Filter>}
+	 * @type {Array<(Filter|Function)>}
 	 */
 	this._filters = [];
 }
 
 /**
- * @param {Filter} filter
+ * @param {(Filter|Function)} filter
  */
 Filterer.prototype.addFilter = function(filter) {
 	if (typeof filter !== 'object' && typeof filter !== 'function') {
@@ -26,7 +26,7 @@ Filterer.prototype.addFilter = function(filter) {
 };
 
 /**
- * @param  {Filter} filter
+ * @param  {(Filter|Function)} filter
  */
 Filterer.prototype.removeFilter = function(filter) {
 	var index = this._filters.indexOf(filter);
