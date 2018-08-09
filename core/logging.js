@@ -57,6 +57,41 @@ function basicConfig(options) {
 //------------------------------------------------------------------------------
 
 /**
+ * @typedef {Object} Configurator~FormatterDescriptor
+ * @property {(string|Function)} [class]
+ * @property {string} [format]
+ */
+
+/**
+ * @typedef {Object} Configurator~FilterDescriptor
+ * @property {(string|Function)} class
+ */
+
+/**
+ * @typedef {Object} Configurator~HandlerDescriptor
+ * @property {(string|Function)} class
+ * @property {string} formatter
+ * @property {string} [level]
+ * @property {Array<string>} [filters]
+ */
+
+/**
+ * @typedef {Object} Configurator~LoggerDescriptor
+ * @property {string} [level]
+ * @property {Array<string>} [handlers]
+ * @property {Array<string>} [filters]
+ */
+
+/**
+ * @typedef {(
+ * 	Configurator~FormatterDescriptor
+ * 	|Configurator~FilterDescriptor
+ * 	|Configurator~HandlerDescriptor
+ * 	|Configurator~LoggerDescriptor
+ * )} Configurator~UniversalDescriptor
+ */
+
+/**
  * Configurator
  *
  * @private
@@ -194,7 +229,7 @@ Configurator._isSupportedVersion = function(version) {
 
 /**
  * @private
- * @param  {Object<string, Object>} section
+ * @param  {Object<string, Configurator~UniversalDescriptor>} section
  * @param  {Object} outerContext
  * @param  {string} [defaultClass]
  * @return {Object<string, Object>}
@@ -390,19 +425,19 @@ Configurator._getArgsList = function(func) {
 /**
  * @private
  * @param  {Array<string>} list
- * @param  {Object<string, *>} store
+ * @param  {Configurator~UniversalDescriptor} descriptor
  * @return {Array<*>}
  */
-Configurator._getMatchingArgs = function(list, store) {
+Configurator._getMatchingArgs = function(list, descriptor) {
 	var args = [];
 
 	for (var i = 0, len = list.length; i < len; i++) {
 		var argName = list[i];
 
 		if (argName === 'level') {
-			args[i] = Logger.getLevelByName(store[argName]);
-		} else if (argName in store) {
-			args[i] = store[argName];
+			args[i] = Logger.getLevelByName(descriptor[argName]);
+		} else if (argName in descriptor) {
+			args[i] = descriptor[argName];
 		}
 	}
 
