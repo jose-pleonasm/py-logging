@@ -28,6 +28,6 @@
   "devDependencies": {
     "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^5.2.0",
-    "sinon": "^1.17.7"
+    "sinon": "^6.1.5"
   }
 }

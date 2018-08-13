@@ -1,3 +1,4 @@
+/* global describe:Function, it:Function, beforeEach:Function, afterEach:Function */
 var assert = require('assert');
 var sinon = require('sinon');
 var mocks = require('./mocks');
@@ -10,7 +11,7 @@ var FltrAll = mocks.MockFilterAll;
 var FltrNothing = mocks.MockFilterNothing;
 
 beforeEach(function () {
-	sandbox = sinon.sandbox.create();
+	sandbox = sinon.createSandbox();
 });
 
 afterEach(function() {
