@@ -57,6 +57,17 @@ function basicConfig(options) {
 //------------------------------------------------------------------------------
 
 /**
+ * @typedef {string} Configurator~Identifier
+ */
+
+/**
+ * @typedef {Object} Configurator~Params
+ * @property {Function} constructor
+ * @property {Array<any>} args
+ * @property {Object} settings
+ */
+
+/**
  * @typedef {Object} Configurator~FormatterDescriptor
  * @property {(string|Function)} [class]
  * @property {string} [format]
@@ -229,10 +240,10 @@ Configurator._isSupportedVersion = function(version) {
 
 /**
  * @private
- * @param  {Object<string, Configurator~UniversalDescriptor>} section
+ * @param  {Object<Configurator~Identifier, Configurator~UniversalDescriptor>} section
  * @param  {Object} outerContext
  * @param  {string} [defaultClass]
- * @return {Object<string, Object>}
+ * @return {Object<Configurator~Identifier, Configurator~Params>}
  */
 Configurator._getSectionParams = function(section, outerContext, defaultClass) {
 	defaultClass = defaultClass || '';
@@ -283,8 +294,8 @@ Configurator._getSectionParams = function(section, outerContext, defaultClass) {
 
 /**
  * @private
- * @param  {Object<string, Object>} sectionParams
- * @return {Object<string, Object>}
+ * @param  {Object<Configurator~Identifier, Configurator~Params>} sectionParams
+ * @return {Object<Configurator~Identifier, Object>}
  */
 Configurator._createInstancies = function(sectionParams) {
 	var instancies = {};
@@ -314,9 +325,9 @@ Configurator._createInstancies = function(sectionParams) {
 
 /**
  * @private
- * @param {Object<string, Object>} sectionParams
- * @param {Object<string, Object>} subjects
- * @param {Object<string, Object>} components
+ * @param {Object<Configurator~Identifier, Configurator~Params>} sectionParams
+ * @param {Object<Configurator~Identifier, Object>} subjects
+ * @param {Object<Configurator~Identifier, Object>} components
  * @param {string} subjectSettingsKey
  * @param {string} subjectMethodName
  */
