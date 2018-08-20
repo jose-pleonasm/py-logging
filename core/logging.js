@@ -138,11 +138,19 @@ Configurator.configure = function(config, outerContext) {
 			+ ' is not supported.');
 	}
 
+	var handlers = Configurator._getIdentifiers(config.loggers, 'handlers');
+	var formatters = Configurator._getIdentifiers(config.handlers, 'formatter', handlers);
+	var filters = Configurator._getIdentifiers(config.loggers, 'filters')
+		.concat(Configurator._getIdentifiers(config.handlers, 'filters', handlers))
+		.filter(function(elem, pos, arr) {
+			return arr.indexOf(elem) === pos;
+		});
 	var params = {};
 	var instancies = {};
 
 	// formatters
 	params.formatters = Configurator._getSectionParams(
+		formatters,
 		config.formatters,
 		outerContext,
 		MODULE_IDENTIFIER + '.Formatter'
@@ -153,6 +161,7 @@ Configurator.configure = function(config, outerContext) {
 
 	// filters
 	params.filters = Configurator._getSectionParams(
+		filters,
 		config.filters,
 		outerContext,
 		MODULE_IDENTIFIER + '.Filter'
@@ -163,6 +172,7 @@ Configurator.configure = function(config, outerContext) {
 
 	// handlers
 	params.handlers = Configurator._getSectionParams(
+		handlers,
 		config.handlers,
 		outerContext
 	);
@@ -241,24 +251,56 @@ Configurator._isSupportedVersion = function(version) {
 /**
  * @private
  * @param  {Object<Configurator~Identifier, Configurator~UniversalDescriptor>} section
- * @param  {Object} outerContext
- * @param  {string} [defaultClass]
- * @return {Object<Configurator~Identifier, Configurator~Params>}
+ * @param  {string} componentName
+ * @param  {('*'|Array<Configurator~Identifier>)} [whiteList]
+ * @return {Array<Configurator~Identifier>}
  */
-Configurator._getSectionParams = function(section, outerContext, defaultClass) {
-	defaultClass = defaultClass || '';
-
-	var params = {};
+Configurator._getIdentifiers = function(section, componentName, whiteList) {
+	whiteList = whiteList || '*';
+	var identifiers = [];
 
 	for (var identifier in section) {
 		if (!section.hasOwnProperty(identifier)) {
 			continue;
 		}
-		if (!section[identifier] || typeof section[identifier] !== 'object') {
-			throw new Error('Invalid format'
-				+ ' in Configurator._getSectionParams.');
+		if (whiteList !== '*' && whiteList.indexOf(identifier) === -1) {
+			continue;
+		}
+		var items = section[identifier][componentName];
+
+		if (!items) {
+			continue;
 		}
 
+		if (!Array.isArray(items)) {
+			items = [items];
+		}
+
+		for (var i = items.length - 1; i >= 0; i--) {
+			if (identifiers.indexOf(items[i]) === -1) {
+				identifiers.push(items[i]);
+			}
+		}
+	}
+
+	return identifiers;
+};
+
+/**
+ * @private
+ * @param  {Array<Configurator~Identifier>} identifiers
+ * @param  {Object<Configurator~Identifier, Configurator~UniversalDescriptor>} section
+ * @param  {Object} outerContext
+ * @param  {string} [defaultClass]
+ * @return {Object<Configurator~Identifier, Configurator~Params>}
+ */
+Configurator._getSectionParams = function(identifiers, section, outerContext, defaultClass) {
+	defaultClass = defaultClass || '';
+
+	var params = {};
+
+	for (var i = identifiers.length - 1; i >= 0; i--) {
+		var identifier = identifiers[i];
 		var descriptor = section[identifier];
 		var klass = descriptor.class || defaultClass;
 		var settings = Object.assign({}, descriptor);
@@ -278,8 +320,8 @@ Configurator._getSectionParams = function(section, outerContext, defaultClass) {
 		var args = Configurator._getMatchingArgs(argsList, descriptor);
 
 		delete settings.class;
-		for (var i = 0, len = argsList.length; i < len; i++) {
-			delete settings[argsList[i]];
+		for (var j = 0, len = argsList.length; j < len; j++) {
+			delete settings[argsList[j]];
 		}
 
 		params[identifier] = {
