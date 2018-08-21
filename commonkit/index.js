@@ -166,10 +166,31 @@ AccumulativeHandler.prototype.equal = function(recordA, recordB) {
 };
 
 
+//------------------------------------------------------------------------------
+//   NullHandler
+//------------------------------------------------------------------------------
+
+/**
+ * This handler does nothing. (Sometimes can by handy)
+ *
+ * @constructor NullHandler
+ * @extends Handler
+ */
+function NullHandler() {
+	Handler.call(this);
+}
+util.inherits(NullHandler, Handler);
+
+NullHandler.prototype.handle = function(record) {};
+
+NullHandler.prototype.emit = function(record) {};
+
+
 module.exports = {
 	install: install,
 	JsonFormatter: JsonFormatter,
 	WhiteListFilter: WhiteListFilter,
 	BlackListFilter: BlackListFilter,
 	AccumulativeHandler: AccumulativeHandler,
+	NullHandler: NullHandler,
 };
