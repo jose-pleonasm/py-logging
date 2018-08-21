@@ -223,6 +223,21 @@ Return the textual representation of logging level.
             * [.addFilter(filter)](#Filterer+addFilter)
             * [.removeFilter(filter)](#Filterer+removeFilter)
             * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+        * [~NullHandler](#module_py-logging/commonkit..NullHandler) ⇐ [<code>Handler</code>](#Handler)
+            * [new NullHandler()](#new_module_py-logging/commonkit..NullHandler_new)
+            * [.toString()](#Handler+toString) ⇒ <code>string</code>
+            * [.setLevel(level)](#Handler+setLevel)
+            * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+            * [.setFormatter(formatter)](#Handler+setFormatter)
+            * [.format(record)](#Handler+format) ⇒ <code>string</code>
+            * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+            * *[.emit(record)](#Handler+emit)*
+            * *[.flush()](#Handler+flush)*
+            * *[.close()](#Handler+close)*
+            * [.handleError(error, [record])](#Handler+handleError)
+            * [.addFilter(filter)](#Filterer+addFilter)
+            * [.removeFilter(filter)](#Filterer+removeFilter)
+            * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
 
 <a name="module_py-logging/commonkit.install"></a>
 
@@ -516,6 +531,156 @@ Handle errors which occur during an emit() call.
 
 #### accumulativeHandler.filter(record) ⇒ <code>boolean</code>
 **Kind**: instance method of [<code>AccumulativeHandler</code>](#module_py-logging/commonkit..AccumulativeHandler)  
+**Returns**: <code>boolean</code> - Returns false if specified record is not supposed
+	to be processed. True otherwise.  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="module_py-logging/commonkit..NullHandler"></a>
+
+### py-logging/commonkit~NullHandler ⇐ [<code>Handler</code>](#Handler)
+**Kind**: inner class of [<code>py-logging/commonkit</code>](#module_py-logging/commonkit)  
+**Extends**: [<code>Handler</code>](#Handler)  
+
+* [~NullHandler](#module_py-logging/commonkit..NullHandler) ⇐ [<code>Handler</code>](#Handler)
+    * [new NullHandler()](#new_module_py-logging/commonkit..NullHandler_new)
+    * [.toString()](#Handler+toString) ⇒ <code>string</code>
+    * [.setLevel(level)](#Handler+setLevel)
+    * [.isEnabledFor(level)](#Handler+isEnabledFor) ⇒ <code>boolean</code>
+    * [.setFormatter(formatter)](#Handler+setFormatter)
+    * [.format(record)](#Handler+format) ⇒ <code>string</code>
+    * [.handle(record)](#Handler+handle) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+    * *[.emit(record)](#Handler+emit)*
+    * *[.flush()](#Handler+flush)*
+    * *[.close()](#Handler+close)*
+    * [.handleError(error, [record])](#Handler+handleError)
+    * [.addFilter(filter)](#Filterer+addFilter)
+    * [.removeFilter(filter)](#Filterer+removeFilter)
+    * [.filter(record)](#Filterer+filter) ⇒ <code>boolean</code>
+
+<a name="new_module_py-logging/commonkit..NullHandler_new"></a>
+
+#### new NullHandler()
+This handler does nothing. (Sometimes can by handy)
+
+<a name="Handler+toString"></a>
+
+#### nullHandler.toString() ⇒ <code>string</code>
+Return the text representation of this handler.
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+<a name="Handler+setLevel"></a>
+
+#### nullHandler.setLevel(level)
+Set the logging level of this handler.
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+isEnabledFor"></a>
+
+#### nullHandler.isEnabledFor(level) ⇒ <code>boolean</code>
+Is this handler enabled for specified level?
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| level | <code>number</code> | 
+
+<a name="Handler+setFormatter"></a>
+
+#### nullHandler.setFormatter(formatter)
+Set the formatter for this handler.
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| formatter | [<code>Formatter</code>](#Formatter) | 
+
+<a name="Handler+format"></a>
+
+#### nullHandler.format(record) ⇒ <code>string</code>
+Format the specified record.
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+handle"></a>
+
+#### nullHandler.handle(record) ⇒ [<code>LogRecord</code>](#module_py-logging.LogRecord)
+Handle the specified logging record.
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+**Overrides**: [<code>handle</code>](#Handler+handle)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+emit"></a>
+
+#### *nullHandler.emit(record)*
+Do whatever it takes to actually log the specified logging record.
+
+**Kind**: instance abstract method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+**Overrides**: [<code>emit</code>](#Handler+emit)  
+
+| Param | Type |
+| --- | --- |
+| record | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Handler+flush"></a>
+
+#### *nullHandler.flush()*
+**Kind**: instance abstract method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+<a name="Handler+close"></a>
+
+#### *nullHandler.close()*
+**Kind**: instance abstract method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+<a name="Handler+handleError"></a>
+
+#### nullHandler.handleError(error, [record])
+Handle errors which occur during an emit() call.
+
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| error | <code>Error</code> | 
+| [record] | [<code>LogRecord</code>](#module_py-logging.LogRecord) | 
+
+<a name="Filterer+addFilter"></a>
+
+#### nullHandler.addFilter(filter)
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
+
+<a name="Filterer+removeFilter"></a>
+
+#### nullHandler.removeFilter(filter)
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
+
+| Param | Type |
+| --- | --- |
+| filter | [<code>Filter</code>](#Filter) \| <code>function</code> | 
+
+<a name="Filterer+filter"></a>
+
+#### nullHandler.filter(record) ⇒ <code>boolean</code>
+**Kind**: instance method of [<code>NullHandler</code>](#module_py-logging/commonkit..NullHandler)  
 **Returns**: <code>boolean</code> - Returns false if specified record is not supposed
 	to be processed. True otherwise.  
 
