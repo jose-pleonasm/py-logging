@@ -1122,3 +1122,193 @@ describe('Formatter', function() {
 	});
 
 });
+
+/**
+ * logging - config
+ */
+describe('Logging', function() {
+
+	describe('#config', function() {
+		it('should throw an error if argument is missing', function() {
+			var testFn = function() {
+				logging.config();
+			};
+
+			assert.throws(testFn, Error);
+		});
+		it('should throw an error if there is invalid argument', function() {
+			var testFn = function() {
+				logging.config('config');
+			};
+
+			assert.throws(testFn, Error);
+		});
+		it('should call handler', function() {
+			var Hdlr = sinon.fake();
+			var cfg = {
+				version: 1,
+				handlers: {
+					foo: {
+						class: Hdlr,
+					},
+				},
+				loggers: {
+					'': {
+						handlers: ['foo'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert(Hdlr.calledOnce);
+		});
+		it('should call both handlers', function() {
+			var Hdlr = sinon.fake();
+			var Hdlr2 = sinon.fake();
+			var cfg = {
+				version: 1,
+				handlers: {
+					foo: {
+						class: Hdlr,
+					},
+					bar: {
+						class: Hdlr2,
+					},
+				},
+				loggers: {
+					'': {
+						handlers: ['foo', 'bar'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert(Hdlr.calledOnce);
+			assert(Hdlr2.calledOnce);
+		});
+		it('should call only first handler', function() {
+			var Hdlr = sinon.fake();
+			var Hdlr2 = sinon.fake();
+			var cfg = {
+				version: 1,
+				handlers: {
+					foo: {
+						class: Hdlr,
+					},
+					bar: {
+						class: Hdlr2,
+					},
+				},
+				loggers: {
+					'': {
+						handlers: ['foo'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert(Hdlr.calledOnce);
+			assert(Hdlr2.notCalled);
+		});
+		it('should call handler with correct level argument', function() {
+			var arg;
+			var Hdlr = function(level) {
+				arg = level;
+			};
+			var cfg = {
+				version: 1,
+				handlers: {
+					foo: {
+						class: Hdlr,
+						level: 'INFO',
+					},
+				},
+				loggers: {
+					'': {
+						handlers: ['foo'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert.strictEqual(arg, logging.INFO);
+		});
+		it('should call filter', function() {
+			var Fltr = sinon.fake();
+			var cfg = {
+				version: 1,
+				filters: {
+					bar: {
+						class: Fltr,
+					},
+				},
+				loggers: {
+					'': {
+						filters: ['bar'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert(Fltr.calledOnce);
+		});
+		it('should call filter for handler', function() {
+			var Fltr = sinon.fake();
+			var cfg = {
+				version: 1,
+				filters: {
+					bar: {
+						class: Fltr,
+					},
+				},
+				handlers: {
+					foo: {
+						class: logging.Handler,
+						filters: ['bar'],
+					},
+				},
+				loggers: {
+					'': {
+						handlers: ['foo'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert(Fltr.calledOnce);
+		});
+		it('should call formatter', function() {
+			var Fmtr = sinon.fake();
+			var cfg = {
+				version: 1,
+				formatters: {
+					bar: {
+						class: Fmtr,
+					},
+				},
+				handlers: {
+					foo: {
+						class: logging.Handler,
+						formatter: 'bar',
+					},
+				},
+				loggers: {
+					'': {
+						handlers: ['foo'],
+					},
+				},
+			};
+
+			logging.config(cfg);
+
+			assert(Fmtr.calledOnce);
+		});
+	});
+
+});
