@@ -12,7 +12,7 @@ var Manager = {};
 /**
  * @type {Logger}
  */
-Manager.root = new Logger(null, 'root', Logger.WARNING);
+Manager.root = new Logger(Manager, 'root', null, Logger.WARNING);
 
 /**
  * Get a logger with the specified name, creating it 
@@ -29,7 +29,7 @@ Manager.getLogger = function(name) {
 	for (var i = 1, len = parts.length; i <= len; i++) {
 		currentName = parts.slice(0, i).join('.');
 		if (!loggers[currentName]) {
-			loggers[currentName] = new Logger(prevLogger, currentName);
+			loggers[currentName] = new Logger(Manager, currentName, prevLogger);
 		}
 		prevLogger = loggers[currentName];
 	}

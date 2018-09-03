@@ -722,5 +722,5 @@ module.exports = {
 /** @private */
 function reset() {
 	Manager.clear();
-	Manager.root = new Logger(null, 'root', Logger.WARNING);
+	Manager.root = new Logger(Manager, 'root', null, Logger.WARNING);
 }
