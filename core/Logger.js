@@ -17,11 +17,12 @@ var Filterer = require('./Filterer');
 /**
  * @constructor Logger
  * @extends Filterer
- * @param {?Logger} parent
+ * @param {Manager} manager
  * @param {string} name
+ * @param {Logger} [parent]
  * @param {number} [level=NOTSET]
  */
-function Logger(parent, name, level) {
+function Logger(manager, name, parent, level) {
 	level = level || Logger.NOTSET;
 
 	if (Logger.getLevelName(level) === '') {
@@ -30,14 +31,6 @@ function Logger(parent, name, level) {
 	}
 
 	Filterer.call(this);
-
-	/**
-	 * Parent logger.
-	 *
-	 * @private
-	 * @type {Object}
-	 */
-	this._parent = parent;
 
 	/**
 	 * Name of this logger.
@@ -54,6 +47,22 @@ function Logger(parent, name, level) {
 	 * @type {number}
 	 */
 	this._level = level;
+
+	/**
+	 * Parent logger.
+	 *
+	 * @private
+	 * @type {Manager}
+	 */
+	this._manager = manager;
+
+	/**
+	 * Parent logger.
+	 *
+	 * @private
+	 * @type {(Logger|null)}
+	 */
+	this._parent = parent;
 
 	/**
 	 * Array of set handlers.
@@ -159,6 +168,20 @@ Logger.prototype.toString = function() {
  */
 Logger.prototype.getName = function() {
 	return this._name;
+};
+
+/**
+ * Return a logger which is a descendant to this one.
+ *
+ * @param  {string} suffix
+ * @return {Object}
+ */
+Logger.prototype.getChild = function(suffix) {
+	if (!suffix) {
+		throw new Error('Argument 1 of Logger.getChild is not specified.');
+	}
+	var base = this._name === 'root' ? '' : this._name + '.';
+	return this._manager.getLogger(base + suffix);
 };
 
 /**
