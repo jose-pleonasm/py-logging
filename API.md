@@ -1372,10 +1372,11 @@ A base class for loggers and handlers which allows them to share common code.
 **Extends**: [<code>Filterer</code>](#Filterer)  
 
 * [Logger](#Logger) ⇐ [<code>Filterer</code>](#Filterer)
-    * [new Logger(parent, name, [level])](#new_Logger_new)
+    * [new Logger(manager, name, [parent], [level])](#new_Logger_new)
     * _instance_
         * [.toString()](#Logger+toString) ⇒ <code>string</code>
         * [.getName()](#Logger+getName) ⇒ <code>string</code>
+        * [.getChild(suffix)](#Logger+getChild) ⇒ <code>Object</code>
         * [.getEffectiveLevel()](#Logger+getEffectiveLevel) ⇒ <code>number</code>
         * [.isEnabledFor(level)](#Logger+isEnabledFor) ⇒ <code>boolean</code>
         * [.setLevel(level)](#Logger+setLevel)
@@ -1398,12 +1399,13 @@ A base class for loggers and handlers which allows them to share common code.
 
 <a name="new_Logger_new"></a>
 
-### new Logger(parent, name, [level])
+### new Logger(manager, name, [parent], [level])
 
 | Param | Type | Default |
 | --- | --- | --- |
-| parent | [<code>Logger</code>](#Logger) |  | 
+| manager | <code>Manager</code> |  | 
 | name | <code>string</code> |  | 
+| [parent] | [<code>Logger</code>](#Logger) |  | 
 | [level] | <code>number</code> | <code>NOTSET</code> | 
 
 <a name="Logger+toString"></a>
@@ -1418,6 +1420,17 @@ Return the text representation of this logger.
 Return the name of this logger.
 
 **Kind**: instance method of [<code>Logger</code>](#Logger)  
+<a name="Logger+getChild"></a>
+
+### logger.getChild(suffix) ⇒ <code>Object</code>
+Return a logger which is a descendant to this one.
+
+**Kind**: instance method of [<code>Logger</code>](#Logger)  
+
+| Param | Type |
+| --- | --- |
+| suffix | <code>string</code> | 
+
 <a name="Logger+getEffectiveLevel"></a>
 
 ### logger.getEffectiveLevel() ⇒ <code>number</code>
