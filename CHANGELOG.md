@@ -1,3 +1,9 @@
+## 2.4.0 (2019-03-26)
+
+#### Added
+
+* Added support for args entry in config
+
 ## 2.3.0 (2018-09-04)
 
 #### Added
