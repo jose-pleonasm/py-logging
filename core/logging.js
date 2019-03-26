@@ -71,11 +71,13 @@ function basicConfig(options) {
  * @typedef {Object} Configurator~FormatterDescriptor
  * @property {(string|Function)} [class]
  * @property {string} [format]
+ * @property {Array<*>} [args]
  */
 
 /**
  * @typedef {Object} Configurator~FilterDescriptor
  * @property {(string|Function)} class
+ * @property {Array<*>} [args]
  */
 
 /**
@@ -84,6 +86,7 @@ function basicConfig(options) {
  * @property {string} formatter
  * @property {string} [level]
  * @property {Array<string>} [filters]
+ * @property {Array<*>} [args]
  */
 
 /**
@@ -482,6 +485,10 @@ Configurator._getArgsList = function(func) {
  * @return {Array<*>}
  */
 Configurator._getMatchingArgs = function(list, descriptor) {
+	if ('args' in descriptor && Array.isArray(descriptor.args)) {
+		return descriptor.args;
+	}
+
 	var args = [];
 
 	for (var i = 0, len = list.length; i < len; i++) {
