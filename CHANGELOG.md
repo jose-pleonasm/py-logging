@@ -1,3 +1,27 @@
+## 2.3.0 (2018-09-04)
+
+#### Added
+
+* Added (back) method getChild
+
+## 2.2.0 (2018-08-21)
+
+#### Changed
+
+* logging.config: creating instances only if are used.
+
+#### Added
+
+* Added NullHandler
+
+## 2.1.0 (2018-08-09)
+
+#### Changed
+
+* Filter can be just a function.
+* Some small improvements.
+
+
 # 2.0.0 (2018-02-18)
 
 #### Breaking Changes
