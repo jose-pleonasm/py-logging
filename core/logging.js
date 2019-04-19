@@ -61,6 +61,10 @@ function basicConfig(options) {
  */
 
 /**
+ * @typedef {Object} Configurator~Instance
+ */
+
+/**
  * @typedef {Object} Configurator~Params
  * @property {Function} constructor
  * @property {Array<any>} args
@@ -340,7 +344,7 @@ Configurator._getSectionParams = function(identifiers, section, outerContext, de
 /**
  * @private
  * @param  {Object<Configurator~Identifier, Configurator~Params>} sectionParams
- * @return {Object<Configurator~Identifier, Object>}
+ * @return {Object<Configurator~Identifier, Configurator~Instance>}
  */
 Configurator._createInstancies = function(sectionParams) {
 	var instancies = {};
@@ -371,8 +375,8 @@ Configurator._createInstancies = function(sectionParams) {
 /**
  * @private
  * @param {Object<Configurator~Identifier, Configurator~Params>} sectionParams
- * @param {Object<Configurator~Identifier, Object>} subjects
- * @param {Object<Configurator~Identifier, Object>} components
+ * @param {Object<Configurator~Identifier, Configurator~Instance>} subjects
+ * @param {Object<Configurator~Identifier, Configurator~Instance>} components
  * @param {string} subjectSettingsKey
  * @param {string} subjectMethodName
  */
@@ -508,7 +512,7 @@ Configurator._getMatchingArgs = function(list, descriptor) {
  * @private
  * @param  {Function} constructor
  * @param  {Array<*>} args
- * @return {Object}
+ * @return {Configurator~Instance}
  */
 Configurator._createInstance = function(constructor, args) {
 	var bindArgs = [constructor].concat(args);
