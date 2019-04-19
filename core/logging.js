@@ -66,7 +66,8 @@ function basicConfig(options) {
 
 /**
  * @typedef {Object} Configurator~Params
- * @property {Function} constructor
+ * @property {Function} [constructor]
+ * @property {Function} [factory]
  * @property {Array<any>} args
  * @property {Object} settings
  */
@@ -311,19 +312,51 @@ Configurator._getSectionParams = function(identifiers, section, outerContext, de
 		var descriptor = section[identifier];
 		var klass = descriptor.class || defaultClass;
 		var settings = Object.assign({}, descriptor);
-		var constructor = (
-			typeof klass === 'function'
-				? klass
-				: (typeof klass === 'string'
-					? Configurator._getConstructor(klass, outerContext) : null)
-		);
-		if (!constructor) {
+		var constructor;
+		var factory;
+
+		if (descriptor['()']) {
+			if (typeof descriptor['()'] === 'function') {
+				factory = descriptor['()'];
+
+			} else if (typeof descriptor['()'] === 'string') {
+				if (typeof require !== 'function') {
+					throw new Error(
+						'Factory can\'t be required because'
+						+ ' environment doesn\'t support require'
+						+ ' in Configurator._getSectionParams.'
+					);
+				}
+				factory = require(descriptor['()']);
+
+			} else {
+				throw new Error(
+					'Invalid type of factory'
+					+ ' in Configurator._getSectionParams.'
+				);
+			}
+
+		} else if (klass) {
+			constructor = (
+				typeof klass === 'function'
+					? klass
+					: (typeof klass === 'string'
+						? Configurator._getConstructor(klass, outerContext) : null)
+			);
+			if (!constructor) {
+				throw new Error(
+					'Class "' + klass + '" does not exist'
+					+ ' in Configurator._getSectionParams.'
+				);
+			}
+
+		} else {
 			throw new Error(
-				'Class "' + klass + '" does not exist'
+				'Class of factory has to be specified'
 				+ ' in Configurator._getSectionParams.'
 			);
 		}
-		var argsList = Configurator._getArgsList(constructor);
+		var argsList = Configurator._getArgsList(factory || constructor);
 		var args = Configurator._getMatchingArgs(argsList, descriptor);
 
 		delete settings.class;
@@ -333,6 +366,7 @@ Configurator._getSectionParams = function(identifiers, section, outerContext, de
 
 		params[identifier] = {
 			constructor: constructor,
+			factory: factory,
 			args: args,
 			settings: settings,
 		};
@@ -354,7 +388,10 @@ Configurator._createInstancies = function(sectionParams) {
 			continue;
 		}
 		var itemParams = sectionParams[identifier];
-		var instance = Configurator._createInstance(
+		var instance = itemParams.factory ? Configurator._callFactory(
+			itemParams.factory,
+			itemParams.args
+		) : Configurator._createInstance(
 			itemParams.constructor,
 			itemParams.args
 		);
@@ -518,6 +555,16 @@ Configurator._createInstance = function(constructor, args) {
 	var bindArgs = [constructor].concat(args);
 
 	return new (constructor.bind.apply(constructor, bindArgs));
+};
+
+/**
+ * @private
+ * @param  {Function} factory
+ * @param  {Array<*>} args
+ * @return {Configurator~Instance}
+ */
+Configurator._callFactory = function(factory, args) {
+	return factory(args);
 };
 
 
