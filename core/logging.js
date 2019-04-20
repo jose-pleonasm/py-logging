@@ -352,7 +352,7 @@ Configurator._getSectionParams = function(identifiers, section, outerContext, de
 
 		} else {
 			throw new Error(
-				'Class of factory has to be specified'
+				'Class or factory has to be specified'
 				+ ' in Configurator._getSectionParams.'
 			);
 		}
