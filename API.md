@@ -56,7 +56,7 @@
 
 <a name="module_py-logging.MODULE_IDENTIFIER"></a>
 
-### py-logging.MODULE_IDENTIFIER : <code>string</code>
+### py-logging.MODULE\_IDENTIFIER : <code>string</code>
 **Kind**: static constant of [<code>py-logging</code>](#module_py-logging)  
 <a name="module_py-logging.VERSION"></a>
 
